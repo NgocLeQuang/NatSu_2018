@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.375" name="DataNatSu">
+  <DataContextMoniker Name="/DataNatSuDataContext" />
+  <nestedChildShapes>
+    <classShape Id="4b3f74b3-281c-40bc-9862-2b89ba68f5b0" absoluteBounds="0.875, 0.625, 2, 8.5014469401041666">
+      <DataClassMoniker Name="/DataNatSuDataContext/tbl_DeSo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ad6e121-d113-42ef-9724-e8a286d00729" absoluteBounds="0.89, 1.085, 1.9700000000000002, 7.941446940104167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e335e240-bb59-408f-914c-54d82a460907" absoluteBounds="3.5, 0.625, 2, 3.1170068359375">
+      <DataClassMoniker Name="/DataNatSuDataContext/tbl_Image" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c76d404a-cd7e-4ec4-9cab-89fe8b8e28d0" absoluteBounds="3.515, 1.085, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11e60e74-9799-48da-99d5-f516446378d3" absoluteBounds="3.375, 4.75, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/DataNatSuDataContext/tbl_Batch" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4115d4b4-1974-478d-b5cc-fb5cc1c8a377" absoluteBounds="3.39, 5.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="407664c4-f63a-49a8-a004-7a6d08648328" absoluteBounds="6.375, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/DataNatSuDataContext/tbl_MissCheck_DeSo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4267474a-4bdc-4a8f-8d5d-339e6473746a" absoluteBounds="6.39, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="74f34163-d154-4822-b812-963dfe90838d" absoluteBounds="6.375, 4.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DataNatSuDataContext/tbl_MissImage_DeSo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f533b8a3-dc32-4b71-9367-5ace55d396b8" absoluteBounds="6.39, 5.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
