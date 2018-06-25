@@ -789,11 +789,11 @@ namespace CLS_NatSu.MyForm
         {
             if (Tab_Main.SelectedTabPage.Name == "tp_225")
             {
-                splitMain.SplitterPosition = 620;
+                splitMain.SplitterPosition = 625;
             }
             else if (Tab_Main.SelectedTabPage.Name == "tp_2225")
             {
-                splitMain.SplitterPosition = 668;
+                splitMain.SplitterPosition = 670;
             }
         }
 

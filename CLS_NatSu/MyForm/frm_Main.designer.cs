@@ -71,7 +71,6 @@
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.barEditItem2 = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemTrackBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemTrackBar();
             this.barEditItem3 = new DevExpress.XtraBars.BarEditItem();
@@ -80,6 +79,7 @@
             this.repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.btn_ChangeZoom = new DevExpress.XtraBars.BarButtonItem();
             this.skinBarSubItem2 = new DevExpress.XtraBars.SkinBarSubItem();
+            this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panel_Top = new DevExpress.XtraEditors.PanelControl();
             this.lb_IdImage = new DevExpress.XtraEditors.LabelControl();
@@ -111,10 +111,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTrackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel_Top)).BeginInit();
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -317,7 +317,7 @@
             this.ckOutSource,
             this.btn_Check_DeSo});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 42;
+            this.barManager1.MaxItemId = 43;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1,
             this.repositoryItemSpinEdit1,
@@ -479,7 +479,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1111, 20);
+            this.barDockControlTop.Size = new System.Drawing.Size(1099, 20);
             // 
             // barDockControlBottom
             // 
@@ -487,7 +487,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 627);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1111, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1099, 0);
             // 
             // barDockControlLeft
             // 
@@ -501,7 +501,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1111, 20);
+            this.barDockControlRight.Location = new System.Drawing.Point(1099, 20);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 607);
             // 
@@ -510,7 +510,12 @@
             this.barButtonItem1.Caption = "&Quản lý";
             this.barButtonItem1.Id = 3;
             this.barButtonItem1.Name = "barButtonItem1";
-            //
+            // 
+            // barSubItem1
+            // 
+            this.barSubItem1.Id = 42;
+            this.barSubItem1.Name = "barSubItem1";
+            // 
             // barEditItem1
             // 
             this.barEditItem1.Caption = "barEditItem1";
@@ -522,13 +527,6 @@
             // 
             this.repositoryItemTextEdit1.AutoHeight = false;
             this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
-            //
-            // repositoryItemSpinEdit1
-            // 
-            this.repositoryItemSpinEdit1.AutoHeight = false;
-            this.repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
             // 
             // barEditItem2
             // 
@@ -579,6 +577,13 @@
             this.skinBarSubItem2.Id = 27;
             this.skinBarSubItem2.Name = "skinBarSubItem2";
             // 
+            // repositoryItemSpinEdit1
+            // 
+            this.repositoryItemSpinEdit1.AutoHeight = false;
+            this.repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
+            // 
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(5, 7);
@@ -604,7 +609,7 @@
             this.panel_Top.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Top.Location = new System.Drawing.Point(0, 20);
             this.panel_Top.Name = "panel_Top";
-            this.panel_Top.Size = new System.Drawing.Size(1111, 26);
+            this.panel_Top.Size = new System.Drawing.Size(1099, 26);
             this.panel_Top.TabIndex = 0;
             // 
             // lb_IdImage
@@ -612,7 +617,7 @@
             this.lb_IdImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_IdImage.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_IdImage.Appearance.Options.UseFont = true;
-            this.lb_IdImage.Location = new System.Drawing.Point(733, 5);
+            this.lb_IdImage.Location = new System.Drawing.Point(721, 5);
             this.lb_IdImage.Name = "lb_IdImage";
             this.lb_IdImage.Size = new System.Drawing.Size(7, 16);
             this.lb_IdImage.TabIndex = 0;
@@ -622,7 +627,7 @@
             // labelControl7
             // 
             this.labelControl7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl7.Location = new System.Drawing.Point(681, 7);
+            this.labelControl7.Location = new System.Drawing.Point(669, 7);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(45, 13);
             this.labelControl7.TabIndex = 0;
@@ -631,7 +636,7 @@
             // lb_UserName
             // 
             this.lb_UserName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lb_UserName.Location = new System.Drawing.Point(972, 7);
+            this.lb_UserName.Location = new System.Drawing.Point(960, 7);
             this.lb_UserName.Name = "lb_UserName";
             this.lb_UserName.Size = new System.Drawing.Size(0, 13);
             this.lb_UserName.TabIndex = 0;
@@ -639,7 +644,7 @@
             // labelControl6
             // 
             this.labelControl6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl6.Location = new System.Drawing.Point(914, 7);
+            this.labelControl6.Location = new System.Drawing.Point(902, 7);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(53, 13);
             this.labelControl6.TabIndex = 0;
@@ -722,7 +727,7 @@
             this.splitMain.Panel1.Text = "Panel1";
             this.splitMain.Panel2.Controls.Add(this.panel_Right);
             this.splitMain.Panel2.Text = "Panel2";
-            this.splitMain.Size = new System.Drawing.Size(1111, 581);
+            this.splitMain.Size = new System.Drawing.Size(1099, 581);
             this.splitMain.SplitterPosition = 831;
             this.splitMain.TabIndex = 1;
             this.splitMain.Text = "splitContainerControl1";
@@ -733,7 +738,7 @@
             this.uc_PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uc_PictureBox1.Location = new System.Drawing.Point(0, 0);
             this.uc_PictureBox1.Name = "uc_PictureBox1";
-            this.uc_PictureBox1.Size = new System.Drawing.Size(275, 581);
+            this.uc_PictureBox1.Size = new System.Drawing.Size(263, 581);
             this.uc_PictureBox1.TabIndex = 0;
             // 
             // frm_Main
@@ -741,7 +746,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1111, 627);
+            this.ClientSize = new System.Drawing.Size(1099, 627);
             this.Controls.Add(this.splitMain);
             this.Controls.Add(this.panel_Top);
             this.Controls.Add(this.barDockControlLeft);
@@ -773,10 +778,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTrackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel_Top)).EndInit();
             this.panel_Top.ResumeLayout(false);
             this.panel_Top.PerformLayout();
