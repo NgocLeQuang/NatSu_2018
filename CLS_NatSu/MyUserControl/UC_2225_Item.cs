@@ -732,7 +732,7 @@ namespace CLS_NatSu.MyUserControl
             }
             else if (e.KeyCode == Keys.Down)
             {
-                txt_Truong_25.Focus();
+                txt_Truong_18.Focus();
                 e.Handled = true;
             }
             else if (e.KeyCode == Keys.Up)
@@ -809,13 +809,13 @@ namespace CLS_NatSu.MyUserControl
             {
                 txt_Truong_24.Focus();
             }
-            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_26")
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_25")
             {
-                txt_Truong_20.Focus();
+                txt_Truong_24.Focus();
             }
             else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_26")
             {
-                txt_Truong_20.Focus();
+                txt_Truong_24.Focus();
             }
 
             else if (e.KeyCode == Keys.Up &
@@ -876,11 +876,11 @@ namespace CLS_NatSu.MyUserControl
             }
             else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_25")
             {
-                txt_Truong_08.Focus();
+                txt_Truong_19.Focus();
             }
             else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_26")
             {
-                txt_Truong_08.Focus();
+                txt_Truong_19.Focus();
             }
         }
 

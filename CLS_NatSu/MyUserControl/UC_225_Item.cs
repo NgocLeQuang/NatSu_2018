@@ -701,6 +701,12 @@ namespace CLS_NatSu.MyUserControl
             {
                 txt_Truong_18.Focus();
             }
+            else if (e.KeyCode == Keys.Down &
+               (((TextEdit)sender).Name == "txt_Truong_05_1"
+               || ((TextEdit)sender).Name == "txt_Truong_05_2"))
+            {
+                txt_Truong_18.Focus();
+            }
             else if (e.KeyCode == Keys.Down & (((TextEdit)sender).Name == "txt_Truong_18" | ((TextEdit)sender).Name == "txt_Truong_24"))
             {
                 txt_Truong_19.Focus();
@@ -739,7 +745,7 @@ namespace CLS_NatSu.MyUserControl
             }
             else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_24")
             {
-                txt_Truong_05_2.Focus();
+                txt_Truong_05_1.Focus();
             }
             else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_20")
             {

@@ -169,14 +169,14 @@ namespace CLS_NatSu.MyForm
                             ListUser += sss;
                         }
                     }
-                    if(File.Exists(txt_path.Text+@"\"+ ((MyEntry)item).BatchName+".xlsx"))
+                    if (File.Exists(txt_path.Text + @"\" + ((MyEntry)item).BatchName + ".xlsx"))
                     {
-                        ListBatchDaXuat+= ("\r\n" + ((MyEntry)item).BatchName);
+                        ListBatchDaXuat += ("\r\n" + ((MyEntry)item).BatchName);
                     }
-                    if (IsFileinUse(new FileInfo(txt_path.Text + @"\" + ((MyEntry)item).BatchName + ".xlsx")))
-                    {
-                        ListFileinUse += ("\r\n" + ((MyEntry)item).BatchName);
-                    }
+                    //if (IsFileinUse(new FileInfo(txt_path.Text + @"\" + ((MyEntry)item).BatchName + ".xlsx")))
+                    //{
+                    //    ListFileinUse += ("\r\n" + ((MyEntry)item).BatchName);
+                    //}
                 }
                 if (!string.IsNullOrEmpty(ListBatchNotFinish) || !string.IsNullOrEmpty(ListUser))
                 {

@@ -367,7 +367,7 @@
             this.txt_Truong_12.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_12.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_12.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_12.TabIndex = 15;
+            this.txt_Truong_12.TabIndex = 23;
             this.txt_Truong_12.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_12.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_12.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -454,7 +454,7 @@
             this.txt_Truong_14.Properties.Mask.EditMask = "[0-9*.]+";
             this.txt_Truong_14.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_14.Size = new System.Drawing.Size(38, 22);
-            this.txt_Truong_14.TabIndex = 17;
+            this.txt_Truong_14.TabIndex = 15;
             this.txt_Truong_14.EditValueChanged += new System.EventHandler(this.txt_Truong_08_1_EditValueChanged);
             this.txt_Truong_14.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
@@ -479,7 +479,7 @@
             this.txt_Truong_15.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_15.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_15.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_15.TabIndex = 18;
+            this.txt_Truong_15.TabIndex = 16;
             this.txt_Truong_15.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_15.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_15.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -505,7 +505,7 @@
             this.txt_Truong_16.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_16.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_16.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_16.TabIndex = 19;
+            this.txt_Truong_16.TabIndex = 17;
             this.txt_Truong_16.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_16.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_16.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -531,7 +531,7 @@
             this.txt_Truong_17.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_17.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_17.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_17.TabIndex = 20;
+            this.txt_Truong_17.TabIndex = 18;
             this.txt_Truong_17.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_17.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_17.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -546,7 +546,7 @@
             this.txt_Truong_18.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_18.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_18.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_18.TabIndex = 21;
+            this.txt_Truong_18.TabIndex = 25;
             this.txt_Truong_18.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_18.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_18.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -609,7 +609,7 @@
             this.txt_Truong_20.Properties.Mask.EditMask = "[0-9*.]+";
             this.txt_Truong_20.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_20.Size = new System.Drawing.Size(38, 22);
-            this.txt_Truong_20.TabIndex = 24;
+            this.txt_Truong_20.TabIndex = 19;
             this.txt_Truong_20.EditValueChanged += new System.EventHandler(this.txt_Truong_08_1_EditValueChanged);
             this.txt_Truong_20.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
@@ -634,7 +634,7 @@
             this.txt_Truong_21.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_21.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_21.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_21.TabIndex = 25;
+            this.txt_Truong_21.TabIndex = 20;
             this.txt_Truong_21.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_21.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_21.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -660,7 +660,7 @@
             this.txt_Truong_22.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_22.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_22.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_22.TabIndex = 26;
+            this.txt_Truong_22.TabIndex = 21;
             this.txt_Truong_22.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_22.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_22.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -686,7 +686,7 @@
             this.txt_Truong_23.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_23.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_23.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_23.TabIndex = 27;
+            this.txt_Truong_23.TabIndex = 22;
             this.txt_Truong_23.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_23.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_23.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -782,7 +782,7 @@
             this.txt_Truong_19.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.OnlyInPopup;
             this.txt_Truong_19.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txt_Truong_19.Size = new System.Drawing.Size(32, 22);
-            this.txt_Truong_19.TabIndex = 16;
+            this.txt_Truong_19.TabIndex = 24;
             this.txt_Truong_19.TextChanged += new System.EventHandler(this.txt_Truong_19_TextChanged);
             this.txt_Truong_19.Paint += new System.Windows.Forms.PaintEventHandler(this.txt_Truong_08_Paint);
             this.txt_Truong_19.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_19_KeyDown);
@@ -797,7 +797,7 @@
             this.txt_Truong_26.Properties.Mask.EditMask = "[0-9*]+";
             this.txt_Truong_26.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_26.Size = new System.Drawing.Size(28, 22);
-            this.txt_Truong_26.TabIndex = 23;
+            this.txt_Truong_26.TabIndex = 27;
             this.txt_Truong_26.EditValueChanged += new System.EventHandler(this.txt_Truong_04_1_1_EditValueChanged);
             this.txt_Truong_26.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
@@ -811,7 +811,7 @@
             this.txt_Truong_25.Properties.Mask.EditMask = "[0-9*]+";
             this.txt_Truong_25.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_25.Size = new System.Drawing.Size(28, 22);
-            this.txt_Truong_25.TabIndex = 22;
+            this.txt_Truong_25.TabIndex = 26;
             this.txt_Truong_25.EditValueChanged += new System.EventHandler(this.txt_Truong_04_1_1_EditValueChanged);
             this.txt_Truong_25.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
