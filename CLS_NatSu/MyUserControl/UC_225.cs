@@ -52,7 +52,7 @@ namespace CLS_NatSu.MyUserControl
             uC_225_Item4.Changed += UcNatsu_Changed;
             uC_225_Item5.Changed += UcNatsu_Changed;
         }
-
+        
         private void UcNatsu_Changed(object sender, EventArgs e)
         {
             Changed?.Invoke(sender, e);

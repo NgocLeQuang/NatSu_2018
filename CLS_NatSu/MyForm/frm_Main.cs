@@ -108,7 +108,293 @@ namespace CLS_NatSu.MyForm
                         UC_2225_1.uC_2225_Item3.Focus += UC_Focus;
                         UC_2225_1.uC_2225_Item4.Focus += UC_Focus;
                         UC_2225_1.uC_2225_Item5.Focus += UC_Focus;
-                        txt_Truong_01.LostFocus += Txt_Truong_01_LostFocus;
+
+                        //Tab trường 01->02 và ngược lại
+                        txt_Truong_01.KeyDown += Txt_Truong_01_KeyDown;
+
+                        //Tab trường 02->03 hoặc ->08 hoặc lên trường 01 cho 225
+                        UC_225_1.uC_225_Item1.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown5;
+
+                        //Tab trường 02->03 hoặc ->08 hoặc lên trường 01 cho 2225
+                        UC_2225_1.uC_2225_Item1.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown1;
+                        UC_2225_1.uC_2225_Item2.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown2;
+                        UC_2225_1.uC_2225_Item3.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown3;
+                        UC_2225_1.uC_2225_Item4.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown4;
+                        UC_2225_1.uC_2225_Item5.txt_Truong_02.KeyDown += Txt_Truong_02_KeyDown5;
+
+                        //Page down giữa các phiếu loại 225
+                        UC_225_1.txt_Truong_Flag.KeyDown += Txt_Truong_Flag_KeyDown;
+                        UC_225_1.uC_225_Item1.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown5;
+
+
+                        //Page down giữa các phiếu loại 225
+                        UC_225_1.txt_Truong_Flag.KeyDown += Txt_Truong_Flag_KeyDown;
+                        UC_225_1.uC_225_Item1.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_03.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_04_1.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_04_2.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_04_3.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_05_1.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_09.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_10.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_11.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_12.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_14.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_15.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_16.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_17.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_18.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_19.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_20.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_21.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_22.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_23.KeyDown += Txt_Truong_03_KeyDown5;
+
+                        UC_225_1.uC_225_Item1.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown1;
+                        UC_225_1.uC_225_Item2.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown2;
+                        UC_225_1.uC_225_Item3.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown3;
+                        UC_225_1.uC_225_Item4.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown4;
+                        UC_225_1.uC_225_Item5.txt_Truong_24.KeyDown += Txt_Truong_03_KeyDown5;
+
                     }
                     menu_QuanLy.Enabled = false;
                     btn_Check_DeSo.Enabled = false;
@@ -144,19 +430,351 @@ namespace CLS_NatSu.MyForm
                 DialogResult = DialogResult.Yes;
             }
         }
-        bool flagLostFocus = true;
-        private void Txt_Truong_01_LostFocus(object sender, EventArgs e)
+
+        #region Sự kiện keyDown
+        /// <summary>
+        /// KeyDown cho Keys PageDown và PageUp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Txt_Truong_03_KeyDown1(object sender, KeyEventArgs e)
         {
-            if (!flagLostFocus)
-                return;
-            if (Tab_Main.SelectedTabPage.Name == "tp_225")
+            if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item2.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                txt_Truong_01.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                txt_Truong_01.Focus();
+            }
+        }
+        private void Txt_Truong_03_KeyDown2(object sender, KeyEventArgs e)
+        {
+            if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item3.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
             {
                 UC_225_1.uC_225_Item1.txt_Truong_02.Focus();
             }
-            else if (Tab_Main.SelectedTabPage.Name == "tp_2225")
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
             {
                 UC_2225_1.uC_2225_Item1.txt_Truong_02.Focus();
             }
+        }
+        private void Txt_Truong_03_KeyDown3(object sender, KeyEventArgs e)
+        {
+            if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item4.txt_Truong_02.Focus();
+            }
+            else if(Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item2.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
+            }
+        }
+        private void Txt_Truong_03_KeyDown4(object sender, KeyEventArgs e)
+        {
+            if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item5.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item3.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item5.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
+            }
+        }
+        private void Txt_Truong_03_KeyDown5(object sender, KeyEventArgs e)
+        {
+            if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.txt_Truong_Flag.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item4.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.txt_Truong_Flag.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item4.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.txt_Truong_Flag.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
+            }
+        }
+        /// <summary>
+        /// KeyDown Trường Flag
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Txt_Truong_Flag_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left | e.KeyCode == Keys.Up)
+            {
+                SendKeys.Send("+{Tab}");
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item5.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item5.txt_Truong_02.Focus();
+            }
+        }
+
+        /// <summary>
+        /// KeyDown Trường 01
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Txt_Truong_01_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Tab_Main.SelectedTabPage.Name == "tp_225"& (e.KeyCode==Keys.Down | e.KeyCode == Keys.Right))
+            {
+                UC_225_1.uC_225_Item1.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & (e.KeyCode == Keys.Down | e.KeyCode == Keys.Right))
+            {
+                UC_2225_1.uC_2225_Item1.txt_Truong_02.Focus();
+            }
+        }
+        /// <summary>
+        /// KeyDow Trường 02
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Txt_Truong_02_KeyDown1(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Left|e.KeyCode==Keys.Up))
+            {
+                txt_Truong_01.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Right)
+            {
+                UC_225_1.uC_225_Item1.txt_Truong_03.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down)
+            {
+                UC_225_1.uC_225_Item1.txt_Truong_08.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Right)
+            {
+                UC_2225_1.uC_2225_Item1.txt_Truong_03.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down)
+            {
+                UC_2225_1.uC_2225_Item1.txt_Truong_06.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item2.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                txt_Truong_01.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                txt_Truong_01.Focus();
+            }
+        }
+        private void Txt_Truong_02_KeyDown2(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left | e.KeyCode == Keys.Up)
+            {
+                SendKeys.Send("+{Tab}");
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                SendKeys.Send("{Tab}");
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down)
+            {
+                UC_225_1.uC_225_Item2.txt_Truong_08.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down)
+            {
+                UC_2225_1.uC_2225_Item2.txt_Truong_06.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item3.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item1.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_2225_1.uC_2225_Item1.txt_Truong_02.Focus();
+            }
+        }
+        private void Txt_Truong_02_KeyDown3(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left | e.KeyCode == Keys.Up)
+            {
+                SendKeys.Send("+{Tab}");
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                SendKeys.Send("{Tab}");
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down)
+            {
+                UC_225_1.uC_225_Item3.txt_Truong_08.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down)
+            {
+                UC_2225_1.uC_2225_Item3.txt_Truong_06.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item4.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item2.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
+            }
+        }
+        private void Txt_Truong_02_KeyDown4(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left | e.KeyCode == Keys.Up)
+            {
+                SendKeys.Send("+{Tab}");
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                SendKeys.Send("{Tab}");
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down)
+            {
+                UC_225_1.uC_225_Item4.txt_Truong_08.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down)
+            {
+                UC_2225_1.uC_2225_Item4.txt_Truong_06.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.uC_225_Item5.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item3.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.uC_2225_Item5.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
+            }
+        }
+        private void Txt_Truong_02_KeyDown5(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left | e.KeyCode == Keys.Up)
+            {
+                SendKeys.Send("+{Tab}");
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                SendKeys.Send("{Tab}");
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down)
+            {
+                UC_225_1.uC_225_Item5.txt_Truong_08.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down)
+            {
+                UC_2225_1.uC_2225_Item5.txt_Truong_06.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_225_1.txt_Truong_Flag.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_225_1.uC_225_Item4.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
+            {
+                UC_2225_1.txt_Truong_Flag.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
+            {
+                UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
+            }
+        }
+        #endregion
+        bool flagLostFocus = true;
+        private void Txt_Truong_01_LostFocus(object sender, EventArgs e)
+        {
+            //if (!flagLostFocus)
+            //    return;
+            //if (Tab_Main.SelectedTabPage.Name == "tp_225")
+            //{
+            //    UC_225_1.uC_225_Item1.txt_Truong_02.Focus();
+            //}
+            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225")
+            //{
+            //    UC_2225_1.uC_2225_Item1.txt_Truong_02.Focus();
+            //}
         }
 
         private void UC_Focus(string Truong, string Tag)
@@ -218,7 +836,7 @@ namespace CLS_NatSu.MyForm
         {
             //uC_Minami1.txt_Truong01.Text = Settings.Default.Truong01;
             //uC_Minami1.txt_Truong02.Text = Settings.Default.Truong02;
-            //uC_Minami1.txt_Truong03.Text = Settings.Default.Truong03;
+            //uC_Minami1.txt_Truong08.Text = Settings.Default.Truong03;
             //uC_Minami1.txt_Truong04_1.Text = Settings.Default.Truong04_1;
             //uC_Minami1.txt_Truong04_2.Text = Settings.Default.Truong04_2;
             //uC_Minami1.txt_Truong05_1.Text = Settings.Default.Truong05_1;

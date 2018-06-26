@@ -384,7 +384,7 @@ namespace CLS_NatSu.MyForm
                     wrksheet.Cells[h, 32] = _kq.Rows[i][2] + ""; //IDPhieu
 
                     //Dữ liệu User 1
-                    wrksheet.Cells[h, 33] = _kq.Rows[i + 1][3] + "";//UserName
+                    wrksheet.Cells[h, 33] = "U:" + _kq.Rows[i + 1][3] + "";//UserName
                     wrksheet.Cells[h, 34] = _kq.Rows[i + 1][4] + "";//Truong01
                     if (truong1 != _kq.Rows[i + 1][4] + "")
                     {
@@ -556,7 +556,7 @@ namespace CLS_NatSu.MyForm
 
                     //Dữ liệu User 2
                     
-                    wrksheet.Cells[h, 65] = _kq.Rows[i + 2][3] + "";//UserName
+                    wrksheet.Cells[h, 65] = "V:" + _kq.Rows[i + 2][3] + "";//UserName
                     wrksheet.Cells[h, 66] = _kq.Rows[i + 2][4] + "";//Truong01
                     if (truong1 != _kq.Rows[i + 2][4] + "")
                     {

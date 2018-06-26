@@ -74,6 +74,7 @@
             this.label23 = new System.Windows.Forms.Label();
             this.txt_Truong_23 = new DevExpress.XtraEditors.TextEdit();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lb_Truong_19 = new System.Windows.Forms.Label();
             this.txt_Truong_19 = new DevExpress.XtraEditors.LookUpEdit();
             this.txt_Truong_26 = new DevExpress.XtraEditors.TextEdit();
             this.txt_Truong_25 = new DevExpress.XtraEditors.TextEdit();
@@ -86,7 +87,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.lb_Truong_19 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_02.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_03.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_04_1.Properties)).BeginInit();
@@ -166,6 +166,7 @@
             this.txt_Truong_03.Size = new System.Drawing.Size(22, 22);
             this.txt_Truong_03.TabIndex = 2;
             this.txt_Truong_03.EditValueChanged += new System.EventHandler(this.txt_Truong_03_1_EditValueChanged);
+            this.txt_Truong_03.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label2
             // 
@@ -190,6 +191,7 @@
             this.txt_Truong_04_1.Size = new System.Drawing.Size(30, 22);
             this.txt_Truong_04_1.TabIndex = 3;
             this.txt_Truong_04_1.EditValueChanged += new System.EventHandler(this.txt_Truong_04_1_1_EditValueChanged);
+            this.txt_Truong_04_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label3
             // 
@@ -214,6 +216,7 @@
             this.txt_Truong_04_2.Size = new System.Drawing.Size(30, 22);
             this.txt_Truong_04_2.TabIndex = 4;
             this.txt_Truong_04_2.EditValueChanged += new System.EventHandler(this.txt_Truong_04_2_1_EditValueChanged);
+            this.txt_Truong_04_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label4
             // 
@@ -238,6 +241,7 @@
             this.txt_Truong_04_3.Size = new System.Drawing.Size(30, 22);
             this.txt_Truong_04_3.TabIndex = 5;
             this.txt_Truong_04_3.EditValueChanged += new System.EventHandler(this.txt_Truong_04_3_1_EditValueChanged);
+            this.txt_Truong_04_3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label6
             // 
@@ -262,6 +266,7 @@
             this.txt_Truong_08.Size = new System.Drawing.Size(38, 22);
             this.txt_Truong_08.TabIndex = 11;
             this.txt_Truong_08.EditValueChanged += new System.EventHandler(this.txt_Truong_08_1_EditValueChanged);
+            this.txt_Truong_08.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label7
             // 
@@ -390,6 +395,7 @@
             this.txt_Truong_05_1.Size = new System.Drawing.Size(28, 22);
             this.txt_Truong_05_1.TabIndex = 6;
             this.txt_Truong_05_1.EditValueChanged += new System.EventHandler(this.txt_Truong_05_1_1_EditValueChanged);
+            this.txt_Truong_05_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label12
             // 
@@ -414,6 +420,7 @@
             this.txt_Truong_05_2.Size = new System.Drawing.Size(28, 22);
             this.txt_Truong_05_2.TabIndex = 7;
             this.txt_Truong_05_2.EditValueChanged += new System.EventHandler(this.txt_Truong_05_2_1_EditValueChanged);
+            this.txt_Truong_05_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label13
             // 
@@ -449,6 +456,7 @@
             this.txt_Truong_14.Size = new System.Drawing.Size(38, 22);
             this.txt_Truong_14.TabIndex = 17;
             this.txt_Truong_14.EditValueChanged += new System.EventHandler(this.txt_Truong_08_1_EditValueChanged);
+            this.txt_Truong_14.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label15
             // 
@@ -603,6 +611,7 @@
             this.txt_Truong_20.Size = new System.Drawing.Size(38, 22);
             this.txt_Truong_20.TabIndex = 24;
             this.txt_Truong_20.EditValueChanged += new System.EventHandler(this.txt_Truong_08_1_EditValueChanged);
+            this.txt_Truong_20.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label21
             // 
@@ -748,6 +757,16 @@
             this.panel1.Size = new System.Drawing.Size(641, 137);
             this.panel1.TabIndex = 0;
             // 
+            // lb_Truong_19
+            // 
+            this.lb_Truong_19.AutoSize = true;
+            this.lb_Truong_19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Truong_19.ForeColor = System.Drawing.Color.Black;
+            this.lb_Truong_19.Location = new System.Drawing.Point(541, 61);
+            this.lb_Truong_19.Name = "lb_Truong_19";
+            this.lb_Truong_19.Size = new System.Drawing.Size(0, 13);
+            this.lb_Truong_19.TabIndex = 29;
+            // 
             // txt_Truong_19
             // 
             this.txt_Truong_19.Location = new System.Drawing.Point(503, 56);
@@ -757,13 +776,16 @@
             this.txt_Truong_19.Properties.Appearance.Options.UseFont = true;
             this.txt_Truong_19.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txt_Truong_19.Properties.MaxLength = 1;
             this.txt_Truong_19.Properties.NullText = "";
             this.txt_Truong_19.Properties.PopupFormMinSize = new System.Drawing.Size(370, 220);
             this.txt_Truong_19.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.OnlyInPopup;
+            this.txt_Truong_19.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txt_Truong_19.Size = new System.Drawing.Size(32, 22);
             this.txt_Truong_19.TabIndex = 16;
             this.txt_Truong_19.TextChanged += new System.EventHandler(this.txt_Truong_19_TextChanged);
             this.txt_Truong_19.Paint += new System.Windows.Forms.PaintEventHandler(this.txt_Truong_08_Paint);
+            this.txt_Truong_19.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_19_KeyDown);
             // 
             // txt_Truong_26
             // 
@@ -777,6 +799,7 @@
             this.txt_Truong_26.Size = new System.Drawing.Size(28, 22);
             this.txt_Truong_26.TabIndex = 23;
             this.txt_Truong_26.EditValueChanged += new System.EventHandler(this.txt_Truong_04_1_1_EditValueChanged);
+            this.txt_Truong_26.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // txt_Truong_25
             // 
@@ -790,6 +813,7 @@
             this.txt_Truong_25.Size = new System.Drawing.Size(28, 22);
             this.txt_Truong_25.TabIndex = 22;
             this.txt_Truong_25.EditValueChanged += new System.EventHandler(this.txt_Truong_04_1_1_EditValueChanged);
+            this.txt_Truong_25.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // txt_Truong_13
             // 
@@ -803,6 +827,7 @@
             this.txt_Truong_13.Size = new System.Drawing.Size(108, 22);
             this.txt_Truong_13.TabIndex = 8;
             this.txt_Truong_13.EditValueChanged += new System.EventHandler(this.txt_Truong_13_EditValueChanged);
+            this.txt_Truong_13.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // txt_Truong_07
             // 
@@ -831,6 +856,7 @@
             this.txt_Truong_06.Size = new System.Drawing.Size(30, 22);
             this.txt_Truong_06.TabIndex = 9;
             this.txt_Truong_06.EditValueChanged += new System.EventHandler(this.txt_Truong_06_EditValueChanged);
+            this.txt_Truong_06.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_03_KeyDown);
             // 
             // label27
             // 
@@ -897,16 +923,6 @@
             this.label25.Size = new System.Drawing.Size(14, 13);
             this.label25.TabIndex = 0;
             this.label25.Text = "7";
-            // 
-            // lb_Truong_19
-            // 
-            this.lb_Truong_19.AutoSize = true;
-            this.lb_Truong_19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Truong_19.ForeColor = System.Drawing.Color.DimGray;
-            this.lb_Truong_19.Location = new System.Drawing.Point(541, 61);
-            this.lb_Truong_19.Name = "lb_Truong_19";
-            this.lb_Truong_19.Size = new System.Drawing.Size(0, 13);
-            this.lb_Truong_19.TabIndex = 29;
             // 
             // UC_2225_Item
             // 

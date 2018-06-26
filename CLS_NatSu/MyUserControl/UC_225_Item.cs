@@ -402,7 +402,8 @@ namespace CLS_NatSu.MyUserControl
         {
             Changed?.Invoke(sender, e);
             DoiMau(0, 2, (TextEdit)sender);
-            if (((TextEdit)sender).Text != "08" & ((TextEdit)sender).Text != "09" & !string.IsNullOrEmpty(((TextEdit)sender).Text))
+            if (((TextEdit)sender).Text != "8" & ((TextEdit)sender).Text != "08" 
+                & ((TextEdit)sender).Text != "9" & ((TextEdit)sender).Text != "09" & !string.IsNullOrEmpty(((TextEdit)sender).Text))
             {
                 ((TextEdit)sender).BackColor = Color.Red;
                 ((TextEdit)sender).ForeColor = Color.White;
@@ -636,7 +637,145 @@ namespace CLS_NatSu.MyUserControl
 
         private void txt_Truong_19_TextChanged(object sender, EventArgs e)
         {
+            string[] data19 = { "", "*", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            bool a = false;
+            if (!data19.Contains(txt_Truong_19.Text))
+            {
+                txt_Truong_19.Text = "";
+            }
             lb_Truong_19.Text= (from w in category where w.DE == txt_Truong_19.Text select w.JP).FirstOrDefault();
+        }
+
+        private void txt_Truong_02_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Left)
+            {
+                SendKeys.Send("+{Tab}");
+            }
+            else if(e.KeyCode == Keys.Right)
+            {
+                SendKeys.Send("{Tab}");
+            }
+            else if(e.KeyCode==Keys.Down &
+                (((TextEdit)sender).Name == "txt_Truong_02"
+                || ((TextEdit)sender).Name == "txt_Truong_03"
+                || ((TextEdit)sender).Name == "txt_Truong_04_1"
+                || ((TextEdit)sender).Name == "txt_Truong_04_2"
+                || ((TextEdit)sender).Name == "txt_Truong_04_3"))
+            {
+                txt_Truong_08.Focus();
+            }
+            else if(e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_08")
+            {
+                txt_Truong_14.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_14")
+            {
+                txt_Truong_20.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_09")
+            {
+                txt_Truong_15.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_15")
+            {
+                txt_Truong_21.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_10")
+            {
+                txt_Truong_16.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_16")
+            {
+                txt_Truong_22.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_11")
+            {
+                txt_Truong_17.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_17")
+            {
+                txt_Truong_23.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & ((TextEdit)sender).Name == "txt_Truong_12")
+            {
+                txt_Truong_18.Focus();
+            }
+            else if (e.KeyCode == Keys.Down & (((TextEdit)sender).Name == "txt_Truong_18" | ((TextEdit)sender).Name == "txt_Truong_24"))
+            {
+                txt_Truong_19.Focus();
+            }
+            
+            else if (e.KeyCode == Keys.Up & 
+                (((TextEdit)sender).Name == "txt_Truong_08"
+                | ((TextEdit)sender).Name == "txt_Truong_09"
+                | ((TextEdit)sender).Name == "txt_Truong_10"
+                | ((TextEdit)sender).Name == "txt_Truong_11"
+                | ((TextEdit)sender).Name == "txt_Truong_12"
+                | ((TextEdit)sender).Name == "txt_Truong_05_1"
+                | ((TextEdit)sender).Name == "txt_Truong_05_2"))
+            {
+                txt_Truong_02.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_14")
+            {
+                txt_Truong_08.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_15")
+            {
+                txt_Truong_09.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_16")
+            {
+                txt_Truong_10.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_17")
+            {
+                txt_Truong_11.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_18")
+            {
+                txt_Truong_12.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_24")
+            {
+                txt_Truong_05_2.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_20")
+            {
+                txt_Truong_14.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_21")
+            {
+                txt_Truong_15.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_22")
+            {
+                txt_Truong_15.Focus();
+            }
+            else if (e.KeyCode == Keys.Up & ((TextEdit)sender).Name == "txt_Truong_23")
+            {
+                txt_Truong_17.Focus();
+            }
+        }
+
+        private void txt_Truong_19_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                SendKeys.Send("+{Tab}");
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Right|e.KeyCode==Keys.Down)
+            {
+                SendKeys.Send("{Tab}");
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                txt_Truong_18.Focus();
+                e.Handled = true;
+            }
         }
 
         private void txt_Truong_08_Paint(object sender, PaintEventArgs e)
@@ -795,6 +934,8 @@ namespace CLS_NatSu.MyUserControl
                 ((TextEdit)sender).Text = ((TextEdit)sender).Text + "000";
                 ((TextEdit)sender).SelectionStart = ((TextEdit)sender).Text.Length;
             }
+            else
+                txt_Truong_02_KeyDown(sender, e);
         }
     }
 }
