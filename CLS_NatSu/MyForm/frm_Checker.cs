@@ -196,6 +196,8 @@ namespace CLS_NatSu.MyForm
         private List<tbl_DeSo> DataUser2 = new List<tbl_DeSo>();
         private void Load_DeSo(string fbatchname, string idimage)
         {
+            DataUser1.Clear();
+            DataUser2.Clear();
             //lb_User1.ForeColor = Color.Black;
             //lb_User2.ForeColor = Color.Black;
             if (Global.StrCheck == "CHECKDESO")

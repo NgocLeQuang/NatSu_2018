@@ -22,6 +22,8 @@ namespace CLS_NatSu.MyForm
         Microsoft.Office.Interop.Excel.Workbook book = null;
         Microsoft.Office.Interop.Excel.Worksheet wrksheet = null;
         int h = 2;
+        private int soloisausua = 0;
+        private int soloi = 0;
         string namefileExcel = "";
 
         public struct MyEntry
@@ -32,6 +34,8 @@ namespace CLS_NatSu.MyForm
         bool FlagLoad = false;
         private void frm_ExportExcel_Load(object sender, EventArgs e)
         {
+            xtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
+            lb_BatchName.Text = "";
             FlagLoad = true;
             //dgv.PageVisible = true;
             //Batch.PageVisible = false;
@@ -278,6 +282,7 @@ namespace CLS_NatSu.MyForm
                 h = 2;
                 namefileExcel = "";
                 namefileExcel += ((MyEntry)item).BatchName;
+                lb_BatchName.Text = ((MyEntry)item).BatchName;
                 _kq = new DataTable();
                 string ConnectionString = Global.Db.Connection.ConnectionString;
                 SqlConnection con = new SqlConnection(ConnectionString);
@@ -292,6 +297,7 @@ namespace CLS_NatSu.MyForm
                 progressBar1.Maximum = RowCount / 3;
                 progressBar1.Minimum = 0;
                 ModifyProgressBarColor.SetState(progressBar1, 1);
+
                 if (_kq.Rows.Count <= 0)
                 {
                     continue;
@@ -372,398 +378,1059 @@ namespace CLS_NatSu.MyForm
                 string truong25UserNhap = "";
                 string truong26UserNhap = "";
                 string FlagZUserNhap = "";
-                for (int i = 0; i < RowCount; i += 3)
+
+
+                var totalImage = RowCount / 3;
+                var totalImageError = (from w in Global.Db.tbl_DeSos where w.BatchID == ((MyEntry)item).BatchID && w.Error == true & w.UserName != "Checker" select w.IDImage).Count();
+                var soDongLoiChoPhep = 0.03 * totalImage;
+                int tileCanSua = (int)Math.Round(totalImageError / soDongLoiChoPhep, 0);
+                int demUser1 = 1, demUser2 = 1;
+                //MessageBox.Show("Tổng dòng:"+ totalImage+
+                //                "\r\nTổng dòng lỗi:"+totalImageError+
+                //                "\r\nTỉ lệ cần sửa:"+tileCanSua+
+                //                "\r\nSố dòng cho phép lỗi"+soDongLoiChoPhep);
+                if (totalImageError <= soDongLoiChoPhep)
                 {
-                    wrksheet.Cells[h, 1] = _kq.Rows[i][0] + ""; //tên image
-                    //Dữ liệu đúng
-                    wrksheet.Cells[h, 2] = truong1 = _kq.Rows[i][4] + "";//Truong01
-                    wrksheet.Cells[h, 3] = truong2 = _kq.Rows[i][5] + "";//Truong02
-                    wrksheet.Cells[h, 4] = truong3 = _kq.Rows[i][6] + "";//Truong03
-                    wrksheet.Cells[h, 5] = truong4_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][7] + "", 2,"0");//Truong04_1
-                    wrksheet.Cells[h, 6] = truong4_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][8] + "", 2, "0");//Truong04_2
-                    wrksheet.Cells[h, 7] = truong4_3 = ThemKyTuPhiaTruoc(_kq.Rows[i][9] + "", 2, "0");//Truong04_3
-                    wrksheet.Cells[h, 8] = truong5_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][10] + "",2,"0");//Truong05_1
-                    wrksheet.Cells[h, 9] = truong5_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][11] + "",2,"0");//Truong05_2
-                    wrksheet.Cells[h, 10] = truong6 = ThemKyTuPhiaTruoc(_kq.Rows[i][12] + "", 2, "0");//Truong06
-                    wrksheet.Cells[h, 11] = truong7 = _kq.Rows[i][13] + "";//Truong07
-                    wrksheet.Cells[h, 12] = truong8 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][14] + "","0");//Truong08
-                    wrksheet.Cells[h, 13] = truong9 = _kq.Rows[i][15] + "";//Truong09
-                    wrksheet.Cells[h, 14] = truong10 = _kq.Rows[i][16] + "";//Truong10
-                    wrksheet.Cells[h, 15] = truong11 = _kq.Rows[i][17] + "";//Truong11
-                    wrksheet.Cells[h, 16] = truong12 = _kq.Rows[i][18] + "";//Truong12
-                    wrksheet.Cells[h, 17] = truong13 = _kq.Rows[i][19] + "";//Truong13
-                    wrksheet.Cells[h, 18] = truong14= ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][20] + "", "0");//Truong14
-                    wrksheet.Cells[h, 19] = truong15 = _kq.Rows[i][21] + "";//Truong15
-                    wrksheet.Cells[h, 20] = truong16 = _kq.Rows[i][22] + "";//Truong16
-                    wrksheet.Cells[h, 21] = truong17 = _kq.Rows[i][23] + "";//Truong17
-                    wrksheet.Cells[h, 22] = truong18 = _kq.Rows[i][24] + "";//Truong18
-                    wrksheet.Cells[h, 23] = truong19 = _kq.Rows[i][25] + "";//Truong19
-                    wrksheet.Cells[h, 24] = truong20 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][26] + "", "0");//Truong20
-                    wrksheet.Cells[h, 25] = truong21 = _kq.Rows[i][27] + "";//Truong21
-                    wrksheet.Cells[h, 26] = truong22 = _kq.Rows[i][28] + "";//Truong22
-                    wrksheet.Cells[h, 27] = truong23 = _kq.Rows[i][29] + "";//Truong23
-                    wrksheet.Cells[h, 28] = truong24 = _kq.Rows[i][30] + "";//Truong24
-                    if(string.IsNullOrEmpty(_kq.Rows[i][31]+"") && !string.IsNullOrEmpty(_kq.Rows[i][32]+""))
+                    for (int i = 0; i < RowCount; i += 3)
                     {
-                        wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong25
-                        wrksheet.Cells[h, 30] = truong26 = "";//Truong26
-                    }
-                    else
-                    {
-                        wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][31] + "", 2, "0");//Truong25
-                        wrksheet.Cells[h, 30] = truong26 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong26
-                    }
-                    wrksheet.Cells[h, 31] = _kq.Rows[i][33] + ""; //FlagZ
-                    wrksheet.Cells[h, 32] = _kq.Rows[i][2] + ""; //IDPhieu
-
-                    //Dữ liệu User 1
-                    wrksheet.Cells[h, 33] = "U:" + _kq.Rows[i + 1][3] + "";//UserName
-                    wrksheet.Cells[h, 34] = truong1UserNhap= _kq.Rows[i + 1][4] + "";//Truong01
-                    if (truong1 != truong1UserNhap)
-                    {
-                        wrksheet.Cells[h, 34].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 35] = truong2UserNhap = _kq.Rows[i + 1][5] + "";//Truong02
-                    if (truong2 != truong2UserNhap)
-                    {
-                        wrksheet.Cells[h, 35].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 36] = truong3UserNhap = _kq.Rows[i + 1][6] + "";//Truong03
-                    if (truong3 != truong3UserNhap)
-                    {
-                        wrksheet.Cells[h, 36].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 37] = truong4_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][7] + "", 2, "0");//Truong04_1
-                    if (truong4_1 != truong4_1UserNhap)
-                    {
-                        wrksheet.Cells[h, 37].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 38] = truong4_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][8] + "", 2, "0");//Truong04_2
-                    if (truong4_2 != truong4_2UserNhap)
-                    {
-                        wrksheet.Cells[h, 38].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 39] = truong4_3UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][9] + "", 2, "0");//Truong04_3
-                    if (truong4_3 != truong4_3UserNhap)
-                    {
-                        wrksheet.Cells[h, 39].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 40] = truong5_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][10] + "", 2, "0");//Truong05_1
-                    if (truong5_1 != truong5_1UserNhap)
-                    {
-                        wrksheet.Cells[h, 40].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 41] = truong5_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][11] + "", 2, "0");//Truong05_2
-                    if (truong5_2 != truong5_2UserNhap)
-                    {
-                        wrksheet.Cells[h, 41].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 42] = truong6UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][12] + "",2,"0");//Truong06
-                    if (truong6 != truong6UserNhap)
-                    {
-                        wrksheet.Cells[h, 42].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 43] = truong7UserNhap = _kq.Rows[i + 1][13] + "";//Truong07
-                    if (truong7 != truong7UserNhap)
-                    {
-                        wrksheet.Cells[h, 43].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 44] = truong8UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][14] + "", "0");//Truong08
-                    if (truong8 != truong8UserNhap)
-                    {
-                        wrksheet.Cells[h, 44].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 45] = truong9UserNhap = _kq.Rows[i + 1][15] + "";//Truong09
-                    if (truong9 != truong9UserNhap)
-                    {
-                        wrksheet.Cells[h, 45].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 46] = truong10UserNhap = _kq.Rows[i + 1][16] + "";//Truong10
-                    if (truong10 != truong10UserNhap)
-                    {
-                        wrksheet.Cells[h, 46].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 47] = truong11UserNhap = _kq.Rows[i + 1][17] + "";//Truong11
-                    if (truong11 != truong11UserNhap)
-                    {
-                        wrksheet.Cells[h, 47].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 48] = truong12UserNhap = _kq.Rows[i + 1][18] + "";//Truong12
-                    if (truong12 != truong12UserNhap)
-                    {
-                        wrksheet.Cells[h, 48].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 49] = truong13UserNhap = _kq.Rows[i + 1][19] + "";//Truong13
-                    if (truong13 != truong13UserNhap)
-                    {
-                        wrksheet.Cells[h, 49].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 50] = truong14UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][20] + "", "0");//Truong14
-                    if (truong14 != truong14UserNhap)
-                    {
-                        wrksheet.Cells[h, 50].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 51] = truong15UserNhap = _kq.Rows[i + 1][21] + "";//Truong15
-                    if (truong15 != truong15UserNhap)
-                    {
-                        wrksheet.Cells[h, 51].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 52] = truong16UserNhap = _kq.Rows[i + 1][22] + "";//Truong16
-                    if (truong16 != truong16UserNhap)
-                    {
-                        wrksheet.Cells[h, 52].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 53] = truong17UserNhap = _kq.Rows[i + 1][23] + "";//Truong17
-                    if (truong17 != truong17UserNhap)
-                    {
-                        wrksheet.Cells[h, 53].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 54] = truong18UserNhap = _kq.Rows[i + 1][24] + "";//Truong18
-                    if (truong18 != truong18UserNhap)
-                    {
-                        wrksheet.Cells[h, 54].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 55] = truong19UserNhap = _kq.Rows[i + 1][25] + "";//Truong19
-                    if (truong19 != truong19UserNhap)
-                    {
-                        wrksheet.Cells[h, 55].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 56] = truong20UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][26] + "", "0");//Truong20
-                    if (truong20 != truong20UserNhap)
-                    {
-                        wrksheet.Cells[h, 56].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 57] = truong21UserNhap = _kq.Rows[i + 1][27] + "";//Truong21
-                    if (truong21 != truong21UserNhap)
-                    {
-                        wrksheet.Cells[h, 57].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 58] = truong22UserNhap = _kq.Rows[i + 1][28] + "";//Truong22
-                    if (truong22 != truong22UserNhap)
-                    {
-                        wrksheet.Cells[h, 58].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 59] = truong23UserNhap = _kq.Rows[i + 1][29] + "";//Truong23
-                    if (truong23 != truong23UserNhap)
-                    {
-                        wrksheet.Cells[h, 59].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 60] = truong24UserNhap = _kq.Rows[i + 1][30] + "";//Truong24
-                    if (truong24 != truong24UserNhap)
-                    {
-                        wrksheet.Cells[h, 60].Interior.Color = Color.Red;
-                    }
-                    if (string.IsNullOrEmpty(_kq.Rows[i + 1][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i + 1][32] + ""))
-                    {
-                        wrksheet.Cells[h, 61] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][32] + "",2,"0");//Truong25
-                        if (truong25 != truong25UserNhap)
+                        wrksheet.Cells[h, 1] = _kq.Rows[i][0] + ""; //tên image
+                        //Dữ liệu đúng
+                        wrksheet.Cells[h, 2] = truong1 = _kq.Rows[i][4] + "";//Truong01
+                        wrksheet.Cells[h, 3] = truong2 = _kq.Rows[i][5] + "";//Truong02
+                        wrksheet.Cells[h, 4] = truong3 = _kq.Rows[i][6] + "";//Truong03
+                        wrksheet.Cells[h, 5] = truong4_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][7] + "", 2, "0");//Truong04_1
+                        wrksheet.Cells[h, 6] = truong4_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][8] + "", 2, "0");//Truong04_2
+                        wrksheet.Cells[h, 7] = truong4_3 = ThemKyTuPhiaTruoc(_kq.Rows[i][9] + "", 2, "0");//Truong04_3
+                        wrksheet.Cells[h, 8] = truong5_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][10] + "", 2, "0");//Truong05_1
+                        wrksheet.Cells[h, 9] = truong5_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][11] + "", 2, "0");//Truong05_2
+                        wrksheet.Cells[h, 10] = truong6 = ThemKyTuPhiaTruoc(_kq.Rows[i][12] + "", 2, "0");//Truong06
+                        wrksheet.Cells[h, 11] = truong7 = _kq.Rows[i][13] + "";//Truong07
+                        wrksheet.Cells[h, 12] = truong8 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][14] + "", "0");//Truong08
+                        wrksheet.Cells[h, 13] = truong9 = _kq.Rows[i][15] + "";//Truong09
+                        wrksheet.Cells[h, 14] = truong10 = _kq.Rows[i][16] + "";//Truong10
+                        wrksheet.Cells[h, 15] = truong11 = _kq.Rows[i][17] + "";//Truong11
+                        wrksheet.Cells[h, 16] = truong12 = _kq.Rows[i][18] + "";//Truong12
+                        wrksheet.Cells[h, 17] = truong13 = _kq.Rows[i][19] + "";//Truong13
+                        wrksheet.Cells[h, 18] = truong14 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][20] + "", "0");//Truong14
+                        wrksheet.Cells[h, 19] = truong15 = _kq.Rows[i][21] + "";//Truong15
+                        wrksheet.Cells[h, 20] = truong16 = _kq.Rows[i][22] + "";//Truong16
+                        wrksheet.Cells[h, 21] = truong17 = _kq.Rows[i][23] + "";//Truong17
+                        wrksheet.Cells[h, 22] = truong18 = _kq.Rows[i][24] + "";//Truong18
+                        wrksheet.Cells[h, 23] = truong19 = _kq.Rows[i][25] + "";//Truong19
+                        wrksheet.Cells[h, 24] = truong20 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][26] + "", "0");//Truong20
+                        wrksheet.Cells[h, 25] = truong21 = _kq.Rows[i][27] + "";//Truong21
+                        wrksheet.Cells[h, 26] = truong22 = _kq.Rows[i][28] + "";//Truong22
+                        wrksheet.Cells[h, 27] = truong23 = _kq.Rows[i][29] + "";//Truong23
+                        wrksheet.Cells[h, 28] = truong24 = _kq.Rows[i][30] + "";//Truong24
+                        if (string.IsNullOrEmpty(_kq.Rows[i][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i][32] + ""))
                         {
-                            wrksheet.Cells[h, 61].Interior.Color = Color.Red;
+                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong25
+                            wrksheet.Cells[h, 30] = truong26 = "";//Truong26
                         }
-
-                        wrksheet.Cells[h, 62] = "";                      //Truong26
-                        if (truong26 != "")
+                        else
                         {
-                            wrksheet.Cells[h, 62].Interior.Color = Color.Red;
+                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][31] + "", 2, "0");//Truong25
+                            wrksheet.Cells[h, 30] = truong26 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong26
                         }
-                    }
-                    else
-                    {
-                        wrksheet.Cells[h, 61] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][31] + "",2,"0");//Truong25
-                    if (truong25 != truong25UserNhap)
-                        {
-                            wrksheet.Cells[h, 61].Interior.Color = Color.Red;
-                        }
-                        wrksheet.Cells[h, 62] = truong26UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][32] + "",2,"0");//Truong26
-                    if (truong26 != truong26UserNhap)
-                        {
-                            wrksheet.Cells[h, 62].Interior.Color = Color.Red;
-                        }
-                    }
-                    wrksheet.Cells[h, 63] = FlagZUserNhap = _kq.Rows[i + 1][33] + ""; //FlagZ
-                    if (FlagZ != FlagZUserNhap)
-                    {
-                        wrksheet.Cells[h, 63].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 64] = _kq.Rows[i + 1][2] + ""; //IDPhieu
+                        wrksheet.Cells[h, 31] = _kq.Rows[i][33] + ""; //FlagZ
+                        wrksheet.Cells[h, 32] = _kq.Rows[i][2] + ""; //IDPhieu
 
-                    //Dữ liệu User 2
-                    
-                    wrksheet.Cells[h, 65] = "V:" + _kq.Rows[i + 2][3] + "";//UserName
-                    wrksheet.Cells[h, 66] = truong1UserNhap = _kq.Rows[i + 2][4] + "";//Truong01
-                    if (truong1 != truong1UserNhap)
-                    {
-                        wrksheet.Cells[h, 66].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 67] = truong2UserNhap = _kq.Rows[i + 2][5] + "";//Truong02
-                    if (truong2 != truong2UserNhap)
-                    {
-                        wrksheet.Cells[h, 67].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 68] = truong3UserNhap = _kq.Rows[i + 2][6] + "";//Truong03
-                    if (truong3 != truong3UserNhap)
-                    {
-                        wrksheet.Cells[h, 68].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 69] = truong4_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][7] + "", 2, "0");//Truong04_1
-                    if (truong4_1 != truong4_1UserNhap)
-                    {
-                        wrksheet.Cells[h, 69].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 70] = truong4_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][8] + "", 2, "0");//Truong04_2
-                    if (truong4_2 != truong4_2UserNhap)
-                    {
-                        wrksheet.Cells[h, 70].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 71] = truong4_3UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][9] + "", 2, "0");//Truong04_3
-                    if (truong4_3 != truong4_3UserNhap)
-                    {
-                        wrksheet.Cells[h, 71].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 72] = truong5_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][10] + "", 2, "0");//Truong05_1
-                    if (truong5_1 != truong5_1UserNhap)
-                    {
-                        wrksheet.Cells[h, 72].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 73] = truong5_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][11] + "", 2, "0");//Truong05_2
-                    if (truong5_2 != truong5_2UserNhap)
-                    {
-                        wrksheet.Cells[h, 73].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 74] = truong6UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][12] + "",2,"0");//Truong06
-                    if (truong6 != truong6UserNhap)
-                    {
-                        wrksheet.Cells[h, 74].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 75] = truong7UserNhap = _kq.Rows[i + 2][13] + "";//Truong07
-                    if (truong7 != truong7UserNhap)
-                    {
-                        wrksheet.Cells[h, 75].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 76] = truong8UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][14] + "", "0");//Truong08
-                    if (truong8 != truong8UserNhap)
-                    {
-                        wrksheet.Cells[h, 76].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 77] = truong9UserNhap = _kq.Rows[i + 2][15] + "";//Truong09
-                    if (truong9 != truong9UserNhap)
-                    {
-                        wrksheet.Cells[h, 77].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 78] = truong19UserNhap = _kq.Rows[i + 2][16] + "";//Truong10
-                    if (truong10 != truong19UserNhap)
-                    {
-                        wrksheet.Cells[h, 78].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 79] = truong11UserNhap = _kq.Rows[i + 2][17] + "";//Truong11
-                    if (truong11 != truong11UserNhap)
-                    {
-                        wrksheet.Cells[h, 79].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 80] = truong12UserNhap = _kq.Rows[i + 2][18] + "";//Truong12
-                    if (truong12 != truong12UserNhap)
-                    {
-                        wrksheet.Cells[h, 80].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 81] = truong13UserNhap = _kq.Rows[i + 2][19] + "";//Truong13
-                    if (truong13 != truong13UserNhap)
-                    {
-                        wrksheet.Cells[h, 81].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 82] = truong14UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][20] + "", "0");//Truong14
-                    if (truong14 != truong14UserNhap)
-                    {
-                        wrksheet.Cells[h, 82].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 83] = truong15UserNhap = _kq.Rows[i + 2][21] + "";//Truong15
-                    if (truong15 != truong15UserNhap)
-                    {
-                        wrksheet.Cells[h, 83].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 84] = truong16UserNhap = _kq.Rows[i + 2][22] + "";//Truong16
-                    if (truong16 != truong16UserNhap)
-                    {
-                        wrksheet.Cells[h, 84].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 85] = truong17UserNhap = _kq.Rows[i + 2][23] + "";//Truong17
-                    if (truong17 != truong17UserNhap)
-                    {
-                        wrksheet.Cells[h, 85].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 86] = truong18UserNhap = _kq.Rows[i + 2][24] + "";//Truong18
-                    if (truong18 != truong18UserNhap)
-                    {
-                        wrksheet.Cells[h, 86].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 87] = truong19UserNhap = _kq.Rows[i + 2][25] + "";//Truong19
-                    if (truong19 != truong19UserNhap)
-                    {
-                        wrksheet.Cells[h, 87].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 88] = truong20UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][26] + "", "0");//Truong20
-                    if (truong20 != truong20UserNhap)
-                    {
-                        wrksheet.Cells[h, 88].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 89] = truong21UserNhap = _kq.Rows[i + 2][27] + "";//Truong21
-                    if (truong21 != truong21UserNhap)
-                    {
-                        wrksheet.Cells[h, 89].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 90] = truong22UserNhap = _kq.Rows[i + 2][28] + "";//Truong22
-                    if (truong22 != truong22UserNhap)
-                    {
-                        wrksheet.Cells[h, 90].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 91] = truong23UserNhap = _kq.Rows[i + 2][29] + "";//Truong23
-                    if (truong23 != truong23UserNhap)
-                    {
-                        wrksheet.Cells[h, 91].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 92] = truong24UserNhap = _kq.Rows[i + 2][30] + "";//Truong24
-                    if (truong24 != truong24UserNhap)
-                    {
-                        wrksheet.Cells[h, 92].Interior.Color = Color.Red;
-                    }
-
-                    if (string.IsNullOrEmpty(_kq.Rows[i + 2][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i + 2][32] + ""))
-                    {
-                        wrksheet.Cells[h, 93] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][32] + "",2,"0");//Truong25
-                    if (truong25 != truong25UserNhap)
+                        //Dữ liệu User 1
+                        wrksheet.Cells[h, 33] = "U:" + _kq.Rows[i + 1][3] + "";//UserName
+                        wrksheet.Cells[h, 34] = truong1UserNhap = _kq.Rows[i + 1][4] + "";//Truong01
+                        if (truong1 != truong1UserNhap)
                         {
-                            wrksheet.Cells[h, 93].Interior.Color = Color.Red;
+                            wrksheet.Cells[h, 34].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 35] = truong2UserNhap = _kq.Rows[i + 1][5] + "";//Truong02
+                        if (truong2 != truong2UserNhap)
+                        {
+                            wrksheet.Cells[h, 35].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 36] = truong3UserNhap = _kq.Rows[i + 1][6] + "";//Truong03
+                        if (truong3 != truong3UserNhap)
+                        {
+                            wrksheet.Cells[h, 36].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 37] = truong4_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][7] + "", 2, "0");//Truong04_1
+                        if (truong4_1 != truong4_1UserNhap)
+                        {
+                            wrksheet.Cells[h, 37].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 38] = truong4_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][8] + "", 2, "0");//Truong04_2
+                        if (truong4_2 != truong4_2UserNhap)
+                        {
+                            wrksheet.Cells[h, 38].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 39] = truong4_3UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][9] + "", 2, "0");//Truong04_3
+                        if (truong4_3 != truong4_3UserNhap)
+                        {
+                            wrksheet.Cells[h, 39].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 40] = truong5_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][10] + "", 2, "0");//Truong05_1
+                        if (truong5_1 != truong5_1UserNhap)
+                        {
+                            wrksheet.Cells[h, 40].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 41] = truong5_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][11] + "", 2, "0");//Truong05_2
+                        if (truong5_2 != truong5_2UserNhap)
+                        {
+                            wrksheet.Cells[h, 41].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 42] = truong6UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][12] + "", 2, "0");//Truong06
+                        if (truong6 != truong6UserNhap)
+                        {
+                            wrksheet.Cells[h, 42].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 43] = truong7UserNhap = _kq.Rows[i + 1][13] + "";//Truong07
+                        if (truong7 != truong7UserNhap)
+                        {
+                            wrksheet.Cells[h, 43].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 44] = truong8UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][14] + "", "0");//Truong08
+                        if (truong8 != truong8UserNhap)
+                        {
+                            wrksheet.Cells[h, 44].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 45] = truong9UserNhap = _kq.Rows[i + 1][15] + "";//Truong09
+                        if (truong9 != truong9UserNhap)
+                        {
+                            wrksheet.Cells[h, 45].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 46] = truong10UserNhap = _kq.Rows[i + 1][16] + "";//Truong10
+                        if (truong10 != truong10UserNhap)
+                        {
+                            wrksheet.Cells[h, 46].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 47] = truong11UserNhap = _kq.Rows[i + 1][17] + "";//Truong11
+                        if (truong11 != truong11UserNhap)
+                        {
+                            wrksheet.Cells[h, 47].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 48] = truong12UserNhap = _kq.Rows[i + 1][18] + "";//Truong12
+                        if (truong12 != truong12UserNhap)
+                        {
+                            wrksheet.Cells[h, 48].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 49] = truong13UserNhap = _kq.Rows[i + 1][19] + "";//Truong13
+                        if (truong13 != truong13UserNhap)
+                        {
+                            wrksheet.Cells[h, 49].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 50] = truong14UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][20] + "", "0");//Truong14
+                        if (truong14 != truong14UserNhap)
+                        {
+                            wrksheet.Cells[h, 50].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 51] = truong15UserNhap = _kq.Rows[i + 1][21] + "";//Truong15
+                        if (truong15 != truong15UserNhap)
+                        {
+                            wrksheet.Cells[h, 51].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 52] = truong16UserNhap = _kq.Rows[i + 1][22] + "";//Truong16
+                        if (truong16 != truong16UserNhap)
+                        {
+                            wrksheet.Cells[h, 52].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 53] = truong17UserNhap = _kq.Rows[i + 1][23] + "";//Truong17
+                        if (truong17 != truong17UserNhap)
+                        {
+                            wrksheet.Cells[h, 53].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 54] = truong18UserNhap = _kq.Rows[i + 1][24] + "";//Truong18
+                        if (truong18 != truong18UserNhap)
+                        {
+                            wrksheet.Cells[h, 54].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 55] = truong19UserNhap = _kq.Rows[i + 1][25] + "";//Truong19
+                        if (truong19 != truong19UserNhap)
+                        {
+                            wrksheet.Cells[h, 55].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 56] = truong20UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][26] + "", "0");//Truong20
+                        if (truong20 != truong20UserNhap)
+                        {
+                            wrksheet.Cells[h, 56].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 57] = truong21UserNhap = _kq.Rows[i + 1][27] + "";//Truong21
+                        if (truong21 != truong21UserNhap)
+                        {
+                            wrksheet.Cells[h, 57].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 58] = truong22UserNhap = _kq.Rows[i + 1][28] + "";//Truong22
+                        if (truong22 != truong22UserNhap)
+                        {
+                            wrksheet.Cells[h, 58].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 59] = truong23UserNhap = _kq.Rows[i + 1][29] + "";//Truong23
+                        if (truong23 != truong23UserNhap)
+                        {
+                            wrksheet.Cells[h, 59].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 60] = truong24UserNhap = _kq.Rows[i + 1][30] + "";//Truong24
+                        if (truong24 != truong24UserNhap)
+                        {
+                            wrksheet.Cells[h, 60].Interior.Color = Color.Red;
+                        }
+                        if (string.IsNullOrEmpty(_kq.Rows[i + 1][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i + 1][32] + ""))
+                        {
+                            wrksheet.Cells[h, 61] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][32] + "", 2, "0");//Truong25
+                            if (truong25 != truong25UserNhap)
+                            {
+                                wrksheet.Cells[h, 61].Interior.Color = Color.Red;
+                            }
+
+                            wrksheet.Cells[h, 62] = "";                      //Truong26
+                            if (truong26 != "")
+                            {
+                                wrksheet.Cells[h, 62].Interior.Color = Color.Red;
+                            }
+                        }
+                        else
+                        {
+                            wrksheet.Cells[h, 61] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][31] + "", 2, "0");//Truong25
+                            if (truong25 != truong25UserNhap)
+                            {
+                                wrksheet.Cells[h, 61].Interior.Color = Color.Red;
+                            }
+                            wrksheet.Cells[h, 62] = truong26UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][32] + "", 2, "0");//Truong26
+                            if (truong26 != truong26UserNhap)
+                            {
+                                wrksheet.Cells[h, 62].Interior.Color = Color.Red;
+                            }
+                        }
+                        wrksheet.Cells[h, 63] = FlagZUserNhap = _kq.Rows[i + 1][33] + ""; //FlagZ
+                        if (FlagZ != FlagZUserNhap)
+                        {
+                            wrksheet.Cells[h, 63].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 64] = _kq.Rows[i + 1][2] + ""; //IDPhieu
+
+                        //Dữ liệu User 2
+
+                        wrksheet.Cells[h, 65] = "V:" + _kq.Rows[i + 2][3] + "";//UserName
+                        wrksheet.Cells[h, 66] = truong1UserNhap = _kq.Rows[i + 2][4] + "";//Truong01
+                        if (truong1 != truong1UserNhap)
+                        {
+                            wrksheet.Cells[h, 66].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 67] = truong2UserNhap = _kq.Rows[i + 2][5] + "";//Truong02
+                        if (truong2 != truong2UserNhap)
+                        {
+                            wrksheet.Cells[h, 67].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 68] = truong3UserNhap = _kq.Rows[i + 2][6] + "";//Truong03
+                        if (truong3 != truong3UserNhap)
+                        {
+                            wrksheet.Cells[h, 68].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 69] = truong4_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][7] + "", 2, "0");//Truong04_1
+                        if (truong4_1 != truong4_1UserNhap)
+                        {
+                            wrksheet.Cells[h, 69].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 70] = truong4_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][8] + "", 2, "0");//Truong04_2
+                        if (truong4_2 != truong4_2UserNhap)
+                        {
+                            wrksheet.Cells[h, 70].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 71] = truong4_3UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][9] + "", 2, "0");//Truong04_3
+                        if (truong4_3 != truong4_3UserNhap)
+                        {
+                            wrksheet.Cells[h, 71].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 72] = truong5_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][10] + "", 2, "0");//Truong05_1
+                        if (truong5_1 != truong5_1UserNhap)
+                        {
+                            wrksheet.Cells[h, 72].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 73] = truong5_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][11] + "", 2, "0");//Truong05_2
+                        if (truong5_2 != truong5_2UserNhap)
+                        {
+                            wrksheet.Cells[h, 73].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 74] = truong6UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][12] + "", 2, "0");//Truong06
+                        if (truong6 != truong6UserNhap)
+                        {
+                            wrksheet.Cells[h, 74].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 75] = truong7UserNhap = _kq.Rows[i + 2][13] + "";//Truong07
+                        if (truong7 != truong7UserNhap)
+                        {
+                            wrksheet.Cells[h, 75].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 76] = truong8UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][14] + "", "0");//Truong08
+                        if (truong8 != truong8UserNhap)
+                        {
+                            wrksheet.Cells[h, 76].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 77] = truong9UserNhap = _kq.Rows[i + 2][15] + "";//Truong09
+                        if (truong9 != truong9UserNhap)
+                        {
+                            wrksheet.Cells[h, 77].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 78] = truong19UserNhap = _kq.Rows[i + 2][16] + "";//Truong10
+                        if (truong10 != truong19UserNhap)
+                        {
+                            wrksheet.Cells[h, 78].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 79] = truong11UserNhap = _kq.Rows[i + 2][17] + "";//Truong11
+                        if (truong11 != truong11UserNhap)
+                        {
+                            wrksheet.Cells[h, 79].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 80] = truong12UserNhap = _kq.Rows[i + 2][18] + "";//Truong12
+                        if (truong12 != truong12UserNhap)
+                        {
+                            wrksheet.Cells[h, 80].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 81] = truong13UserNhap = _kq.Rows[i + 2][19] + "";//Truong13
+                        if (truong13 != truong13UserNhap)
+                        {
+                            wrksheet.Cells[h, 81].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 82] = truong14UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][20] + "", "0");//Truong14
+                        if (truong14 != truong14UserNhap)
+                        {
+                            wrksheet.Cells[h, 82].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 83] = truong15UserNhap = _kq.Rows[i + 2][21] + "";//Truong15
+                        if (truong15 != truong15UserNhap)
+                        {
+                            wrksheet.Cells[h, 83].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 84] = truong16UserNhap = _kq.Rows[i + 2][22] + "";//Truong16
+                        if (truong16 != truong16UserNhap)
+                        {
+                            wrksheet.Cells[h, 84].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 85] = truong17UserNhap = _kq.Rows[i + 2][23] + "";//Truong17
+                        if (truong17 != truong17UserNhap)
+                        {
+                            wrksheet.Cells[h, 85].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 86] = truong18UserNhap = _kq.Rows[i + 2][24] + "";//Truong18
+                        if (truong18 != truong18UserNhap)
+                        {
+                            wrksheet.Cells[h, 86].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 87] = truong19UserNhap = _kq.Rows[i + 2][25] + "";//Truong19
+                        if (truong19 != truong19UserNhap)
+                        {
+                            wrksheet.Cells[h, 87].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 88] = truong20UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][26] + "", "0");//Truong20
+                        if (truong20 != truong20UserNhap)
+                        {
+                            wrksheet.Cells[h, 88].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 89] = truong21UserNhap = _kq.Rows[i + 2][27] + "";//Truong21
+                        if (truong21 != truong21UserNhap)
+                        {
+                            wrksheet.Cells[h, 89].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 90] = truong22UserNhap = _kq.Rows[i + 2][28] + "";//Truong22
+                        if (truong22 != truong22UserNhap)
+                        {
+                            wrksheet.Cells[h, 90].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 91] = truong23UserNhap = _kq.Rows[i + 2][29] + "";//Truong23
+                        if (truong23 != truong23UserNhap)
+                        {
+                            wrksheet.Cells[h, 91].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 92] = truong24UserNhap = _kq.Rows[i + 2][30] + "";//Truong24
+                        if (truong24 != truong24UserNhap)
+                        {
+                            wrksheet.Cells[h, 92].Interior.Color = Color.Red;
                         }
 
-                        wrksheet.Cells[h, 94] = "";                      //Truong26
-                        if (truong26 != "")
+                        if (string.IsNullOrEmpty(_kq.Rows[i + 2][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i + 2][32] + ""))
                         {
-                            wrksheet.Cells[h, 94].Interior.Color = Color.Red;
-                        }
-                    }
-                    else
-                    {
-                        wrksheet.Cells[h, 93] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][31] + "",2,"0");//Truong25
-                    if (truong25 != truong25UserNhap)
-                        {
-                            wrksheet.Cells[h, 93].Interior.Color = Color.Red;
-                        }
-                        wrksheet.Cells[h, 94] = truong26UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][32] + "",2,"0");//Truong26
-                    if (truong26 != truong26UserNhap)
-                        {
-                            wrksheet.Cells[h, 94].Interior.Color = Color.Red;
-                        }
-                    }
-                    
-                    wrksheet.Cells[h, 95] = FlagZUserNhap = _kq.Rows[i + 2][33] + ""; //FlagZ
-                    if (FlagZ != FlagZUserNhap)
-                    {
-                        wrksheet.Cells[h, 34].Interior.Color = Color.Red;
-                    }
-                    wrksheet.Cells[h, 96] = _kq.Rows[i + 2][2] + ""; //IDPhieu
+                            wrksheet.Cells[h, 93] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][32] + "", 2, "0");//Truong25
+                            if (truong25 != truong25UserNhap)
+                            {
+                                wrksheet.Cells[h, 93].Interior.Color = Color.Red;
+                            }
 
-                    lb_Complete.Text = (h - 1) + "/" + RowCount / 3;
-                    progressBar1.PerformStep();
-                    h++;
+                            wrksheet.Cells[h, 94] = "";                      //Truong26
+                            if (truong26 != "")
+                            {
+                                wrksheet.Cells[h, 94].Interior.Color = Color.Red;
+                            }
+                        }
+                        else
+                        {
+                            wrksheet.Cells[h, 93] = truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][31] + "", 2, "0");//Truong25
+                            if (truong25 != truong25UserNhap)
+                            {
+                                wrksheet.Cells[h, 93].Interior.Color = Color.Red;
+                            }
+                            wrksheet.Cells[h, 94] = truong26UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][32] + "", 2, "0");//Truong26
+                            if (truong26 != truong26UserNhap)
+                            {
+                                wrksheet.Cells[h, 94].Interior.Color = Color.Red;
+                            }
+                        }
+
+                        wrksheet.Cells[h, 95] = FlagZUserNhap = _kq.Rows[i + 2][33] + ""; //FlagZ
+                        if (FlagZ != FlagZUserNhap)
+                        {
+                            wrksheet.Cells[h, 34].Interior.Color = Color.Red;
+                        }
+                        wrksheet.Cells[h, 96] = _kq.Rows[i + 2][2] + ""; //IDPhieu
+
+                        lb_Complete.Text = (h - 1) + "/" + RowCount / 3 + " (" + (int)(((double)(h - 1) / (double)(RowCount / 3)) * 100) + "%) ";
+                        progressBar1.PerformStep();
+                        h++;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < RowCount; i += 3)
+                    {
+                        wrksheet.Cells[h, 1] = _kq.Rows[i][0] + ""; //tên image
+                        //Dữ liệu đúng
+                        wrksheet.Cells[h, 2] = truong1 = _kq.Rows[i][4] + "";//Truong01
+                        wrksheet.Cells[h, 3] = truong2 = _kq.Rows[i][5] + "";//Truong02
+                        wrksheet.Cells[h, 4] = truong3 = _kq.Rows[i][6] + "";//Truong03
+                        wrksheet.Cells[h, 5] = truong4_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][7] + "", 2, "0");//Truong04_1
+                        wrksheet.Cells[h, 6] = truong4_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][8] + "", 2, "0");//Truong04_2
+                        wrksheet.Cells[h, 7] = truong4_3 = ThemKyTuPhiaTruoc(_kq.Rows[i][9] + "", 2, "0");//Truong04_3
+                        wrksheet.Cells[h, 8] = truong5_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][10] + "", 2, "0");//Truong05_1
+                        wrksheet.Cells[h, 9] = truong5_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][11] + "", 2, "0");//Truong05_2
+                        wrksheet.Cells[h, 10] = truong6 = ThemKyTuPhiaTruoc(_kq.Rows[i][12] + "", 2, "0");//Truong06
+                        wrksheet.Cells[h, 11] = truong7 = _kq.Rows[i][13] + "";//Truong07
+                        wrksheet.Cells[h, 12] = truong8 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][14] + "", "0");//Truong08
+                        wrksheet.Cells[h, 13] = truong9 = _kq.Rows[i][15] + "";//Truong09
+                        wrksheet.Cells[h, 14] = truong10 = _kq.Rows[i][16] + "";//Truong10
+                        wrksheet.Cells[h, 15] = truong11 = _kq.Rows[i][17] + "";//Truong11
+                        wrksheet.Cells[h, 16] = truong12 = _kq.Rows[i][18] + "";//Truong12
+                        wrksheet.Cells[h, 17] = truong13 = _kq.Rows[i][19] + "";//Truong13
+                        wrksheet.Cells[h, 18] = truong14 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][20] + "", "0");//Truong14
+                        wrksheet.Cells[h, 19] = truong15 = _kq.Rows[i][21] + "";//Truong15
+                        wrksheet.Cells[h, 20] = truong16 = _kq.Rows[i][22] + "";//Truong16
+                        wrksheet.Cells[h, 21] = truong17 = _kq.Rows[i][23] + "";//Truong17
+                        wrksheet.Cells[h, 22] = truong18 = _kq.Rows[i][24] + "";//Truong18
+                        wrksheet.Cells[h, 23] = truong19 = _kq.Rows[i][25] + "";//Truong19
+                        wrksheet.Cells[h, 24] = truong20 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][26] + "", "0");//Truong20
+                        wrksheet.Cells[h, 25] = truong21 = _kq.Rows[i][27] + "";//Truong21
+                        wrksheet.Cells[h, 26] = truong22 = _kq.Rows[i][28] + "";//Truong22
+                        wrksheet.Cells[h, 27] = truong23 = _kq.Rows[i][29] + "";//Truong23
+                        wrksheet.Cells[h, 28] = truong24 = _kq.Rows[i][30] + "";//Truong24
+                        if (string.IsNullOrEmpty(_kq.Rows[i][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i][32] + ""))
+                        {
+                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong25
+                            wrksheet.Cells[h, 30] = truong26 = "";//Truong26
+                        }
+                        else
+                        {
+                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][31] + "", 2, "0");//Truong25
+                            wrksheet.Cells[h, 30] = truong26 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong26
+                        }
+                        wrksheet.Cells[h, 31] = _kq.Rows[i][33] + ""; //FlagZ
+                        wrksheet.Cells[h, 32] = _kq.Rows[i][2] + ""; //IDPhieu
+
+                        //Dữ liệu User 1
+                        truong1UserNhap = _kq.Rows[i + 1][4] + "";//Truong01
+                        truong2UserNhap = _kq.Rows[i + 1][5] + "";//Truong02
+                        truong3UserNhap = _kq.Rows[i + 1][6] + "";//Truong03
+                        truong4_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][7] + "", 2, "0");//Truong04_1
+                        truong4_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][8] + "", 2, "0");//Truong04_2
+                        truong4_3UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][9] + "", 2, "0");//Truong04_3
+                        truong5_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][10] + "", 2, "0");//Truong05_1
+                        truong5_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][11] + "", 2, "0");//Truong05_2
+                        truong6UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][12] + "", 2, "0");//Truong06
+                        truong7UserNhap = _kq.Rows[i + 1][13] + "";//Truong07
+                        truong8UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][14] + "", "0");//Truong08
+                        truong9UserNhap = _kq.Rows[i + 1][15] + "";//Truong09
+                        truong10UserNhap = _kq.Rows[i + 1][16] + "";//Truong10
+                        truong11UserNhap = _kq.Rows[i + 1][17] + "";//Truong11
+                        truong12UserNhap = _kq.Rows[i + 1][18] + "";//Truong12
+                        truong13UserNhap = _kq.Rows[i + 1][19] + "";//Truong13
+                        truong14UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][20] + "", "0");//Truong14
+                        truong15UserNhap = _kq.Rows[i + 1][21] + "";//Truong15
+                        truong16UserNhap = _kq.Rows[i + 1][22] + "";//Truong16
+                        truong17UserNhap = _kq.Rows[i + 1][23] + "";//Truong17
+                        truong18UserNhap = _kq.Rows[i + 1][24] + "";//Truong18
+                        truong19UserNhap = _kq.Rows[i + 1][25] + "";//Truong19
+                        truong20UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 1][26] + "", "0");//Truong20
+                        truong21UserNhap = _kq.Rows[i + 1][27] + "";//Truong21
+                        truong22UserNhap = _kq.Rows[i + 1][28] + "";//Truong22
+                        truong23UserNhap = _kq.Rows[i + 1][29] + "";//Truong23
+                        truong24UserNhap = _kq.Rows[i + 1][30] + "";//Truong24
+                        if (string.IsNullOrEmpty(_kq.Rows[i + 1][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i + 1][32] + ""))
+                        {
+                            truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][32] + "", 2, "0");//Truong25
+                            wrksheet.Cells[h, 62] = "";                      //Truong26
+                        }
+                        else
+                        {
+                            truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][31] + "", 2, "0");//Truong25
+                            truong26UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 1][32] + "", 2, "0");//Truong26
+                        }
+                        FlagZUserNhap = _kq.Rows[i + 1][33] + ""; //FlagZ
+
+                        wrksheet.Cells[h, 33] = "U:" + _kq.Rows[i + 1][3] + "";//UserName
+                        if (truong1 != truong1UserNhap
+                           || truong2 != truong2UserNhap
+                           || truong3 != truong3UserNhap
+                           || truong4_1 != truong4_1UserNhap
+                           || truong4_2 != truong4_2UserNhap
+                           || truong4_3 != truong4_3UserNhap
+                           || truong5_1 != truong5_1UserNhap
+                           || truong5_2 != truong5_2UserNhap
+                           || truong6 != truong6UserNhap
+                           || truong7 != truong7UserNhap
+                           || truong8 != truong8UserNhap
+                           || truong9 != truong9UserNhap
+                           || truong10 != truong10UserNhap
+                           || truong12 != truong11UserNhap
+                           || truong13 != truong12UserNhap
+                           || truong14 != truong13UserNhap
+                           || truong15 != truong14UserNhap
+                           || truong16 != truong15UserNhap
+                           || truong17 != truong16UserNhap
+                           || truong18 != truong17UserNhap
+                           || truong19 != truong18UserNhap
+                           || truong20 != truong20UserNhap
+                           || truong21 != truong21UserNhap
+                           || truong22 != truong22UserNhap
+                           || truong23 != truong23UserNhap
+                           || truong24 != truong24UserNhap
+                           || truong25 != truong25UserNhap
+                           || truong26 != truong26UserNhap)
+                        {
+                            soloi += 1;
+                            if (demUser1 == tileCanSua)
+                            {
+                                wrksheet.Cells[h, 34] = truong1UserNhap;//Truong01
+                                if (truong1 != truong1UserNhap)
+                                {
+                                    wrksheet.Cells[h, 34].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 35] = truong2UserNhap;//Truong02
+                                if (truong2 != truong2UserNhap)
+                                {
+                                    wrksheet.Cells[h, 35].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 36] = truong3UserNhap;//Truong03
+                                if (truong3 != truong3UserNhap)
+                                {
+                                    wrksheet.Cells[h, 36].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 37] = truong4_1UserNhap;//Truong04_1
+                                if (truong4_1 != truong4_1UserNhap)
+                                {
+                                    wrksheet.Cells[h, 37].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 38] = truong4_2UserNhap;//Truong04_2
+                                if (truong4_2 != truong4_2UserNhap)
+                                {
+                                    wrksheet.Cells[h, 38].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 39] = truong4_3UserNhap;//Truong04_3
+                                if (truong4_3 != truong4_3UserNhap)
+                                {
+                                    wrksheet.Cells[h, 39].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 40] = truong5_1UserNhap;//Truong05_1
+                                if (truong5_1 != truong5_1UserNhap)
+                                {
+                                    wrksheet.Cells[h, 40].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 41] = truong5_2UserNhap;//Truong05_2
+                                if (truong5_2 != truong5_2UserNhap)
+                                {
+                                    wrksheet.Cells[h, 41].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 42] = truong6UserNhap;//Truong06
+                                if (truong6 != truong6UserNhap)
+                                {
+                                    wrksheet.Cells[h, 42].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 43] = truong7UserNhap;//Truong07
+                                if (truong7 != truong7UserNhap)
+                                {
+                                    wrksheet.Cells[h, 43].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 44] = truong8UserNhap;//Truong08
+                                if (truong8 != truong8UserNhap)
+                                {
+                                    wrksheet.Cells[h, 44].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 45] = truong9UserNhap;//Truong09
+                                if (truong9 != truong9UserNhap)
+                                {
+                                    wrksheet.Cells[h, 45].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 46] = truong10UserNhap;//Truong10
+                                if (truong10 != truong10UserNhap)
+                                {
+                                    wrksheet.Cells[h, 46].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 47] = truong11UserNhap;//Truong11
+                                if (truong11 != truong11UserNhap)
+                                {
+                                    wrksheet.Cells[h, 47].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 48] = truong12UserNhap;//Truong12
+                                if (truong12 != truong12UserNhap)
+                                {
+                                    wrksheet.Cells[h, 48].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 49] = truong13UserNhap;//Truong13
+                                if (truong13 != truong13UserNhap)
+                                {
+                                    wrksheet.Cells[h, 49].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 50] = truong14UserNhap;//Truong14
+                                if (truong14 != truong14UserNhap)
+                                {
+                                    wrksheet.Cells[h, 50].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 51] = truong15UserNhap;//Truong15
+                                if (truong15 != truong15UserNhap)
+                                {
+                                    wrksheet.Cells[h, 51].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 52] = truong16UserNhap;//Truong16
+                                if (truong16 != truong16UserNhap)
+                                {
+                                    wrksheet.Cells[h, 52].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 53] = truong17UserNhap;//Truong17
+                                if (truong17 != truong17UserNhap)
+                                {
+                                    wrksheet.Cells[h, 53].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 54] = truong18UserNhap;//Truong18
+                                if (truong18 != truong18UserNhap)
+                                {
+                                    wrksheet.Cells[h, 54].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 55] = truong19UserNhap;//Truong19
+                                if (truong19 != truong19UserNhap)
+                                {
+                                    wrksheet.Cells[h, 55].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 56] = truong20UserNhap;//Truong20
+                                if (truong20 != truong20UserNhap)
+                                {
+                                    wrksheet.Cells[h, 56].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 57] = truong21UserNhap;//Truong21
+                                if (truong21 != truong21UserNhap)
+                                {
+                                    wrksheet.Cells[h, 57].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 58] = truong22UserNhap;//Truong22
+                                if (truong22 != truong22UserNhap)
+                                {
+                                    wrksheet.Cells[h, 58].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 59] = truong23UserNhap;//Truong23
+                                if (truong23 != truong23UserNhap)
+                                {
+                                    wrksheet.Cells[h, 59].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 60] = truong24UserNhap;//Truong24
+                                if (truong24 != truong24UserNhap)
+                                {
+                                    wrksheet.Cells[h, 60].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 61] = truong25UserNhap;//Truong25
+                                if (truong25 != truong25UserNhap)
+                                {
+                                    wrksheet.Cells[h, 61].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 62] = truong26UserNhap;//Truong26
+                                if (truong26 != truong26UserNhap)
+                                {
+                                    wrksheet.Cells[h, 62].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 63] = FlagZUserNhap; //FlagZ
+                                if (FlagZ != FlagZUserNhap)
+                                {
+                                    wrksheet.Cells[h, 63].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 64] = _kq.Rows[i + 1][2] + ""; //IDPhieu
+                                demUser1 = 1;
+                                soloisausua += 1;
+                            }
+                            else
+                            {
+                                wrksheet.Cells[h, 34] = truong1;//Truong01
+                                wrksheet.Cells[h, 35] = truong2;//Truong02
+                                wrksheet.Cells[h, 36] = truong3;//Truong03
+                                wrksheet.Cells[h, 37] = truong4_1;//Truong04_1
+                                wrksheet.Cells[h, 38] = truong4_2;//Truong04_2
+                                wrksheet.Cells[h, 39] = truong4_3;//Truong04_3
+                                wrksheet.Cells[h, 40] = truong5_1;//Truong05_1
+                                wrksheet.Cells[h, 41] = truong5_2;//Truong05_2
+                                wrksheet.Cells[h, 42] = truong6;//Truong06
+                                wrksheet.Cells[h, 43] = truong7;//Truong07
+                                wrksheet.Cells[h, 44] = truong8;//Truong08
+                                wrksheet.Cells[h, 45] = truong9;//Truong09
+                                wrksheet.Cells[h, 46] = truong10;//Truong10
+                                wrksheet.Cells[h, 47] = truong11;//Truong11
+                                wrksheet.Cells[h, 48] = truong12;//Truong12
+                                wrksheet.Cells[h, 49] = truong13;//Truong13
+                                wrksheet.Cells[h, 50] = truong14;//Truong14
+                                wrksheet.Cells[h, 51] = truong15;//Truong15
+                                wrksheet.Cells[h, 52] = truong16;//Truong16
+                                wrksheet.Cells[h, 53] = truong17;//Truong17
+                                wrksheet.Cells[h, 54] = truong18;//Truong18
+                                wrksheet.Cells[h, 55] = truong19;//Truong19
+                                wrksheet.Cells[h, 56] = truong20;//Truong20
+                                wrksheet.Cells[h, 57] = truong21;//Truong21
+                                wrksheet.Cells[h, 58] = truong22;//Truong22
+                                wrksheet.Cells[h, 59] = truong23;//Truong23
+                                wrksheet.Cells[h, 60] = truong24;//Truong24
+                                wrksheet.Cells[h, 61] = truong25;//Truong25
+                                wrksheet.Cells[h, 62] = truong26;//Truong26
+                                wrksheet.Cells[h, 63] = FlagZ; //FlagZ
+                                wrksheet.Cells[h, 64] = _kq.Rows[i + 1][2] + ""; //IDPhieu
+                                demUser1 += 1;
+                            }
+                        }
+                        else
+                        {
+                            wrksheet.Cells[h, 34] = truong1;//Truong01
+                            wrksheet.Cells[h, 35] = truong2;//Truong02
+                            wrksheet.Cells[h, 36] = truong3;//Truong03
+                            wrksheet.Cells[h, 37] = truong4_1;//Truong04_1
+                            wrksheet.Cells[h, 38] = truong4_2;//Truong04_2
+                            wrksheet.Cells[h, 39] = truong4_3;//Truong04_3
+                            wrksheet.Cells[h, 40] = truong5_1;//Truong05_1
+                            wrksheet.Cells[h, 41] = truong5_2;//Truong05_2
+                            wrksheet.Cells[h, 42] = truong6;//Truong06
+                            wrksheet.Cells[h, 43] = truong7;//Truong07
+                            wrksheet.Cells[h, 44] = truong8;//Truong08
+                            wrksheet.Cells[h, 45] = truong9;//Truong09
+                            wrksheet.Cells[h, 46] = truong10;//Truong10
+                            wrksheet.Cells[h, 47] = truong11;//Truong11
+                            wrksheet.Cells[h, 48] = truong12;//Truong12
+                            wrksheet.Cells[h, 49] = truong13;//Truong13
+                            wrksheet.Cells[h, 50] = truong14;//Truong14
+                            wrksheet.Cells[h, 51] = truong15;//Truong15
+                            wrksheet.Cells[h, 52] = truong16;//Truong16
+                            wrksheet.Cells[h, 53] = truong17;//Truong17
+                            wrksheet.Cells[h, 54] = truong18;//Truong18
+                            wrksheet.Cells[h, 55] = truong19;//Truong19
+                            wrksheet.Cells[h, 56] = truong20;//Truong20
+                            wrksheet.Cells[h, 57] = truong21;//Truong21
+                            wrksheet.Cells[h, 58] = truong22;//Truong22
+                            wrksheet.Cells[h, 59] = truong23;//Truong23
+                            wrksheet.Cells[h, 60] = truong24;//Truong24
+                            wrksheet.Cells[h, 61] = truong25;//Truong25
+                            wrksheet.Cells[h, 62] = truong26;//Truong26
+                            wrksheet.Cells[h, 63] = FlagZ; //FlagZ
+                            wrksheet.Cells[h, 64] = _kq.Rows[i + 1][2] + ""; //IDPhieu
+                        }
+
+
+                        //Dữ liệu User 2
+                        truong1UserNhap = _kq.Rows[i + 2][4] + "";//Truong01
+                        truong2UserNhap = _kq.Rows[i + 2][5] + "";//Truong02
+                        truong3UserNhap = _kq.Rows[i + 2][6] + "";//Truong03
+                        truong4_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][7] + "", 2, "0");//Truong04_1
+                        truong4_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][8] + "", 2, "0");//Truong04_2
+                        truong4_3UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][9] + "", 2, "0");//Truong04_3
+                        truong5_1UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][10] + "", 2, "0");//Truong05_1
+                        truong5_2UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][11] + "", 2, "0");//Truong05_2
+                        truong6UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][12] + "", 2, "0");//Truong06
+                        truong7UserNhap = _kq.Rows[i + 2][13] + "";//Truong07
+                        truong8UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][14] + "", "0");//Truong08
+                        truong9UserNhap = _kq.Rows[i + 2][15] + "";//Truong09
+                        truong10UserNhap = _kq.Rows[i + 2][16] + "";//Truong10
+                        truong11UserNhap = _kq.Rows[i + 2][17] + "";//Truong11
+                        truong12UserNhap = _kq.Rows[i + 2][18] + "";//Truong12
+                        truong13UserNhap = _kq.Rows[i + 2][19] + "";//Truong13
+                        truong14UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][20] + "", "0");//Truong14
+                        truong15UserNhap = _kq.Rows[i + 2][21] + "";//Truong15
+                        truong16UserNhap = _kq.Rows[i + 2][22] + "";//Truong16
+                        truong17UserNhap = _kq.Rows[i + 2][23] + "";//Truong17
+                        truong18UserNhap = _kq.Rows[i + 2][24] + "";//Truong18
+                        truong19UserNhap = _kq.Rows[i + 2][25] + "";//Truong19
+                        truong20UserNhap = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i + 2][26] + "", "0");//Truong20
+                        truong21UserNhap = _kq.Rows[i + 2][27] + "";//Truong21
+                        truong22UserNhap = _kq.Rows[i + 2][28] + "";//Truong22
+                        truong23UserNhap = _kq.Rows[i + 2][29] + "";//Truong23
+                        truong24UserNhap = _kq.Rows[i + 2][30] + "";//Truong24
+                        if (string.IsNullOrEmpty(_kq.Rows[i + 2][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i + 2][32] + ""))
+                        {
+                            truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][32] + "", 2, "0");//Truong25
+                            wrksheet.Cells[h, 62] = "";                      //Truong26
+                        }
+                        else
+                        {
+                            truong25UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][31] + "", 2, "0");//Truong25
+                            truong26UserNhap = ThemKyTuPhiaTruoc(_kq.Rows[i + 2][32] + "", 2, "0");//Truong26
+                        }
+                        FlagZUserNhap = _kq.Rows[i + 2][33] + ""; //FlagZ
+
+                        wrksheet.Cells[h, 65] = "V:" + _kq.Rows[i + 2][3] + "";//UserName
+                        if (truong1 != truong1UserNhap
+                           || truong2 != truong2UserNhap
+                           || truong3 != truong3UserNhap
+                           || truong4_1 != truong4_1UserNhap
+                           || truong4_2 != truong4_2UserNhap
+                           || truong4_3 != truong4_3UserNhap
+                           || truong5_1 != truong5_1UserNhap
+                           || truong5_2 != truong5_2UserNhap
+                           || truong6 != truong6UserNhap
+                           || truong7 != truong7UserNhap
+                           || truong8 != truong8UserNhap
+                           || truong9 != truong9UserNhap
+                           || truong10 != truong10UserNhap
+                           || truong12 != truong11UserNhap
+                           || truong13 != truong12UserNhap
+                           || truong14 != truong13UserNhap
+                           || truong15 != truong14UserNhap
+                           || truong16 != truong15UserNhap
+                           || truong17 != truong16UserNhap
+                           || truong18 != truong17UserNhap
+                           || truong19 != truong18UserNhap
+                           || truong20 != truong20UserNhap
+                           || truong21 != truong21UserNhap
+                           || truong22 != truong22UserNhap
+                           || truong23 != truong23UserNhap
+                           || truong24 != truong24UserNhap
+                           || truong25 != truong25UserNhap
+                           || truong26 != truong26UserNhap)
+                        {
+                            soloi += 1;
+                            if (demUser2 == tileCanSua)
+                            {
+                                wrksheet.Cells[h, 66] = truong1UserNhap;//Truong01
+                                if (truong1 != truong1UserNhap)
+                                {
+                                    wrksheet.Cells[h, 66].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 67] = truong2UserNhap;//Truong02
+                                if (truong2 != truong2UserNhap)
+                                {
+                                    wrksheet.Cells[h, 67].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 68] = truong3UserNhap;//Truong03
+                                if (truong3 != truong3UserNhap)
+                                {
+                                    wrksheet.Cells[h, 68].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 69] = truong4_1UserNhap;//Truong04_1
+                                if (truong4_1 != truong4_1UserNhap)
+                                {
+                                    wrksheet.Cells[h, 69].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 70] = truong4_2UserNhap;//Truong04_2
+                                if (truong4_2 != truong4_2UserNhap)
+                                {
+                                    wrksheet.Cells[h, 70].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 71] = truong4_3UserNhap;//Truong04_3
+                                if (truong4_3 != truong4_3UserNhap)
+                                {
+                                    wrksheet.Cells[h, 71].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 72] = truong5_1UserNhap;//Truong05_1
+                                if (truong5_1 != truong5_1UserNhap)
+                                {
+                                    wrksheet.Cells[h, 72].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 73] = truong5_2UserNhap;//Truong05_2
+                                if (truong5_2 != truong5_2UserNhap)
+                                {
+                                    wrksheet.Cells[h, 73].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 74] = truong6UserNhap;//Truong06
+                                if (truong6 != truong6UserNhap)
+                                {
+                                    wrksheet.Cells[h, 74].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 75] = truong7UserNhap;//Truong07
+                                if (truong7 != truong7UserNhap)
+                                {
+                                    wrksheet.Cells[h, 75].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 76] = truong8UserNhap;//Truong08
+                                if (truong8 != truong8UserNhap)
+                                {
+                                    wrksheet.Cells[h, 76].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 77] = truong9UserNhap;//Truong09
+                                if (truong9 != truong9UserNhap)
+                                {
+                                    wrksheet.Cells[h, 77].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 78] = truong19UserNhap;//Truong10
+                                if (truong10 != truong19UserNhap)
+                                {
+                                    wrksheet.Cells[h, 78].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 79] = truong11UserNhap;//Truong11
+                                if (truong11 != truong11UserNhap)
+                                {
+                                    wrksheet.Cells[h, 79].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 80] = truong12UserNhap;//Truong12
+                                if (truong12 != truong12UserNhap)
+                                {
+                                    wrksheet.Cells[h, 80].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 81] = truong13UserNhap;//Truong13
+                                if (truong13 != truong13UserNhap)
+                                {
+                                    wrksheet.Cells[h, 81].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 82] = truong14UserNhap;//Truong14
+                                if (truong14 != truong14UserNhap)
+                                {
+                                    wrksheet.Cells[h, 82].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 83] = truong15UserNhap;//Truong15
+                                if (truong15 != truong15UserNhap)
+                                {
+                                    wrksheet.Cells[h, 83].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 84] = truong16UserNhap;//Truong16
+                                if (truong16 != truong16UserNhap)
+                                {
+                                    wrksheet.Cells[h, 84].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 85] = truong17UserNhap;//Truong17
+                                if (truong17 != truong17UserNhap)
+                                {
+                                    wrksheet.Cells[h, 85].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 86] = truong18UserNhap;//Truong18
+                                if (truong18 != truong18UserNhap)
+                                {
+                                    wrksheet.Cells[h, 86].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 87] = truong19UserNhap;//Truong19
+                                if (truong19 != truong19UserNhap)
+                                {
+                                    wrksheet.Cells[h, 87].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 88] = truong20UserNhap;//Truong20
+                                if (truong20 != truong20UserNhap)
+                                {
+                                    wrksheet.Cells[h, 88].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 89] = truong21UserNhap;//Truong21
+                                if (truong21 != truong21UserNhap)
+                                {
+                                    wrksheet.Cells[h, 89].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 90] = truong22UserNhap;//Truong22
+                                if (truong22 != truong22UserNhap)
+                                {
+                                    wrksheet.Cells[h, 90].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 91] = truong23UserNhap;//Truong23
+                                if (truong23 != truong23UserNhap)
+                                {
+                                    wrksheet.Cells[h, 91].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 92] = truong24UserNhap;//Truong24
+                                if (truong24 != truong24UserNhap)
+                                {
+                                    wrksheet.Cells[h, 92].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 93] = truong25UserNhap;//Truong25
+                                if (truong25 != truong25UserNhap)
+                                {
+                                    wrksheet.Cells[h, 93].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 94] = truong26UserNhap;//Truong26
+                                if (truong26 != truong26UserNhap)
+                                {
+                                    wrksheet.Cells[h, 94].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 95] = FlagZUserNhap; //FlagZ
+                                if (FlagZ != FlagZUserNhap)
+                                {
+                                    wrksheet.Cells[h, 34].Interior.Color = Color.Red;
+                                }
+                                wrksheet.Cells[h, 96] = _kq.Rows[i + 2][2] + ""; //IDPhieu
+                                demUser2 = 1;
+                                soloisausua += 1;
+                            }
+                            else
+                            {
+                                wrksheet.Cells[h, 66] = truong1;//Truong01
+                                wrksheet.Cells[h, 67] = truong2;//Truong02
+                                wrksheet.Cells[h, 68] = truong3;//Truong03
+                                wrksheet.Cells[h, 69] = truong4_1;//Truong04_1
+                                wrksheet.Cells[h, 70] = truong4_2;//Truong04_2
+                                wrksheet.Cells[h, 71] = truong4_3;//Truong04_3
+                                wrksheet.Cells[h, 72] = truong5_1;//Truong05_1
+                                wrksheet.Cells[h, 73] = truong5_2;//Truong05_2
+                                wrksheet.Cells[h, 74] = truong6;//Truong06
+                                wrksheet.Cells[h, 75] = truong7;//Truong07
+                                wrksheet.Cells[h, 76] = truong8;//Truong08
+                                wrksheet.Cells[h, 77] = truong9;//Truong09
+                                wrksheet.Cells[h, 78] = truong19;//Truong10
+                                wrksheet.Cells[h, 79] = truong11;//Truong11
+                                wrksheet.Cells[h, 80] = truong12;//Truong12
+                                wrksheet.Cells[h, 81] = truong13;//Truong13
+                                wrksheet.Cells[h, 82] = truong14;//Truong14
+                                wrksheet.Cells[h, 83] = truong15;//Truong15
+                                wrksheet.Cells[h, 84] = truong16;//Truong16
+                                wrksheet.Cells[h, 85] = truong17;//Truong17
+                                wrksheet.Cells[h, 86] = truong18;//Truong18
+                                wrksheet.Cells[h, 87] = truong19;//Truong19
+                                wrksheet.Cells[h, 88] = truong20;//Truong20
+                                wrksheet.Cells[h, 89] = truong21;//Truong21
+                                wrksheet.Cells[h, 90] = truong22;//Truong22
+                                wrksheet.Cells[h, 91] = truong23;//Truong23
+                                wrksheet.Cells[h, 92] = truong24;//Truong24
+                                wrksheet.Cells[h, 93] = truong25;//Truong25
+                                wrksheet.Cells[h, 94] = truong26;//Truong26
+                                wrksheet.Cells[h, 95] = FlagZ; //FlagZ
+                                wrksheet.Cells[h, 96] = _kq.Rows[i + 2][2] + ""; //IDPhieu
+                                demUser2 += 1;
+                            }
+                        }
+                        else
+                        {
+                            wrksheet.Cells[h, 66] = truong1;//Truong01
+                            wrksheet.Cells[h, 67] = truong2;//Truong02
+                            wrksheet.Cells[h, 68] = truong3;//Truong03
+                            wrksheet.Cells[h, 69] = truong4_1;//Truong04_1
+                            wrksheet.Cells[h, 70] = truong4_2;//Truong04_2
+                            wrksheet.Cells[h, 71] = truong4_3;//Truong04_3
+                            wrksheet.Cells[h, 72] = truong5_1;//Truong05_1
+                            wrksheet.Cells[h, 73] = truong5_2;//Truong05_2
+                            wrksheet.Cells[h, 74] = truong6;//Truong06
+                            wrksheet.Cells[h, 75] = truong7;//Truong07
+                            wrksheet.Cells[h, 76] = truong8;//Truong08
+                            wrksheet.Cells[h, 77] = truong9;//Truong09
+                            wrksheet.Cells[h, 78] = truong19;//Truong10
+                            wrksheet.Cells[h, 79] = truong11;//Truong11
+                            wrksheet.Cells[h, 80] = truong12;//Truong12
+                            wrksheet.Cells[h, 81] = truong13;//Truong13
+                            wrksheet.Cells[h, 82] = truong14;//Truong14
+                            wrksheet.Cells[h, 83] = truong15;//Truong15
+                            wrksheet.Cells[h, 84] = truong16;//Truong16
+                            wrksheet.Cells[h, 85] = truong17;//Truong17
+                            wrksheet.Cells[h, 86] = truong18;//Truong18
+                            wrksheet.Cells[h, 87] = truong19;//Truong19
+                            wrksheet.Cells[h, 88] = truong20;//Truong20
+                            wrksheet.Cells[h, 89] = truong21;//Truong21
+                            wrksheet.Cells[h, 90] = truong22;//Truong22
+                            wrksheet.Cells[h, 91] = truong23;//Truong23
+                            wrksheet.Cells[h, 92] = truong24;//Truong24
+                            wrksheet.Cells[h, 93] = truong25;//Truong25
+                            wrksheet.Cells[h, 94] = truong26;//Truong26
+                            wrksheet.Cells[h, 95] = FlagZ; //FlagZ
+                            wrksheet.Cells[h, 96] = _kq.Rows[i + 2][2] + ""; //IDPhieu
+                        }
+                        lb_Complete.Text = (h - 1) + "/" + RowCount / 3 + " (" + (int)(((double)(h - 1) / (double)(RowCount/3))*100) + "%) ";
+                        progressBar1.PerformStep();
+                        h++;
+                    }
                 }
                 Microsoft.Office.Interop.Excel.Range rowHead = wrksheet.get_Range("A2", "CR" + (h - 1));
                 rowHead.Borders.LineStyle = Microsoft.Office.Interop.Excel.Constants.xlSolid;
@@ -847,6 +1514,19 @@ namespace CLS_NatSu.MyForm
                 ((ComboBox)sender).Text = "";
         }
         FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+        private void frm_ExportExcel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (backgroundWorker1.IsBusy)
+            {
+                if(MessageBox.Show("Quá trình xuất file đang diễn ra, Bạn chắc chắn muốn dừng ?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3) == DialogResult.Yes)
+                {
+                    return;
+                }
+                e.Cancel = true;
+            }
+        }
+
         private void btn_Browse_Click(object sender, EventArgs e)
         {
             if (fbd.ShowDialog() == DialogResult.OK)

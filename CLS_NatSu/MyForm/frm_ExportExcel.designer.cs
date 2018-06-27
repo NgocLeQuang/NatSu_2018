@@ -39,20 +39,16 @@
             this.btn_Browse = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.dgv = new DevExpress.XtraTab.XtraTabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Batch = new DevExpress.XtraTab.XtraTabPage();
             this.list_Batch = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.lb_BatchName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
-            this.dgv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Batch.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +65,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.lb_BatchName);
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Controls.Add(this.txt_path);
             this.panelControl1.Controls.Add(this.progressBar1);
@@ -78,7 +75,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1105, 71);
+            this.panelControl1.Size = new System.Drawing.Size(1105, 95);
             this.panelControl1.TabIndex = 4;
             // 
             // label1
@@ -101,7 +98,7 @@
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(31, 41);
+            this.progressBar1.Location = new System.Drawing.Point(31, 61);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(919, 23);
             this.progressBar1.TabIndex = 6;
@@ -110,7 +107,7 @@
             // 
             this.lb_Complete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Complete.AutoSize = true;
-            this.lb_Complete.Location = new System.Drawing.Point(962, 46);
+            this.lb_Complete.Location = new System.Drawing.Point(962, 66);
             this.lb_Complete.Name = "lb_Complete";
             this.lb_Complete.Size = new System.Drawing.Size(0, 13);
             this.lb_Complete.TabIndex = 4;
@@ -130,9 +127,9 @@
             // 
             this.panelControl2.Controls.Add(this.xtraTabControl1);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 71);
+            this.panelControl2.Location = new System.Drawing.Point(0, 95);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1105, 508);
+            this.panelControl2.Size = new System.Drawing.Size(1105, 484);
             this.panelControl2.TabIndex = 5;
             // 
             // xtraTabControl1
@@ -140,39 +137,18 @@
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.dgv;
+            this.xtraTabControl1.SelectedTabPage = this.Batch;
             this.xtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.True;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1101, 504);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1101, 480);
             this.xtraTabControl1.TabIndex = 4;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.dgv,
             this.Batch});
-            // 
-            // dgv
-            // 
-            this.dgv.Controls.Add(this.dataGridView1);
-            this.dgv.Name = "dgv";
-            this.dgv.PageVisible = false;
-            this.dgv.Size = new System.Drawing.Size(1095, 476);
-            this.dgv.Text = "Data excel";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(40, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1038, 421);
-            this.dataGridView1.TabIndex = 3;
             // 
             // Batch
             // 
             this.Batch.Controls.Add(this.list_Batch);
             this.Batch.Name = "Batch";
-            this.Batch.Size = new System.Drawing.Size(1095, 476);
+            this.Batch.Size = new System.Drawing.Size(1095, 452);
             this.Batch.Text = "Batch";
             // 
             // list_Batch
@@ -183,13 +159,23 @@
             this.list_Batch.MultiColumn = true;
             this.list_Batch.Name = "list_Batch";
             this.list_Batch.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.list_Batch.Size = new System.Drawing.Size(1095, 476);
+            this.list_Batch.Size = new System.Drawing.Size(1095, 452);
             this.list_Batch.TabIndex = 0;
             // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // lb_BatchName
+            // 
+            this.lb_BatchName.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_BatchName.Appearance.Options.UseFont = true;
+            this.lb_BatchName.Location = new System.Drawing.Point(33, 40);
+            this.lb_BatchName.Name = "lb_BatchName";
+            this.lb_BatchName.Size = new System.Drawing.Size(68, 16);
+            this.lb_BatchName.TabIndex = 9;
+            this.lb_BatchName.Text = "Batch Name";
             // 
             // frm_ExportExcel
             // 
@@ -202,6 +188,7 @@
             this.Name = "frm_ExportExcel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExportExcel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm_ExportExcel_FormClosing);
             this.Load += new System.EventHandler(this.frm_ExportExcel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -210,8 +197,6 @@
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
-            this.dgv.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Batch.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -225,14 +210,12 @@
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage dgv;
         private DevExpress.XtraTab.XtraTabPage Batch;
         private System.Windows.Forms.ListBox list_Batch;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_path;
         private DevExpress.XtraEditors.SimpleButton btn_Browse;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DevExpress.XtraEditors.LabelControl lb_BatchName;
     }
 }
