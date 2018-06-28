@@ -139,8 +139,6 @@ namespace CLS_NatSu.MyForm
                             ListUser += sss;
                         }
                     }
-                    //dt.Rows.Add(((MyEntry)item).BatchID + "");
-                    //namefileExcel += ((MyEntry)item).BatchName + "_";
                 }
                 if (!string.IsNullOrEmpty(ListBatchNotFinish))
                 {
@@ -208,12 +206,6 @@ namespace CLS_NatSu.MyForm
                 //backgroundWorker1_DoWork(null, null);
             }
             catch { }
-            finally
-            {
-                txt_path.Enabled = true;
-                btn_Browse.Enabled = true;
-                list_Batch.Enabled = true;
-            }
         }
         private string QuaKyTuXuatDauChamHoi(string input, int iByte, string str)
         {
@@ -380,16 +372,16 @@ namespace CLS_NatSu.MyForm
                 string FlagZUserNhap = "";
 
 
-                var totalImage = RowCount / 3;
-                var totalImageError = (from w in Global.Db.tbl_DeSos where w.BatchID == ((MyEntry)item).BatchID && w.Error == true & w.UserName != "Checker" select w.IDImage).Count();
-                var soDongLoiChoPhep = 0.03 * totalImage;
-                int tileCanSua = (int)Math.Round(totalImageError / soDongLoiChoPhep, 0);
+                var totalRow = RowCount / 3;
+                var totalRowError = (from w in Global.Db.tbl_DeSos where w.BatchID == ((MyEntry)item).BatchID && w.Error == true group w by new { w.BatchID,w.IDImage,w.IDPhieu} into g  select g.Key.IDImage).Count();
+                var soDongLoiChoPhep = 0.03 * totalRow;
+                int tileCanSua = (int)Math.Round(totalRowError / soDongLoiChoPhep, 0);
                 int demUser1 = 1, demUser2 = 1;
                 //MessageBox.Show("Tổng dòng:"+ totalImage+
                 //                "\r\nTổng dòng lỗi:"+totalImageError+
                 //                "\r\nTỉ lệ cần sửa:"+tileCanSua+
                 //                "\r\nSố dòng cho phép lỗi"+soDongLoiChoPhep);
-                if (totalImageError <= soDongLoiChoPhep)
+                if (totalRowError <= soDongLoiChoPhep)
                 {
                     for (int i = 0; i < RowCount; i += 3)
                     {

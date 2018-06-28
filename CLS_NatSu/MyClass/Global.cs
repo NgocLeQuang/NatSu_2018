@@ -112,7 +112,7 @@ namespace CLS_NatSu.MyClass
                 {
                     if (MessageBox.Show("Version bạn dùng đã cũ, vui lòng cập nhật phiên bản mới (Bắt buộc)!", "Thông báo!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                     {
-                        Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe", Server + " " + Webservice_Update);
+                        Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe");
                     }
                     return true;
                 }
@@ -122,7 +122,7 @@ namespace CLS_NatSu.MyClass
                         return false;
                     if (MessageBox.Show("Version bạn dùng đã cũ, vui lòng cập nhật phiên bản mới!", "Thông báo!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                     {
-                        Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe", Server + " " + Webservice_Update);
+                        Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe");
                         return true;
                     }
                     else

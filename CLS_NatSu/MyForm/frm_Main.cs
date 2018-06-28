@@ -1470,7 +1470,7 @@ namespace CLS_NatSu.MyForm
 
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           //new frm_NangSuat().ShowDialog();
+           new frm_NangSuat().ShowDialog();
         }
 
         private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1517,7 +1517,7 @@ namespace CLS_NatSu.MyForm
         
         private void btn_RefreshImageNotInput_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //new Refresh_ImageNotInput().ShowDialog();
+            new Refresh_ImageNotInput().ShowDialog();
         }
 
         private void btn_Check_DeSo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

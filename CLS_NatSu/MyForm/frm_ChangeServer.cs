@@ -50,7 +50,7 @@ namespace CLS_NatSu.MyForm
                     Settings.Default.Save();
                     Global.Server = "DaNang";
                     Global.Webservice = "http://192.168.165.10:8888/NatSu/";
-                    Global.Webservice_Update = "http://192.168.165.10:8888/Update/NatSu_2018/CLS_NatSu.dll";
+                    Global.Webservice_Update = "http://192.168.165.10:8888/Update/Natsu2018/";
                     Global.Db = new DataNatSuDataContext(@"Data Source=192.168.165.10\BPOSERVER;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=NatSu_2018;Password=123@123a");
                     Global.Db.CommandTimeout = 15 * 60; // 5 Mins
                     Global.DbBpo = new DataBPODataContext(@"Data Source=192.168.165.10;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;User ID=NatSu_2018;Password=123@123a");
@@ -61,10 +61,10 @@ namespace CLS_NatSu.MyForm
                     Settings.Default.Save();
                     Global.Server = "Khac";
                     Global.Webservice = "http://101.99.53.121:3602/NatSu/";
-                    Global.Webservice_Update = "http://101.99.53.121:3602/Update/NatSu_2018/CLS_NatSu.dll";
-                    Global.Db = new DataNatSuDataContext(@"Data Source=101.99.53.121,3609;Initial Catalog=NatSu_2018;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                    Global.Webservice_Update = "http://101.99.53.121:3602/Update/Natsu2018/";
+                    Global.Db = new DataNatSuDataContext(@"Data Source=http://101.99.53.121,3609;Initial Catalog=NatSu_2018;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
                     Global.Db.CommandTimeout = 15 * 60; // 5 Mins
-                    Global.DbBpo = new DataBPODataContext(@"Data Source=101.99.53.121,3609;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                    Global.DbBpo = new DataBPODataContext(@"Data Source=http://101.99.53.121,3609;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
                 }
             }
             catch (Exception i)

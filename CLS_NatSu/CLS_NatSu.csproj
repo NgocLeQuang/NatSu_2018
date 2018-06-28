@@ -211,6 +211,12 @@
     <Compile Include="MyForm\frm_ManagerBatch.designer.cs">
       <DependentUpon>frm_ManagerBatch.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\frm_NangSuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\frm_NangSuat.designer.cs">
+      <DependentUpon>frm_NangSuat.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\frm_ShowCheckedImage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,12 @@
     </Compile>
     <Compile Include="MyForm\frm_User.designer.cs">
       <DependentUpon>frm_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\Refresh_ImageNotInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\Refresh_ImageNotInput.designer.cs">
+      <DependentUpon>Refresh_ImageNotInput.cs</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\UC_225.cs">
       <SubType>UserControl</SubType>
@@ -273,6 +285,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ExportExcel.xlsx" />
+    <None Include="Resources\Productivity.xlsx" />
+    <None Include="Resources\Productivity_Check.xlsx" />
     <None Include="Resources\svn_deleted.png" />
   </ItemGroup>
   <ItemGroup>
@@ -325,11 +339,17 @@
     <EmbeddedResource Include="MyForm\frm_ManagerBatch.resx">
       <DependentUpon>frm_ManagerBatch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\frm_NangSuat.resx">
+      <DependentUpon>frm_NangSuat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\frm_ShowCheckedImage.resx">
       <DependentUpon>frm_ShowCheckedImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\frm_User.resx">
       <DependentUpon>frm_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\Refresh_ImageNotInput.resx">
+      <DependentUpon>Refresh_ImageNotInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyUserControl\UC_225.resx">
       <DependentUpon>UC_225.cs</DependentUpon>

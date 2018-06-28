@@ -121,6 +121,12 @@
   <data name="ExportExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ExportExcel.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Productivity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Productivity.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Productivity_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Productivity_Check.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value />
   </data>

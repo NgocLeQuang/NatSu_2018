@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NatSu", "NatSu\NatSu.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLS_NatSu", "CLS_NatSu\CLS_NatSu.csproj", "{534A04D2-B3BD-48E0-84B6-C421A0F54A7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateDataSimple", "UpdateDataSimple\UpdateDataSimple.csproj", "{0B66D7B9-E668-41A1-9A93-1FBF4F13FA78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{534A04D2-B3BD-48E0-84B6-C421A0F54A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{534A04D2-B3BD-48E0-84B6-C421A0F54A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{534A04D2-B3BD-48E0-84B6-C421A0F54A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B66D7B9-E668-41A1-9A93-1FBF4F13FA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B66D7B9-E668-41A1-9A93-1FBF4F13FA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B66D7B9-E668-41A1-9A93-1FBF4F13FA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B66D7B9-E668-41A1-9A93-1FBF4F13FA78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
