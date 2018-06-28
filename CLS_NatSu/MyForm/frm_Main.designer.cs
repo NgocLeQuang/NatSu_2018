@@ -92,7 +92,7 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.lb_TongPhieu = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.lb_fBatchName = new DevExpress.XtraEditors.LabelControl();
+            this.lb_BatchName = new DevExpress.XtraEditors.LabelControl();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.uc_PictureBox1 = new CLS_NatSu.MyUserControl.uc_PictureBox();
@@ -604,7 +604,7 @@
             this.panel_Top.Controls.Add(this.labelControl3);
             this.panel_Top.Controls.Add(this.lb_TongPhieu);
             this.panel_Top.Controls.Add(this.labelControl2);
-            this.panel_Top.Controls.Add(this.lb_fBatchName);
+            this.panel_Top.Controls.Add(this.lb_BatchName);
             this.panel_Top.Controls.Add(this.labelControl1);
             this.panel_Top.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Top.Location = new System.Drawing.Point(0, 20);
@@ -695,14 +695,14 @@
             this.labelControl2.TabIndex = 0;
             this.labelControl2.Text = "Tổng phiếu:";
             // 
-            // lb_fBatchName
+            // lb_BatchName
             // 
-            this.lb_fBatchName.Location = new System.Drawing.Point(38, 7);
-            this.lb_fBatchName.Name = "lb_fBatchName";
-            this.lb_fBatchName.Size = new System.Drawing.Size(6, 13);
-            this.lb_fBatchName.TabIndex = 0;
-            this.lb_fBatchName.Text = "1";
-            this.lb_fBatchName.Click += new System.EventHandler(this.lb_fBatchName_Click);
+            this.lb_BatchName.Location = new System.Drawing.Point(38, 7);
+            this.lb_BatchName.Name = "lb_BatchName";
+            this.lb_BatchName.Size = new System.Drawing.Size(6, 13);
+            this.lb_BatchName.TabIndex = 0;
+            this.lb_BatchName.Text = "1";
+            this.lb_BatchName.Click += new System.EventHandler(this.lb_fBatchName_Click);
             // 
             // bar1
             // 
@@ -809,7 +809,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl lb_TongPhieu;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl lb_fBatchName;
+        private DevExpress.XtraEditors.LabelControl lb_BatchName;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;

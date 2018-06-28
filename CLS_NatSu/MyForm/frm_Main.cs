@@ -47,6 +47,7 @@ namespace CLS_NatSu.MyForm
                 ChiaUser = -1;
                 LevelUser = -1;
                 lb_IdImage.Text = "";
+                lb_BatchName.Text = "";
                 Global.FlagChangeSave = false;
                 Global.FlagLoadCheck = false;
                 splitMain.SplitterPosition = 620;
@@ -56,7 +57,7 @@ namespace CLS_NatSu.MyForm
                 btn_Submit.Enabled = false;
                 btn_Submit_Logout.Enabled = false;
                 Folder = "";
-                lb_fBatchName.Text = Global.StrBatch;
+                lb_BatchName.Text = Global.StrBatch;
                 lb_UserName.Text = Global.StrUserName;
                 Global.FlagLoad = false;
                 var checkDisableUser = (from w in Global.DbBpo.tbl_Users where w.Username == Global.StrUserName select w.IsDelete).FirstOrDefault();
@@ -1143,7 +1144,7 @@ namespace CLS_NatSu.MyForm
                 Image_temp = GetImageNew();
                 if (Image_temp == "NULL")
                 {
-                    MessageBox.Show(@"Hoàn thành batch '" + lb_fBatchName.Text + "'");
+                    MessageBox.Show(@"Hoàn thành batch '" + lb_BatchName.Text + "'");
                     Global.StrBatch = "";
                     Global.StrBatchID = "";
                     Folder = "";
@@ -1174,7 +1175,7 @@ namespace CLS_NatSu.MyForm
                                 {
                                     ChiaUser = -1;
                                 }
-                                lb_fBatchName.Text = Global.StrBatch;
+                                lb_BatchName.Text = Global.StrBatch;
                                 lb_IdImage.Text = "";
                                 lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
                                 setValue();
@@ -1218,7 +1219,7 @@ namespace CLS_NatSu.MyForm
                                 {
                                     ChiaUser = -1;
                                 }
-                                lb_fBatchName.Text = Global.StrBatch;
+                                lb_BatchName.Text = Global.StrBatch;
                                 lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
                                 setValue();
                                 btn_Submit.Text = @"Start";
@@ -1286,7 +1287,7 @@ namespace CLS_NatSu.MyForm
                 Image_temp = GetImageNew();
                 if (Image_temp == "NULL")
                 {
-                    MessageBox.Show(@"Hoàn thành batch '" + lb_fBatchName.Text + "'");
+                    MessageBox.Show(@"Hoàn thành batch '" + lb_BatchName.Text + "'");
                     Global.StrBatch = "";
                     Global.StrBatchID = "";
                     Folder = "";
@@ -1317,7 +1318,7 @@ namespace CLS_NatSu.MyForm
                                 {
                                     ChiaUser = -1;
                                 }
-                                lb_fBatchName.Text = Global.StrBatch;
+                                lb_BatchName.Text = Global.StrBatch;
                                 lb_IdImage.Text = "";
                                 lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
                                 setValue();
@@ -1361,7 +1362,7 @@ namespace CLS_NatSu.MyForm
                                 {
                                     ChiaUser = -1;
                                 }
-                                lb_fBatchName.Text = Global.StrBatch;
+                                lb_BatchName.Text = Global.StrBatch;
                                 lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
                                 setValue();
                                 btn_Submit.Text = @"Start";
@@ -1434,6 +1435,7 @@ namespace CLS_NatSu.MyForm
                     UC_2225_1.Save2225(Global.StrBatchID, lb_IdImage.Text, txt_Truong_01.Text);
                 }
             }
+            lb_IdImage.Text = "";
             RefreshUC();
             DialogResult = DialogResult.Yes;
         }
@@ -1460,7 +1462,7 @@ namespace CLS_NatSu.MyForm
 
         private void btn_TienDo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //new FrmTienDo().ShowDialog();
+            new FrmTienDo().ShowDialog();
         }
 
         private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -1487,6 +1489,10 @@ namespace CLS_NatSu.MyForm
         {
             try
             {
+                if(!string.IsNullOrEmpty(lb_IdImage.Text))
+                {
+                    Global.Db.CancelEntry(Global.StrBatchID, lb_IdImage.Text, Global.StrUserName, Global.StrIdProject,LevelUser,ChiaUser);
+                }
                 Global.DbBpo.UpdateTimeLastRequest(Global.Token);
                 Global.DbBpo.UpdateTimeLogout(Global.Token);
                 Global.DbBpo.ResetToken(Global.StrUserName, Global.StrIdProject, Global.Token);
@@ -1511,7 +1517,7 @@ namespace CLS_NatSu.MyForm
 
         private void lb_fBatchName_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(lb_fBatchName.Text);
+            Clipboard.SetText(lb_BatchName.Text);
             XtraMessageBox.Show("Copy batch name Success!");
         }
         

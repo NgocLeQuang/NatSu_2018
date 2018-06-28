@@ -163,6 +163,12 @@
     <Compile Include="MyForm\frmLogin.designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\FrmTienDo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\FrmTienDo.designer.cs">
+      <DependentUpon>FrmTienDo.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\frm_ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,12 @@
     </Compile>
     <Compile Include="MyForm\frm_Checker.designer.cs">
       <DependentUpon>frm_Checker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\frm_ChiTietTienDo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\frm_ChiTietTienDo.designer.cs">
+      <DependentUpon>frm_ChiTietTienDo.cs</DependentUpon>
     </Compile>
     <Compile Include="MyForm\frm_CreateBatch.cs">
       <SubType>Form</SubType>
@@ -318,6 +330,9 @@
     <EmbeddedResource Include="MyForm\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\FrmTienDo.resx">
+      <DependentUpon>FrmTienDo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\frm_ChangePassword.resx">
       <DependentUpon>frm_ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
@@ -326,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\frm_Checker.resx">
       <DependentUpon>frm_Checker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\frm_ChiTietTienDo.resx">
+      <DependentUpon>frm_ChiTietTienDo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\frm_CreateBatch.resx">
       <DependentUpon>frm_CreateBatch.cs</DependentUpon>
