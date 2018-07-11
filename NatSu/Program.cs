@@ -30,7 +30,6 @@ namespace NatSu
             do
             {
                 temp = false;
-
                 if (CLS_NatSu.MyClass.Global.RunUpdateVersion())
                     temp = false;
                 else

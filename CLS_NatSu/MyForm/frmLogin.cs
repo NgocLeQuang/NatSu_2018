@@ -116,7 +116,7 @@ namespace CLS_NatSu.MyForm
                     Settings.Default.Save();
                 }
                 Global.Token = Global.GetToken(txt_username.Text);
-                Global.StrBatch = cbb_batchname.Text;
+                Global.StrBatchName = cbb_batchname.Text;
                 Global.StrBatchID = cbb_batchname.Text == "" ? "" : cbb_batchname.SelectedValue.ToString();
                 Global.StrUserName = txt_username.Text;
                 Global.StrPcName = txt_machine.Text;

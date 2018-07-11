@@ -19,11 +19,25 @@ namespace CLS_NatSu.MyForm
             InitializeComponent();
         }
 
-        int ChiaUser = -1;
-        int LevelUser = -1;
+        private int ChiaUser = -1;
+        private int LevelUser = -1;
         private string Folder = "";
-        bool flagLostFocus = true;
         bool FlagLoad = false;
+        private object Text_Focus = "";
+        private object IDPhieu_Focus = "";
+
+        private List<Category> category = new List<Category>();
+
+        public class Category
+        {
+            public string LoaiPhieu { get; set; }
+        }
+        private void SetDataLookUpEdit()
+        {
+            category.Clear();
+            category.Add(new Category() { LoaiPhieu = "225"});
+            category.Add(new Category() { LoaiPhieu = "2225"});
+        }
         private void btn_Logout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             DialogResult = DialogResult.Yes;
@@ -38,6 +52,29 @@ namespace CLS_NatSu.MyForm
         {
             new frm_ManagerBatch().ShowDialog();
         }
+
+        private void UcPictureBox1_MouseUpImage(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((LookUpEdit)Text_Focus).Name == "txt_Truong_01")
+                {
+                    txt_Truong_01.Focus();
+                }
+            }
+            catch
+            {
+                if (Tab_Main.SelectedTabPage.Name == "tp_225")
+                {
+                    UC_225_1.SetFocus(IDPhieu_Focus, Text_Focus);
+                }
+                else if (Tab_Main.SelectedTabPage.Name == "tp_2225")
+                {
+                    UC_2225_1.SetFocus(IDPhieu_Focus, Text_Focus);
+                }
+            }
+        }
+        
         private void frm_Main_Load(object sender, EventArgs e)
         {
             try
@@ -49,19 +86,25 @@ namespace CLS_NatSu.MyForm
                 lb_IdImage.Text = "";
                 lb_BatchName.Text = "";
                 Global.FlagChangeSave = false;
-                Global.FlagLoadCheck = false;
-                splitMain.SplitterPosition = 620;
+                Global.FlagLoadDeSo = false;
+                splitMain.SplitterPosition = 675;
                 Tab_Main.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
                 menu_QuanLy.Enabled = false;
                 btn_Check_DeSo.Enabled = false;
                 btn_Submit.Enabled = false;
                 btn_Submit_Logout.Enabled = false;
                 Folder = "";
-                lb_BatchName.Text = Global.StrBatch;
+                lb_BatchName.Text = Global.StrBatchName;
                 lb_UserName.Text = Global.StrUserName;
                 Global.FlagLoad = false;
+
+                SetDataLookUpEdit();
+                txt_Truong_01.Properties.DataSource = category;
+                txt_Truong_01.Properties.DisplayMember = "LoaiPhieu";
+                txt_Truong_01.Properties.ValueMember = "LoaiPhieu";
+
                 var checkDisableUser = (from w in Global.DbBpo.tbl_Users where w.Username == Global.StrUserName select w.IsDelete).FirstOrDefault();
-                //Global.DataNote = (from w in Global.Db.tbl_Notes select new Global.dataNote_ {Truong = w.Truong, Note = w.Note }).ToList();
+                Folder = (from w in Global.Db.GetFolder(Global.StrBatchID)select w.PathServer).FirstOrDefault();
                 if (checkDisableUser)
                 {
                     MessageBox.Show("Tài khoản này đã vô hiệu hóa. Vui lòng liên hệ với Admin");
@@ -70,11 +113,11 @@ namespace CLS_NatSu.MyForm
                 if (Global.StrRole.ToUpper() == "DESO")
                 {
                     var ktBatch = (from w in Global.Db.CheckBatchChiaUser(Global.StrBatchID) select w.ChiaUser).FirstOrDefault();
-                    if (ktBatch == true)
+                    if (ktBatch.Value)
                     {
                         ChiaUser = 1;
                     }
-                    else if (ktBatch == false)
+                    else if (!ktBatch.Value)
                     {
                         ChiaUser = 0;
                     }
@@ -88,29 +131,21 @@ namespace CLS_NatSu.MyForm
                         MessageBox.Show("Bạn chưa có quyền tham gia dự án. Vui lòng liên hệ với Admin");
                         return;
                     }
-                    if (ktUser.LevelUser == true)
+                    if (ktUser.LevelUser)
                         LevelUser = 0;
-                    else if (ktUser.LevelUser == false)
+                    else if (!ktUser.LevelUser)
                         LevelUser = 1;
                     else
                         LevelUser = -1;
                     lb_TongPhieu.Text = (from w in Global.Db.tbl_Batches where w.BatchID == Global.StrBatchID select w.NumberImage).FirstOrDefault();
                     setValue();
-                    if (Global.StrRole.ToUpper() == "DESO")
-                    {
-                        UC_225_1.UC_225_Load(null, null);
-                        UC_225_1.uC_225_Item1.Focus += UC_Focus;
-                        UC_225_1.uC_225_Item2.Focus += UC_Focus;
-                        UC_225_1.uC_225_Item3.Focus += UC_Focus;
-                        UC_225_1.uC_225_Item4.Focus += UC_Focus;
-                        UC_225_1.uC_225_Item5.Focus += UC_Focus;
-                        UC_2225_1.UC_2225_Load(null, null);
-                        UC_2225_1.uC_2225_Item1.Focus += UC_Focus;
-                        UC_2225_1.uC_2225_Item2.Focus += UC_Focus;
-                        UC_2225_1.uC_2225_Item3.Focus += UC_Focus;
-                        UC_2225_1.uC_2225_Item4.Focus += UC_Focus;
-                        UC_2225_1.uC_2225_Item5.Focus += UC_Focus;
-                    }
+                    Global.FlagLoadDeSo = true;
+                    uc_PictureBox1.MouseUpImage += UcPictureBox1_MouseUpImage;
+                    UC_225_1.FocusTXT += UC_Focus;
+                    txt_Truong_01.GotFocus += Focus_Truong1;
+                    UC_2225_1.FocusTXT += UC_Focus;
+                    UC_225_1.UC_225_Load(null, null);
+                    UC_2225_1.UC_2225_Load(null, null);
                     menu_QuanLy.Enabled = false;
                     btn_Check_DeSo.Enabled = false;
                     btn_Submit.Enabled = true;
@@ -145,6 +180,18 @@ namespace CLS_NatSu.MyForm
                 MessageBox.Show("Kết nối internet của bạn bị gián đoạn, Vui lòng kiểm tra lại!");
                 DialogResult = DialogResult.Yes;
             }
+        }
+        
+        private void UC_Focus(object IDPhieu, object Truong)
+        {
+            IDPhieu_Focus = IDPhieu;
+            Text_Focus = Truong;
+        }
+        private void Focus_Truong1(object sender, EventArgs e)
+        {
+            IDPhieu_Focus = "";
+            Text_Focus = sender;
+            ((LookUpEdit)sender).SelectAll();
         }
 
         #region Sự kiện keyDown
@@ -205,6 +252,12 @@ namespace CLS_NatSu.MyForm
             UC_225_1.uC_225_Item3.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown3;
             UC_225_1.uC_225_Item4.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown4;
             UC_225_1.uC_225_Item5.txt_Truong_05_2.KeyDown += Txt_Truong_03_KeyDown5;
+
+            UC_225_1.uC_225_Item1.txt_Truong_07.KeyDown += Txt_Truong_03_KeyDown1;
+            UC_225_1.uC_225_Item2.txt_Truong_07.KeyDown += Txt_Truong_03_KeyDown2;
+            UC_225_1.uC_225_Item3.txt_Truong_07.KeyDown += Txt_Truong_03_KeyDown3;
+            UC_225_1.uC_225_Item4.txt_Truong_07.KeyDown += Txt_Truong_03_KeyDown4;
+            UC_225_1.uC_225_Item5.txt_Truong_07.KeyDown += Txt_Truong_03_KeyDown5;
 
             UC_225_1.uC_225_Item1.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown1;
             UC_225_1.uC_225_Item2.txt_Truong_08.KeyDown += Txt_Truong_03_KeyDown2;
@@ -502,7 +555,7 @@ namespace CLS_NatSu.MyForm
                 txt_Truong_01.Focus();
             }
             else if(Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down 
-                & (a.Name== "txt_Truong_20"| a.Name == "txt_Truong_21"| a.Name == "txt_Truong_22"| a.Name == "txt_Truong_23"| b.Name == "txt_Truong_19"))
+                & (a.Name== "txt_Truong_20"| a.Name == "txt_Truong_21"| a.Name == "txt_Truong_22"| a.Name == "txt_Truong_23"  | b.Name == "txt_Truong_19"))
             {
                 UC_225_1.uC_225_Item2.txt_Truong_02.Focus();
             }
@@ -510,6 +563,14 @@ namespace CLS_NatSu.MyForm
                & (a.Name == "txt_Truong_20" | a.Name == "txt_Truong_21" | a.Name == "txt_Truong_22" | a.Name == "txt_Truong_23" | b.Name == "txt_Truong_19"))
             {
                 UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down  & a.Name == "txt_Truong_24")
+            {
+                UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
+            }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
             }
         }
         private void Txt_Truong_03_KeyDown2(object sender, KeyEventArgs e)
@@ -550,6 +611,14 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
             }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down & a.Name == "txt_Truong_24")
+            {
+                UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
+            }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
         }
         private void Txt_Truong_03_KeyDown3(object sender, KeyEventArgs e)
         {
@@ -589,6 +658,14 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
             }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down & a.Name == "txt_Truong_24")
+            {
+                UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
+            }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
         }
         private void Txt_Truong_03_KeyDown4(object sender, KeyEventArgs e)
         {
@@ -619,7 +696,7 @@ namespace CLS_NatSu.MyForm
                 UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
             }
             else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down
-              & (a.Name == "txt_Truong_20" | a.Name == "txt_Truong_21" | a.Name == "txt_Truong_22" | a.Name == "txt_Truong_23" | b.Name == "txt_Truong_19"))
+              & (a.Name == "txt_Truong_20" | a.Name == "txt_Truong_21" | a.Name == "txt_Truong_22" | a.Name == "txt_Truong_23"  | b.Name == "txt_Truong_19"))
             {
                 UC_225_1.uC_225_Item5.txt_Truong_02.Focus();
             }
@@ -627,6 +704,14 @@ namespace CLS_NatSu.MyForm
                & (a.Name == "txt_Truong_20" | a.Name == "txt_Truong_21" | a.Name == "txt_Truong_22" | a.Name == "txt_Truong_23" | b.Name == "txt_Truong_19"))
             {
                 UC_2225_1.uC_2225_Item5.txt_Truong_02.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down & a.Name == "txt_Truong_24")
+            {
+                UC_2225_1.uC_2225_Item5.txt_Truong_02.Focus();
+            }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
             }
         }
         private void Txt_Truong_03_KeyDown5(object sender, KeyEventArgs e)
@@ -658,7 +743,7 @@ namespace CLS_NatSu.MyForm
                 UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
             }
             else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.Down
-              & (a.Name == "txt_Truong_20" | a.Name == "txt_Truong_21" | a.Name == "txt_Truong_22" | a.Name == "txt_Truong_23" | b.Name == "txt_Truong_19"))
+              & (a.Name == "txt_Truong_20" | a.Name == "txt_Truong_21" | a.Name == "txt_Truong_22" | a.Name == "txt_Truong_23"  | b.Name == "txt_Truong_19"))
             {
                 UC_225_1.txt_Truong_Flag.Focus();
             }
@@ -666,6 +751,14 @@ namespace CLS_NatSu.MyForm
                & (a.Name == "txt_Truong_20" | a.Name == "txt_Truong_21" | a.Name == "txt_Truong_22" | a.Name == "txt_Truong_23" | b.Name == "txt_Truong_19"))
             {
                 UC_2225_1.txt_Truong_Flag.Focus();
+            }
+            else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.Down & a.Name == "txt_Truong_24")
+            {
+                UC_2225_1.txt_Truong_Flag.Focus();
+            }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
             }
         }
         /// <summary>
@@ -687,6 +780,10 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item5.txt_Truong_02.Focus();
             }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
         }
 
         /// <summary>
@@ -704,6 +801,10 @@ namespace CLS_NatSu.MyForm
             else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & (e.KeyCode == Keys.PageDown | e.KeyCode == Keys.Down | e.KeyCode == Keys.Right))
             {
                 UC_2225_1.uC_2225_Item1.txt_Truong_02.Focus();
+                e.Handled = true;
+            }
+            else if ((e.Control & e.KeyCode == Keys.Tab)|| e.KeyCode == Keys.Up)
+            {
                 e.Handled = true;
             }
         }
@@ -734,23 +835,11 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item1.txt_Truong_06.Focus();
             }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
             Txt_Truong_03_KeyDown1(sender, e);
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_225_1.uC_225_Item2.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    txt_Truong_01.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    txt_Truong_01.Focus();
-            //}
         }
         private void Txt_Truong_02_KeyDown2(object sender, KeyEventArgs e)
         {
@@ -770,24 +859,12 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item2.txt_Truong_06.Focus();
             }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
 
             Txt_Truong_03_KeyDown2(sender, e);
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_225_1.uC_225_Item3.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_225_1.uC_225_Item1.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_2225_1.uC_2225_Item1.txt_Truong_02.Focus();
-            //}
         }
         private void Txt_Truong_02_KeyDown3(object sender, KeyEventArgs e)
         {
@@ -807,24 +884,12 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item3.txt_Truong_06.Focus();
             }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
 
             Txt_Truong_03_KeyDown3(sender, e);
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_225_1.uC_225_Item4.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_225_1.uC_225_Item2.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_2225_1.uC_2225_Item2.txt_Truong_02.Focus();
-            //}
         }
         private void Txt_Truong_02_KeyDown4(object sender, KeyEventArgs e)
         {
@@ -844,24 +909,12 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item4.txt_Truong_06.Focus();
             }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
 
             Txt_Truong_03_KeyDown4(sender, e);
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_225_1.uC_225_Item5.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_225_1.uC_225_Item3.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_2225_1.uC_2225_Item5.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_2225_1.uC_2225_Item3.txt_Truong_02.Focus();
-            //}
         }
         private void Txt_Truong_02_KeyDown5(object sender, KeyEventArgs e)
         {
@@ -881,46 +934,15 @@ namespace CLS_NatSu.MyForm
             {
                 UC_2225_1.uC_2225_Item5.txt_Truong_06.Focus();
             }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
 
             Txt_Truong_03_KeyDown5(sender, e);
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_225_1.txt_Truong_Flag.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_225_1.uC_225_Item4.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageDown)
-            //{
-            //    UC_2225_1.txt_Truong_Flag.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225" & e.KeyCode == Keys.PageUp)
-            //{
-            //    UC_2225_1.uC_2225_Item4.txt_Truong_02.Focus();
-            //}
         }
         #endregion
-
-        private void Txt_Truong_01_LostFocus(object sender, EventArgs e)
-        {
-            //if (!flagLostFocus)
-            //    return;
-            //if (Tab_Main.SelectedTabPage.Name == "tp_225")
-            //{
-            //    UC_225_1.uC_225_Item1.txt_Truong_02.Focus();
-            //}
-            //else if (Tab_Main.SelectedTabPage.Name == "tp_2225")
-            //{
-            //    UC_2225_1.uC_2225_Item1.txt_Truong_02.Focus();
-            //}
-        }
-
-        private void UC_Focus(string Truong, string Tag)
-        {
-            txt_Note.Text = Tag;
-        }
-
+        
         private void setValue()
         {
             var a = (from w in Global.Db.GetSoLuongPhieu(Global.StrBatchID, Global.StrUserName, LevelUser + "", ChiaUser + "") select new { w.SoPhieuCon, w.SoPhieuNhap }).FirstOrDefault();
@@ -929,21 +951,33 @@ namespace CLS_NatSu.MyForm
         }
         private void RefreshUC()
         {
-            flagLostFocus = false;
-            txt_Truong_01.Text = "225";
-            txt_Truong_01.ForeColor = Color.Black;
-            txt_Truong_01.BackColor = Color.White;
+            lb_IdImage.Text = "";
             UC_225_1.ResetData();
             UC_2225_1.ResetData();
+            txt_Truong_01.Text = "2225";
+            txt_Truong_01.ForeColor = Color.Black;
+            txt_Truong_01.BackColor = Color.White;
             txt_Truong_01.Focus();
-            flagLostFocus = true;
         }
         public struct ImageImformation
         {
             public string ImageName { set; get; }
         }
         private ImageImformation getFilename = new ImageImformation();
-
+        
+        private void LockControl(bool kt)
+        {
+            if (kt)
+            {
+                btn_Submit.Enabled = false;
+                btn_Submit_Logout.Enabled = false;
+            }
+            else
+            {
+                btn_Submit.Enabled = true;
+                btn_Submit_Logout.Enabled = true;
+            }
+        }
         public void SetFieldLocation_IsNull()
         {
             //Settings.Default.BatchID = Global.StrBatchID;
@@ -1000,11 +1034,33 @@ namespace CLS_NatSu.MyForm
         }
         private string GetImageNew()
         {
+            LockControl(true);
             lb_IdImage.Text = "";
             getFilename.ImageName = "";
             Global.FlagChangeSave = true;
             if (Global.StrRole == "DESO")
             {
+                //var ktUser = (from w in Global.DbBpo.CheckLevelUser_PhanCong(Global.StrIdProject, Global.StrUserName) select new { w.UserName, w.LevelUser }).FirstOrDefault();
+                //if (ktUser.LevelUser)
+                //    LevelUser = 0;
+                //else if (!ktUser.LevelUser)
+                //    LevelUser = 1;
+                //else
+                //    LevelUser = -1;
+                //var ktBatch = (from w in Global.Db.CheckBatchChiaUser(Global.StrBatchID) select w.ChiaUser).FirstOrDefault();
+                //if (ktBatch.Value)
+                //{
+                //    ChiaUser = 1;
+                //}
+                //else if (!ktBatch.Value)
+                //{
+                //    ChiaUser = 0;
+                //}
+                //else
+                //{
+                //    ChiaUser = -1;
+                //}
+
                 if (FlagLoadMissImage)
                 {
                     var temp = (from w in Global.Db.GetImage_MissImage_Deso(Global.StrBatchID, Global.StrUserName) select new { w.IDImage }).ToList();
@@ -1082,13 +1138,11 @@ namespace CLS_NatSu.MyForm
                 lb_IdImage.Text = getFilename.ImageName;
 
                 uc_PictureBox1.imageBox1.Image = null;
-                UC_225_1.ResetData();
-                if (uc_PictureBox1.LoadImage(Global.Webservice + Global.StrBatchID + "/" + getFilename.ImageName, getFilename.ImageName, Settings.Default.ZoomImage) == "Error")
+                if (uc_PictureBox1.LoadImage(Global.Webservice +Folder+ Global.StrBatchID + "/" + getFilename.ImageName, getFilename.ImageName, Settings.Default.ZoomImage) == "Error")
                 {
                     uc_PictureBox1.imageBox1.Image = Resources.svn_deleted;
                     return "Error";
                 }
-                ////LogFile.WriteLog(Global.StrUserName + ".txt", "Bắt đầu load data đã nhập DE.");
                 //if (Settings.Default.BatchID == Global.StrBatchID & Settings.Default.ImageID == lb_IdImage.Text & Settings.Default.UserInput.ToUpper() == Global.StrUserName.ToUpper())
                 //{
                 //    SetFieldLocation_IsValue();
@@ -1097,10 +1151,9 @@ namespace CLS_NatSu.MyForm
                 //{
                 //    SetFieldLocation_IsNull();
                 //}
-                ////LogFile.WriteLog(Global.StrUserName + ".txt", "Kết thúc load data đã nhập DE.");
-                ////LogFile.WriteLog(Global.StrUserName + ".txt", "Bắt đầu load data compare màu.");
 
             }
+            timer1.Enabled = true;
             return "ok";
         }
         
@@ -1145,7 +1198,7 @@ namespace CLS_NatSu.MyForm
                 if (Image_temp == "NULL")
                 {
                     MessageBox.Show(@"Hoàn thành batch '" + lb_BatchName.Text + "'");
-                    Global.StrBatch = "";
+                    Global.StrBatchName = "";
                     Global.StrBatchID = "";
                     Folder = "";
                     if (LevelUser == 0)
@@ -1161,13 +1214,14 @@ namespace CLS_NatSu.MyForm
                                     btn_Logout_ItemClick(null, null);
                                 }
                                 Global.StrBatchID = listResult[0].BatchID;
-                                Global.StrBatch = listResult[0].BatchName;
-                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(listResult[0].BatchID) select w.ChiaUser).FirstOrDefault();
-                                if (ktBatch == true)
+                                Global.StrBatchName = listResult[0].BatchName;
+                                Folder = (from w in Global.Db.GetFolder(Global.StrBatchID) select w.PathServer).FirstOrDefault();
+                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(Global.StrBatchID) select w.ChiaUser).FirstOrDefault();
+                                if (ktBatch.Value)
                                 {
                                     ChiaUser = 1;
                                 }
-                                else if (ktBatch == false)
+                                else if (!ktBatch.Value)
                                 {
                                     ChiaUser = 0;
                                 }
@@ -1175,7 +1229,7 @@ namespace CLS_NatSu.MyForm
                                 {
                                     ChiaUser = -1;
                                 }
-                                lb_BatchName.Text = Global.StrBatch;
+                                lb_BatchName.Text = Global.StrBatchName;
                                 lb_IdImage.Text = "";
                                 lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
                                 setValue();
@@ -1192,7 +1246,7 @@ namespace CLS_NatSu.MyForm
                             btn_Logout_ItemClick(null, null);
                         }
                     }
-                    else
+                    else if (LevelUser == 1)
                     {
                         var listResult = Global.Db.GetBatNotFinishDeGood(Global.StrUserName).ToList();
                         if (listResult.Count > 0)
@@ -1204,14 +1258,16 @@ namespace CLS_NatSu.MyForm
                                     MessageBox.Show("Hiện tại dự án chưa có nhu cầu về nguồn nhân lực bên ngoài");
                                     btn_Logout_ItemClick(null, null);
                                 }
-                                Global.StrBatch = listResult[0].BatchName;
+                                Global.StrBatchName = listResult[0].BatchName;
                                 Global.StrBatchID = listResult[0].BatchID;
-                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(listResult[0].BatchID) select w.ChiaUser).FirstOrDefault();
-                                if (ktBatch == true)
+                                Folder = (from w in Global.Db.GetFolder(Global.StrBatchID) select w.PathServer).FirstOrDefault();
+
+                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(Global.StrBatchID) select w.ChiaUser).FirstOrDefault();
+                                if (ktBatch.Value)
                                 {
                                     ChiaUser = 1;
                                 }
-                                else if (ktBatch == false)
+                                else if (!ktBatch.Value)
                                 {
                                     ChiaUser = 0;
                                 }
@@ -1219,7 +1275,7 @@ namespace CLS_NatSu.MyForm
                                 {
                                     ChiaUser = -1;
                                 }
-                                lb_BatchName.Text = Global.StrBatch;
+                                lb_BatchName.Text = Global.StrBatchName;
                                 lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
                                 setValue();
                                 btn_Submit.Text = @"Start";
@@ -1235,6 +1291,8 @@ namespace CLS_NatSu.MyForm
                             btn_Logout_ItemClick(null, null);
                         }
                     }
+                    else
+                    { btn_Logout_ItemClick(null, null); }
                 }
                 else if (Image_temp == "Error")
                 {
@@ -1243,25 +1301,19 @@ namespace CLS_NatSu.MyForm
                 }
                 setValue();
                 btn_Submit.Text = "Submit";
-                btn_Submit_Logout.Enabled = true;
             }
             else
             {
                 FlagLoadMissImage = false;
-
+                
                 if (string.IsNullOrEmpty(txt_Truong_01.Text))
                 {
-                    MessageBox.Show("Bạn đang để trống trường 1. Vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    return;
+                    if (MessageBox.Show(@"Bạn đang để trống trường 1. Bạn muốn gửi phiếu không ?", @"Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                        return;
                 }
-                if (txt_Truong_01.Text == "225")
+                if (txt_Truong_01.Text == "225"||txt_Truong_01.Text == "221")
                 {
-                    if (CheckLoaiPhieu())
-                    {
-                        if (MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
-                            return;
-                    }
-                    if (UC_225_1.IsEmpty())
+                    if (UC_225_1.IsEmpty() /*& string.IsNullOrEmpty(txt_Truong_01.Text)*/)
                     {
                         if (MessageBox.Show(@"Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", @"Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
                             return;
@@ -1270,12 +1322,7 @@ namespace CLS_NatSu.MyForm
                 }
                 else
                 {
-                    if (CheckLoaiPhieu())
-                    {
-                        if (MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
-                            return;
-                    }
-                    if (UC_2225_1.IsEmpty())
+                    if (UC_2225_1.IsEmpty() /*& string.IsNullOrEmpty(txt_Truong_01.Text)*/)
                     {
                         if (MessageBox.Show(@"Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", @"Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
                             return;
@@ -1288,7 +1335,7 @@ namespace CLS_NatSu.MyForm
                 if (Image_temp == "NULL")
                 {
                     MessageBox.Show(@"Hoàn thành batch '" + lb_BatchName.Text + "'");
-                    Global.StrBatch = "";
+                    Global.StrBatchName = "";
                     Global.StrBatchID = "";
                     Folder = "";
                     if (LevelUser == 0)
@@ -1303,14 +1350,15 @@ namespace CLS_NatSu.MyForm
                                     MessageBox.Show("Hiện tại dự án chưa có nhu cầu về nguồn nhân lực bên ngoài");
                                     btn_Logout_ItemClick(null, null);
                                 }
-                                Global.StrBatch = listResult[0].BatchName;
+                                Global.StrBatchName = listResult[0].BatchName;
                                 Global.StrBatchID = listResult[0].BatchID;
-                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(listResult[0].BatchID) select w.ChiaUser).FirstOrDefault();
-                                if (ktBatch == true)
+                                Folder = (from w in Global.Db.GetFolder(Global.StrBatchID) select w.PathServer).FirstOrDefault();
+                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(Global.StrBatchID) select w.ChiaUser).FirstOrDefault();
+                                if (ktBatch.Value)
                                 {
                                     ChiaUser = 1;
                                 }
-                                else if (ktBatch == false)
+                                else if (!ktBatch.Value)
                                 {
                                     ChiaUser = 0;
                                 }
@@ -1318,8 +1366,52 @@ namespace CLS_NatSu.MyForm
                                 {
                                     ChiaUser = -1;
                                 }
-                                lb_BatchName.Text = Global.StrBatch;
+                                lb_BatchName.Text = Global.StrBatchName;
                                 lb_IdImage.Text = "";
+                                lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
+                                setValue();
+                                btn_Submit.Text = @"Start";
+                                btn_Submit_Click(null, null);
+                            }
+                            else
+                            {
+                                btn_Logout_ItemClick(null, null);
+                            }
+                        }
+                        else
+                        {
+                            btn_Logout_ItemClick(null, null);
+                        }
+                    }
+                    else if (LevelUser == 1)
+                    {
+                        var listResult = Global.Db.GetBatNotFinishDeGood(Global.StrUserName).ToList();
+                        if (listResult.Count > 0)
+                        {
+                            if (MessageBox.Show(@"Batch tiếp theo: " + listResult[0].BatchName + "\nBạn muốn làm tiếp ??", "Thông báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                            {
+                                if (Global.CheckOutSource(Global.StrRole) == true)
+                                {
+                                    MessageBox.Show("Hiện tại dự án chưa có nhu cầu về nguồn nhân lực bên ngoài");
+                                    btn_Logout_ItemClick(null, null);
+                                }
+                                Global.StrBatchName = listResult[0].BatchName;
+                                Global.StrBatchID = listResult[0].BatchID;
+                                Folder = (from w in Global.Db.GetFolder(Global.StrBatchID) select w.PathServer).FirstOrDefault();
+                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(Global.StrBatchID) select w.ChiaUser).FirstOrDefault();
+                                if (ktBatch.Value)
+                                {
+                                    ChiaUser = 1;
+                                }
+                                else if (!ktBatch.Value)
+                                {
+                                    ChiaUser = 0;
+                                }
+                                else
+                                {
+                                    ChiaUser = -1;
+                                }
+                                lb_BatchName.Text = Global.StrBatchName;
                                 lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
                                 setValue();
                                 btn_Submit.Text = @"Start";
@@ -1337,46 +1429,7 @@ namespace CLS_NatSu.MyForm
                     }
                     else
                     {
-                        var listResult = Global.Db.GetBatNotFinishDeGood(Global.StrUserName).ToList();
-                        if (listResult.Count > 0)
-                        {
-                            if (MessageBox.Show(@"Batch tiếp theo: " + listResult[0].BatchName + "\nBạn muốn làm tiếp ??", "Thông báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                            {
-                                if (Global.CheckOutSource(Global.StrRole) == true)
-                                {
-                                    MessageBox.Show("Hiện tại dự án chưa có nhu cầu về nguồn nhân lực bên ngoài");
-                                    btn_Logout_ItemClick(null, null);
-                                }
-                                Global.StrBatch = listResult[0].BatchName;
-                                Global.StrBatchID = listResult[0].BatchID;
-                                var ktBatch = (from w in Global.Db.CheckBatchChiaUser(listResult[0].BatchID) select w.ChiaUser).FirstOrDefault();
-                                if (ktBatch == true)
-                                {
-                                    ChiaUser = 1;
-                                }
-                                else if (ktBatch == false)
-                                {
-                                    ChiaUser = 0;
-                                }
-                                else
-                                {
-                                    ChiaUser = -1;
-                                }
-                                lb_BatchName.Text = Global.StrBatch;
-                                lb_TongPhieu.Text = (from w in Global.Db.tbl_Images where w.BatchID == Global.StrBatchID select w.IDImage).Count().ToString();
-                                setValue();
-                                btn_Submit.Text = @"Start";
-                                btn_Submit_Click(null, null);
-                            }
-                            else
-                            {
-                                btn_Logout_ItemClick(null, null);
-                            }
-                        }
-                        else
-                        {
-                            btn_Logout_ItemClick(null, null);
-                        }
+                        btn_Logout_ItemClick(null, null);
                     }
                 }
                 else if (Image_temp == "Error")
@@ -1403,17 +1456,13 @@ namespace CLS_NatSu.MyForm
             {
                 if (string.IsNullOrEmpty(txt_Truong_01.Text))
                 {
-                    MessageBox.Show("Bạn đang để trống trường 1. Vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    return;
+                    if (MessageBox.Show(@"Bạn đang để trống trường 1. Bạn muốn gửi phiếu không ?", @"Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                        return;
                 }
-                if (txt_Truong_01.Text == "225")
+
+                if (txt_Truong_01.Text == "225" || txt_Truong_01.Text == "221")
                 {
-                    if (CheckLoaiPhieu())
-                    {
-                        if (MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
-                            return;
-                    }
-                    if (UC_225_1.IsEmpty())
+                    if (UC_225_1.IsEmpty() /*& string.IsNullOrEmpty(txt_Truong_01.Text)*/)
                     {
                         if (MessageBox.Show(@"Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", @"Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
                             return;
@@ -1422,12 +1471,7 @@ namespace CLS_NatSu.MyForm
                 }
                 else
                 {
-                    if (CheckLoaiPhieu())
-                    {
-                        if (MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
-                            return;
-                    }
-                    if (UC_2225_1.IsEmpty())
+                    if (UC_2225_1.IsEmpty()/* & string.IsNullOrEmpty(txt_Truong_01.Text)*/)
                     {
                         if (MessageBox.Show(@"Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", @"Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.No)
                             return;
@@ -1452,6 +1496,10 @@ namespace CLS_NatSu.MyForm
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.PageDown)
             {
                 uc_PictureBox1.btn_xoayphai_Click(null, null);
+            }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
             }
         }
         
@@ -1529,15 +1577,17 @@ namespace CLS_NatSu.MyForm
         private void btn_Check_DeSo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Global.FlagChangeSave = false;
+            Global.FlagCheckDeSo = true;
             Global.StrCheck = "CHECKDESO";
             frm_Checker fCheck = new frm_Checker();
             fCheck.TypeCheck = "CHECK DESO";
             fCheck.ShowDialog();
+            Global.FlagCheckDeSo = false;
         }
         
         private void txt_Truong_01_TextChanged(object sender, EventArgs e)
         {
-            if(txt_Truong_01.Text=="225")
+            if(txt_Truong_01.Text=="225"|| txt_Truong_01.Text == "221")
             {
                 Tab_Main.SelectedTabPage = tp_225;
             }
@@ -1551,11 +1601,43 @@ namespace CLS_NatSu.MyForm
         {
             if (Tab_Main.SelectedTabPage.Name == "tp_225")
             {
-                splitMain.SplitterPosition = 625;
+                splitMain.SplitterPosition = 730;
             }
             else if (Tab_Main.SelectedTabPage.Name == "tp_2225")
             {
-                splitMain.SplitterPosition = 670;
+                splitMain.SplitterPosition = 675;
+            }
+        }
+
+        private void SapXepChuoi_Click(object sender, EventArgs e)
+        {
+            string[] b = txt_Truong_01.Text.ToCharArray().Select(q => q.ToString()).ToArray();
+            Array.Sort(b);
+            string c = "";
+            Array.ForEach(b, x => c += x);
+            MessageBox.Show(c);
+
+            string[] s = txt_Truong_01.Text.ToCharArray().Select(q => q.ToString()).ToArray().OrderByDescending(a => a).ToArray();
+            Array.ForEach(s, x => c += x);
+            MessageBox.Show(c);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            LockControl(false);
+            timer1.Enabled = false;
+        }
+
+        private void barSubItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if(Global.StrRole.ToUpper() != "CheckerDEJP".ToUpper()& Global.StrRole.ToUpper() != "Admin".ToUpper())
+            {
+                MessageBox.Show("Chưa phân quyền. Vui lòng liên hệ admin", "Lỗi phân quyền!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            else
+            {
+                new frm_LastCheckTruong19().ShowDialog();
             }
         }
 

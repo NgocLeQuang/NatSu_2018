@@ -240,7 +240,7 @@
             this.CityN_Loai1.Size = new System.Drawing.Size(1040, 531);
             this.CityN_Loai1.TabIndex = 0;
             this.CityN_Loai1.Tag = "0";
-            this.CityN_Loai1.Text = "CityN Loai1";
+            this.CityN_Loai1.Text = "Năng suất";
             this.CityN_Loai1.UseVisualStyleBackColor = true;
             // 
             // gridControl1

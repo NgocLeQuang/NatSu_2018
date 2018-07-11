@@ -67,11 +67,10 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.cbb_Batch_Check = new System.Windows.Forms.ComboBox();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tp_UC_Check = new DevExpress.XtraTab.XtraTabControl();
             this.tp_User1 = new DevExpress.XtraTab.XtraTabPage();
             this.tp_User2 = new DevExpress.XtraTab.XtraTabPage();
-            this.txt_Note = new System.Windows.Forms.TextBox();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -96,8 +95,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tp_UC_Check)).BeginInit();
             this.tp_UC_Check.SuspendLayout();
             this.tp_User1.SuspendLayout();
@@ -117,7 +115,7 @@
             this.Tab_User2.Location = new System.Drawing.Point(0, 25);
             this.Tab_User2.Name = "Tab_User2";
             this.Tab_User2.SelectedTabPage = this.tp_225_User2;
-            this.Tab_User2.Size = new System.Drawing.Size(416, 567);
+            this.Tab_User2.Size = new System.Drawing.Size(416, 572);
             this.Tab_User2.TabIndex = 7;
             this.Tab_User2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tp_225_User2,
@@ -129,7 +127,7 @@
             this.tp_225_User2.AutoScroll = true;
             this.tp_225_User2.Controls.Add(this.UC_225_2);
             this.tp_225_User2.Name = "tp_225_User2";
-            this.tp_225_User2.Size = new System.Drawing.Size(410, 539);
+            this.tp_225_User2.Size = new System.Drawing.Size(410, 544);
             this.tp_225_User2.Text = "225";
             // 
             // UC_225_2
@@ -140,7 +138,7 @@
             this.UC_225_2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UC_225_2.Location = new System.Drawing.Point(0, 0);
             this.UC_225_2.Name = "UC_225_2";
-            this.UC_225_2.Size = new System.Drawing.Size(410, 539);
+            this.UC_225_2.Size = new System.Drawing.Size(410, 544);
             this.UC_225_2.TabIndex = 6;
             this.UC_225_2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.uC_225_2_Scroll);
             // 
@@ -149,7 +147,7 @@
             this.tp_2225_User2.AutoScroll = true;
             this.tp_2225_User2.Controls.Add(this.UC_2225_2);
             this.tp_2225_User2.Name = "tp_2225_User2";
-            this.tp_2225_User2.Size = new System.Drawing.Size(410, 538);
+            this.tp_2225_User2.Size = new System.Drawing.Size(410, 544);
             this.tp_2225_User2.Text = "2225";
             // 
             // UC_2225_2
@@ -160,7 +158,7 @@
             this.UC_2225_2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UC_2225_2.Location = new System.Drawing.Point(0, 0);
             this.UC_2225_2.Name = "UC_2225_2";
-            this.UC_2225_2.Size = new System.Drawing.Size(410, 538);
+            this.UC_2225_2.Size = new System.Drawing.Size(410, 544);
             this.UC_2225_2.TabIndex = 0;
             this.UC_2225_2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.uC_2225_2_Scroll);
             // 
@@ -204,7 +202,7 @@
             this.panelControl5.Controls.Add(this.lb_User2);
             this.panelControl5.Controls.Add(this.btn_Luu_DeSo2);
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl5.Location = new System.Drawing.Point(0, 592);
+            this.panelControl5.Location = new System.Drawing.Point(0, 597);
             this.panelControl5.Name = "panelControl5";
             this.panelControl5.Size = new System.Drawing.Size(416, 30);
             this.panelControl5.TabIndex = 5;
@@ -234,7 +232,7 @@
             this.Tab_User1.Location = new System.Drawing.Point(0, 25);
             this.Tab_User1.Name = "Tab_User1";
             this.Tab_User1.SelectedTabPage = this.tp_225_User1;
-            this.Tab_User1.Size = new System.Drawing.Size(416, 567);
+            this.Tab_User1.Size = new System.Drawing.Size(416, 572);
             this.Tab_User1.TabIndex = 2;
             this.Tab_User1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tp_225_User1,
@@ -246,7 +244,7 @@
             this.tp_225_User1.AutoScroll = true;
             this.tp_225_User1.Controls.Add(this.UC_225_1);
             this.tp_225_User1.Name = "tp_225_User1";
-            this.tp_225_User1.Size = new System.Drawing.Size(410, 539);
+            this.tp_225_User1.Size = new System.Drawing.Size(410, 544);
             this.tp_225_User1.Text = "225";
             // 
             // UC_225_1
@@ -257,7 +255,7 @@
             this.UC_225_1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UC_225_1.Location = new System.Drawing.Point(0, 0);
             this.UC_225_1.Name = "UC_225_1";
-            this.UC_225_1.Size = new System.Drawing.Size(410, 539);
+            this.UC_225_1.Size = new System.Drawing.Size(410, 544);
             this.UC_225_1.TabIndex = 1;
             this.UC_225_1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.uC_225_1_Scroll);
             // 
@@ -266,7 +264,7 @@
             this.tp_2225_User1.AutoScroll = true;
             this.tp_2225_User1.Controls.Add(this.UC_2225_1);
             this.tp_2225_User1.Name = "tp_2225_User1";
-            this.tp_2225_User1.Size = new System.Drawing.Size(410, 539);
+            this.tp_2225_User1.Size = new System.Drawing.Size(410, 544);
             this.tp_2225_User1.Text = "2225";
             // 
             // UC_2225_1
@@ -277,7 +275,7 @@
             this.UC_2225_1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UC_2225_1.Location = new System.Drawing.Point(0, 0);
             this.UC_2225_1.Name = "UC_2225_1";
-            this.UC_2225_1.Size = new System.Drawing.Size(410, 539);
+            this.UC_2225_1.Size = new System.Drawing.Size(410, 544);
             this.UC_2225_1.TabIndex = 0;
             this.UC_2225_1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.uC_2225_1_Scroll);
             // 
@@ -321,7 +319,7 @@
             this.panelControl3.Controls.Add(this.lb_User1);
             this.panelControl3.Controls.Add(this.btn_Luu_DeSo1);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl3.Location = new System.Drawing.Point(0, 592);
+            this.panelControl3.Location = new System.Drawing.Point(0, 597);
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(416, 30);
             this.panelControl3.TabIndex = 0;
@@ -368,7 +366,7 @@
             this.splitCheck.Panel1.Controls.Add(this.pictureBox1);
             this.splitCheck.Panel1.Controls.Add(this.panelControl2);
             this.splitCheck.Panel1.Text = "Panel1";
-            this.splitCheck.Panel2.Controls.Add(this.splitContainerControl1);
+            this.splitCheck.Panel2.Controls.Add(this.panel1);
             this.splitCheck.Panel2.Text = "Panel2";
             this.splitCheck.Size = new System.Drawing.Size(1283, 655);
             this.splitCheck.SplitterPosition = 422;
@@ -506,21 +504,14 @@
             this.labelControl4.TabIndex = 1;
             this.labelControl4.Text = "Batch:";
             // 
-            // splitContainerControl1
+            // panel1
             // 
-            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
-            this.splitContainerControl1.Horizontal = false;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.tp_UC_Check);
-            this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.txt_Note);
-            this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(422, 655);
-            this.splitContainerControl1.SplitterPosition = 0;
-            this.splitContainerControl1.TabIndex = 2;
-            this.splitContainerControl1.Text = "splitContainerControl1";
+            this.panel1.Controls.Add(this.tp_UC_Check);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(422, 655);
+            this.panel1.TabIndex = 0;
             // 
             // tp_UC_Check
             // 
@@ -528,7 +519,7 @@
             this.tp_UC_Check.Location = new System.Drawing.Point(0, 0);
             this.tp_UC_Check.Name = "tp_UC_Check";
             this.tp_UC_Check.SelectedTabPage = this.tp_User1;
-            this.tp_UC_Check.Size = new System.Drawing.Size(422, 650);
+            this.tp_UC_Check.Size = new System.Drawing.Size(422, 655);
             this.tp_UC_Check.TabIndex = 0;
             this.tp_UC_Check.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tp_User1,
@@ -540,7 +531,7 @@
             this.tp_User1.Controls.Add(this.pn_Truong_01_User1);
             this.tp_User1.Controls.Add(this.panelControl3);
             this.tp_User1.Name = "tp_User1";
-            this.tp_User1.Size = new System.Drawing.Size(416, 622);
+            this.tp_User1.Size = new System.Drawing.Size(416, 627);
             this.tp_User1.Text = "User 1";
             // 
             // tp_User2
@@ -549,19 +540,8 @@
             this.tp_User2.Controls.Add(this.pn_Truong_01_User2);
             this.tp_User2.Controls.Add(this.panelControl5);
             this.tp_User2.Name = "tp_User2";
-            this.tp_User2.Size = new System.Drawing.Size(416, 622);
+            this.tp_User2.Size = new System.Drawing.Size(416, 627);
             this.tp_User2.Text = "User 2";
-            // 
-            // txt_Note
-            // 
-            this.txt_Note.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt_Note.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Note.Location = new System.Drawing.Point(0, 0);
-            this.txt_Note.Multiline = true;
-            this.txt_Note.Name = "txt_Note";
-            this.txt_Note.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Note.Size = new System.Drawing.Size(0, 0);
-            this.txt_Note.TabIndex = 0;
             // 
             // panelControl1
             // 
@@ -596,10 +576,12 @@
             this.ClientSize = new System.Drawing.Size(1283, 655);
             this.Controls.Add(this.splitCheck);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "frm_Checker";
             this.Text = "Check DESO";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_Checker_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_Checker_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.Tab_User2)).EndInit();
             this.Tab_User2.ResumeLayout(false);
             this.tp_225_User2.ResumeLayout(false);
@@ -630,8 +612,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tp_UC_Check)).EndInit();
             this.tp_UC_Check.ResumeLayout(false);
             this.tp_User1.ResumeLayout(false);
@@ -652,8 +633,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.Utils.ToolTipController toolTipController1;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private System.Windows.Forms.TextBox txt_Note;
         private DevExpress.XtraEditors.SimpleButton btn_ShowImageCheck;
         private DevExpress.XtraEditors.SimpleButton btn_CheckLai;
         private DevExpress.XtraEditors.SimpleButton btn_Start;
@@ -689,5 +668,6 @@
         private DevExpress.XtraTab.XtraTabControl tp_UC_Check;
         private DevExpress.XtraTab.XtraTabPage tp_User1;
         private DevExpress.XtraTab.XtraTabPage tp_User2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

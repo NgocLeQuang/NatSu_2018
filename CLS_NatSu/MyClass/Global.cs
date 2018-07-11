@@ -18,7 +18,7 @@ namespace CLS_NatSu.MyClass
         public static string StrUserName = "";
         public static string StrPcName = "";
         public static string StrDomainName = "";
-        public static string StrBatch = "";
+        public static string StrBatchName = "";
         public static string StrBatchID = "";
         public static string StrRole = "";
         public static string Token = "";
@@ -26,12 +26,13 @@ namespace CLS_NatSu.MyClass
         public static string StrCheck = "";
         public static List<dataNote_> DataNote = new List<dataNote_>();
         public static bool FlagLoad = false;
-        public static bool FlagLoadCheck = false;
+        public static bool FlagCheckDeSo = false;
+        public static bool FlagLoadDeSo = false;
         public static string Truong_18_1 = "";
         public static bool FlagCheckUpdate = true;
         public static bool FlagTong = true;
 
-        public static string Version = "1.0.0";
+        public static string Version = "1.1.0";
         public static string Server = "DaNang";
         public static bool FlagChangeSave = true;
         public static string StrPath = @"\\192.168.165.10\NatSu$";
@@ -103,37 +104,44 @@ namespace CLS_NatSu.MyClass
         }
         public static bool RunUpdateVersion()
         {
-            var Version = (from w in DbBpo.tbl_Versions where w.IDProject == StrIdProject select  new { w.IDVersion, w.Is_Update}).FirstOrDefault();
-
-            //MessageBox.Show(Version + "\r\n" + Version);
-            if (Version.IDVersion + "" != Global.Version)
+            try
             {
-                if (Version.Is_Update.Value)
+                var Version = (from w in DbBpo.tbl_Versions where w.IDProject == StrIdProject select new { w.IDVersion, w.Is_Update }).FirstOrDefault();
+
+                if (Version.IDVersion + "" != Global.Version)
                 {
-                    if (MessageBox.Show("Version bạn dùng đã cũ, vui lòng cập nhật phiên bản mới (Bắt buộc)!", "Thông báo!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                    if (Version.Is_Update.Value)
                     {
-                        Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe");
-                    }
-                    return true;
-                }
-                else
-                {
-                    if (!FlagCheckUpdate)
-                        return false;
-                    if (MessageBox.Show("Version bạn dùng đã cũ, vui lòng cập nhật phiên bản mới!", "Thông báo!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
-                    {
-                        Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe");
+                        if (MessageBox.Show("Version bạn dùng đã cũ, vui lòng cập nhật phiên bản mới (Bắt buộc)!", "Thông báo!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                        {
+                            Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe");
+                        }
                         return true;
                     }
                     else
                     {
-                        FlagCheckUpdate = false;
-                        return false;
+                        if (!FlagCheckUpdate)
+                            return false;
+                        if (MessageBox.Show("Version bạn dùng đã cũ, vui lòng cập nhật phiên bản mới!", "Thông báo!", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                        {
+                            Process.Start(Directory.GetCurrentDirectory() + @"\Update.exe");
+                            return true;
+                        }
+                        else
+                        {
+                            FlagCheckUpdate = false;
+                            return false;
+                        }
                     }
                 }
+                else
+                    return false;
             }
-            else
-                return false;
+            catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi: Không thể kết nối tới server. Hãy kiểm tra internet của bạn.\r\n"+ ex.Message);
+                return true;
+            }
         }
     }
 }

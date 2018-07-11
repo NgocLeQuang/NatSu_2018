@@ -21,7 +21,7 @@ namespace CLS_NatSu.MyForm
             FlagLoad = true;
             cbb_Batch.DataSource = null;
             cbb_Batch.Text = "";
-            var fBatchName = (from w in Global.Db.tbl_Batches where w.CongKhaiBatch == true orderby w.DateCreate descending select new { w.BatchID, w.BatchName }).ToList();
+            var fBatchName = (from w in Global.Db.tbl_Batches where w.CongKhaiBatch == true orderby w.DateCreate ascending select new { w.BatchID, w.BatchName }).ToList();
             cbb_Batch.DataSource = fBatchName;
             cbb_Batch.DisplayMember = "BatchName";
             cbb_Batch.ValueMember = "BatchID";

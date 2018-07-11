@@ -116,34 +116,34 @@ namespace CLS_NatSu.MyUserControl
             txt_Truong_25.BackColor = Color.White;
             txt_Truong_26.BackColor = Color.White;
 
-            txt_Truong_02.Tag = "0";
-            txt_Truong_03.Tag = "0";
-            txt_Truong_04_1.Tag = "0";
-            txt_Truong_04_2.Tag = "0";
-            txt_Truong_04_3.Tag = "0";
-            txt_Truong_05_1.Tag = "0";
-            txt_Truong_05_2.Tag = "0";
-            txt_Truong_06.Tag = "0";
-            txt_Truong_07.Tag = "0";
-            txt_Truong_08.Tag = "0";
-            txt_Truong_09.Tag = "0";
-            txt_Truong_10.Tag = "0";
-            txt_Truong_11.Tag = "0";
-            txt_Truong_12.Tag = "0";
-            txt_Truong_13.Tag = "0";
-            txt_Truong_14.Tag = "0";
-            txt_Truong_15.Tag = "0";
-            txt_Truong_16.Tag = "0";
-            txt_Truong_17.Tag = "0";
-            txt_Truong_18.Tag = "0";
-            txt_Truong_19.Tag = "0";
-            txt_Truong_20.Tag = "0";
-            txt_Truong_21.Tag = "0";
-            txt_Truong_22.Tag = "0";
-            txt_Truong_23.Tag = "0";
-            txt_Truong_24.Tag = "0";
-            txt_Truong_25.Tag = "0";
-            txt_Truong_26.Tag = "0";
+            txt_Truong_02.Tag = "";
+            txt_Truong_03.Tag = "";
+            txt_Truong_04_1.Tag = "";
+            txt_Truong_04_2.Tag = "";
+            txt_Truong_04_3.Tag = "";
+            txt_Truong_05_1.Tag = "";
+            txt_Truong_05_2.Tag = "";
+            txt_Truong_06.Tag = "";
+            txt_Truong_07.Tag = "";
+            txt_Truong_08.Tag = "";
+            txt_Truong_09.Tag = "";
+            txt_Truong_10.Tag = "";
+            txt_Truong_11.Tag = "";
+            txt_Truong_12.Tag = "";
+            txt_Truong_13.Tag = "";
+            txt_Truong_14.Tag = "";
+            txt_Truong_15.Tag = "";
+            txt_Truong_16.Tag = "";
+            txt_Truong_17.Tag = "";
+            txt_Truong_18.Tag = "";
+            txt_Truong_19.Tag = "";
+            txt_Truong_20.Tag = "";
+            txt_Truong_21.Tag = "";
+            txt_Truong_22.Tag = "";
+            txt_Truong_23.Tag = "";
+            txt_Truong_24.Tag = "";
+            txt_Truong_25.Tag = "";
+            txt_Truong_26.Tag = "";
         }
         public bool IsEmpty()
         {
@@ -200,27 +200,42 @@ namespace CLS_NatSu.MyUserControl
                 textBox.ForeColor = Color.Black;
             }
         }
-
-        private void Txt_GotFocus(object sender, EventArgs e)
+        public void SetFocusItem(object sender)
         {
-            //try
-            //{
-            //    Focus(((TextEdit)sender).Name, ((TextEdit)sender).Tag + "");
-            //    ((TextEdit)sender).SelectAll();
-            //}
-            //catch
-            //{
-            //    try
-            //    {
-            //        Focus(((LookUpEdit)sender).Name, ((LookUpEdit)sender).Tag + "");
-            //        ((LookUpEdit)sender).SelectAll();
-            //    }
-            //    catch
-            //    {
-
-            //    }
-            //}
+            try
+            {
+                ((TextEdit)sender).Focus();
+            }
+            catch
+            {
+                try
+                {
+                    ((LookUpEdit)sender).Focus();
+                }
+                catch
+                { }
+            }
         }
+        //private void Txt_GotFocus(object sender, EventArgs e)
+        //{
+        //    //try
+        //    //{
+        //    //    Focus(((TextEdit)sender).Name, ((TextEdit)sender).Tag + "");
+        //    //    ((TextEdit)sender).SelectAll();
+        //    //}
+        //    //catch
+        //    //{
+        //    //    try
+        //    //    {
+        //    //        Focus(((LookUpEdit)sender).Name, ((LookUpEdit)sender).Tag + "");
+        //    //        ((LookUpEdit)sender).SelectAll();
+        //    //    }
+        //    //    catch
+        //    //    {
+
+        //    //    }
+        //    //}
+        //}
         private void SetDataLookUpEdit()
         {
             category.Clear();
@@ -229,12 +244,12 @@ namespace CLS_NatSu.MyUserControl
             category.Add(new Category() { DE = "2" , JP = "二以上"});
             category.Add(new Category() { DE = "3" , JP = "月額変更予定"});
             category.Add(new Category() { DE = "4" , JP = "途中入社"});
-            category.Add(new Category() { DE = "5" , JP = "病休 or 育休 or 休職"});
+            category.Add(new Category() { DE = "5" , JP = "病休 or 育休 or 休職 or育児休暇 or 病気休暇" });
             category.Add(new Category() { DE = "6" , JP = "短 or 短時間"});
             category.Add(new Category() { DE = "7" , JP = "パ or パート"});
             category.Add(new Category() { DE = "8" , JP = "年間平均"});
-            category.Add(new Category() { DE = "9" , JP = "Thấy số 9 hoặc hai giá trị chữ hoặc không phán đoán được(chữ khác)"});
-            category.Add(new Category() { DE = "*" , JP = "*"});
+            category.Add(new Category() { DE = "9" , JP = "Thấy số 9"});
+            category.Add(new Category() { DE = "*", JP = "Nếu có hai giá trị chữ hoặc không phán đoán được (chữ khác)" });
         }
         public void UC_2225_Load(object sender, EventArgs e)
         {
@@ -242,43 +257,17 @@ namespace CLS_NatSu.MyUserControl
             txt_Truong_19.Properties.DataSource = category;
             txt_Truong_19.Properties.DisplayMember = "DE";
             txt_Truong_19.Properties.ValueMember = "DE";
-            if (Global.FlagLoad)
-                return;
-            //txt_Truong_02.Tag = (from w in Global.DataNote where w.Truong == "1" select w.Note).FirstOrDefault();
-            txt_Truong_02.GotFocus += Txt_GotFocus;
-            txt_Truong_03.GotFocus += Txt_GotFocus;
-            txt_Truong_04_1.GotFocus += Txt_GotFocus;
-            txt_Truong_04_2.GotFocus += Txt_GotFocus;
-            txt_Truong_04_3.GotFocus += Txt_GotFocus;
-            txt_Truong_05_1.GotFocus += Txt_GotFocus;
-            txt_Truong_05_2.GotFocus += Txt_GotFocus;
-            txt_Truong_06.GotFocus += Txt_GotFocus;
-            txt_Truong_07.GotFocus += Txt_GotFocus;
-            txt_Truong_08.GotFocus += Txt_GotFocus;
-            txt_Truong_09.GotFocus += Txt_GotFocus;
-            txt_Truong_10.GotFocus += Txt_GotFocus;
-            txt_Truong_11.GotFocus += Txt_GotFocus;
-            txt_Truong_12.GotFocus += Txt_GotFocus;
-            txt_Truong_13.GotFocus += Txt_GotFocus;
-            txt_Truong_14.GotFocus += Txt_GotFocus;
-            txt_Truong_15.GotFocus += Txt_GotFocus;
-            txt_Truong_16.GotFocus += Txt_GotFocus;
-            txt_Truong_17.GotFocus += Txt_GotFocus;
-            txt_Truong_18.GotFocus += Txt_GotFocus;
-            txt_Truong_19.GotFocus += Txt_GotFocus;
-            txt_Truong_20.GotFocus += Txt_GotFocus;
-            txt_Truong_21.GotFocus += Txt_GotFocus;
-            txt_Truong_22.GotFocus += Txt_GotFocus;
-            txt_Truong_23.GotFocus += Txt_GotFocus;
-            txt_Truong_24.GotFocus += Txt_GotFocus;
-            txt_Truong_25.GotFocus += Txt_GotFocus;
-            txt_Truong_26.GotFocus += Txt_GotFocus;
         }
 
         private void txt_Truong_02_1_EditValueChanged(object sender, EventArgs e)
         {
             Changed?.Invoke(sender, e);
             DoiMau(0, 6, (TextEdit)sender);
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
+            }
         }
 
         private void txt_Truong_03_1_EditValueChanged(object sender, EventArgs e)
@@ -305,6 +294,11 @@ namespace CLS_NatSu.MyUserControl
             txt_Truong_04_1_1_EditValueChanged(txt_Truong_04_1, null);
             txt_Truong_04_2_1_EditValueChanged(txt_Truong_04_2, null);
             txt_Truong_04_3_1_EditValueChanged(txt_Truong_04_3, null);
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
+            }
         }
 
         private void txt_Truong_04_1_1_EditValueChanged(object sender, EventArgs e)
@@ -346,6 +340,11 @@ namespace CLS_NatSu.MyUserControl
                 ((TextEdit)sender).BackColor = Color.White;
                 ((TextEdit)sender).ForeColor = Color.Black;
             }
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
+            }
         }
 
         private void txt_Truong_04_2_1_EditValueChanged(object sender, EventArgs e)
@@ -378,6 +377,11 @@ namespace CLS_NatSu.MyUserControl
             {
                 ((TextEdit)sender).BackColor = Color.White;
                 ((TextEdit)sender).ForeColor = Color.Black;
+            }
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
             }
         }
 
@@ -412,6 +416,11 @@ namespace CLS_NatSu.MyUserControl
                 ((TextEdit)sender).BackColor = Color.White;
                 ((TextEdit)sender).ForeColor = Color.Black;
             }
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
+            }
         }
 
         private void txt_Truong_05_1_1_EditValueChanged(object sender, EventArgs e)
@@ -421,6 +430,11 @@ namespace CLS_NatSu.MyUserControl
             if(((TextEdit)sender).Text!="30" & !string.IsNullOrEmpty(((TextEdit)sender).Text))
             {
                 ((TextEdit)sender).BackColor = Color.Red;
+                ((TextEdit)sender).ForeColor = Color.White;
+            }
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
                 ((TextEdit)sender).ForeColor = Color.White;
             }
         }
@@ -433,6 +447,11 @@ namespace CLS_NatSu.MyUserControl
                 & ((TextEdit)sender).Text != "9" & ((TextEdit)sender).Text != "09" & !string.IsNullOrEmpty(((TextEdit)sender).Text))
             {
                 ((TextEdit)sender).BackColor = Color.Red;
+                ((TextEdit)sender).ForeColor = Color.White;
+            }
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
                 ((TextEdit)sender).ForeColor = Color.White;
             }
         }
@@ -474,6 +493,11 @@ namespace CLS_NatSu.MyUserControl
             {
                 ((TextEdit)sender).BackColor = Color.White;
                 ((TextEdit)sender).ForeColor = Color.Black;
+            }
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
             }
         }
         private void DoiMauTruongTien(int soByteBe, int soBytelon, TextEdit textBox)
@@ -685,6 +709,11 @@ namespace CLS_NatSu.MyUserControl
                     ((TextEdit)sender).BackColor = Color.White;
                     ((TextEdit)sender).ForeColor = Color.Black;
                 }
+                if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+                {
+                    ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                    ((TextEdit)sender).ForeColor = Color.White;
+                }
             }
             catch
             {
@@ -705,17 +734,21 @@ namespace CLS_NatSu.MyUserControl
                 ((TextEdit)sender).BackColor = Color.White;
                 ((TextEdit)sender).ForeColor = Color.Black;
             }
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
+            }
         }
 
         private void txt_Truong_19_TextChanged(object sender, EventArgs e)
         {
-            string[] data19 = { "", "*", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-            bool a = false;
-            if (!data19.Contains(txt_Truong_19.Text))
-            {
-                txt_Truong_19.Text = "";
-            }
             lb_Truong_19.Text = (from w in category where w.DE == txt_Truong_19.Text select w.JP).FirstOrDefault();
+            if (Global.FlagCheckDeSo & ((LookUpEdit)sender).BackColor == Color.White & ((LookUpEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((LookUpEdit)sender).BackColor = Color.PaleVioletRed;
+                ((LookUpEdit)sender).ForeColor = Color.White;
+            }
         }
 
         private void txt_Truong_19_KeyDown(object sender, KeyEventArgs e)
@@ -738,6 +771,10 @@ namespace CLS_NatSu.MyUserControl
             else if (e.KeyCode == Keys.Up)
             {
                 txt_Truong_06.Focus();
+                e.Handled = true;
+            }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
                 e.Handled = true;
             }
         }
@@ -882,6 +919,19 @@ namespace CLS_NatSu.MyUserControl
             {
                 txt_Truong_19.Focus();
             }
+            else if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_Truong_19_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string[] data19 = { "8", "42", "49", "50", "51", "52", "53", "54", "55", "56", "57","63" };
+            if (!data19.Contains((int)e.KeyChar + ""))
+            {
+                e.Handled = true;
+            }
         }
 
         private void txt_Truong_08_Paint(object sender, PaintEventArgs e)
@@ -913,16 +963,16 @@ namespace CLS_NatSu.MyUserControl
                 {
                     txt_Truong_11.BackColor = Color.Red;
                     txt_Truong_11.ForeColor = Color.White;
-                    txt_Truong_11.Tag = "1";
+                    //txt_Truong_11.Tag = "1";
                 }
                 else
                 {
                     txt_Truong_11.BackColor = Color.White;
                     txt_Truong_11.ForeColor = Color.Black;
-                    txt_Truong_11.Tag = "0";
+                    //txt_Truong_11.Tag = "0";
                 }
             }
-            if (((TextEdit)sender).Name == "txt_Truong_15" | ((TextEdit)sender).Name == "txt_Truong_16" | ((TextEdit)sender).Name == "txt_Truong_17")
+            else if (((TextEdit)sender).Name == "txt_Truong_15" | ((TextEdit)sender).Name == "txt_Truong_16" | ((TextEdit)sender).Name == "txt_Truong_17")
             {
                 Tong_truong17= Total_Truong11(txt_Truong_15, txt_Truong_16);
                 double truong17 = 0;
@@ -939,16 +989,16 @@ namespace CLS_NatSu.MyUserControl
                 {
                     txt_Truong_17.BackColor = Color.Red;
                     txt_Truong_17.ForeColor = Color.White;
-                    txt_Truong_17.Tag = "1";
+                    //txt_Truong_17.Tag = "1";
                 }
                 else
                 {
                     txt_Truong_17.BackColor = Color.White;
                     txt_Truong_17.ForeColor = Color.Black;
-                    txt_Truong_17.Tag = "0";
+                    //txt_Truong_17.Tag = "0";
                 }
             }
-            if (((TextEdit)sender).Name == "txt_Truong_21" | ((TextEdit)sender).Name == "txt_Truong_22" | ((TextEdit)sender).Name == "txt_Truong_23")
+            else if (((TextEdit)sender).Name == "txt_Truong_21" | ((TextEdit)sender).Name == "txt_Truong_22" | ((TextEdit)sender).Name == "txt_Truong_23")
             {
                 Tong_truong23= Total_Truong11(txt_Truong_21, txt_Truong_22);
 
@@ -966,16 +1016,16 @@ namespace CLS_NatSu.MyUserControl
                 {
                     txt_Truong_23.BackColor = Color.Red;
                     txt_Truong_23.ForeColor = Color.White;
-                    txt_Truong_23.Tag = "1";
+                    //txt_Truong_23.Tag = "1";
                 }
                 else
                 {
                     txt_Truong_23.BackColor = Color.White;
                     txt_Truong_23.ForeColor = Color.Black;
-                    txt_Truong_23.Tag = "0";
+                    //txt_Truong_23.Tag = "0";
                 }
             }
-            if (((TextEdit)sender).Name == "txt_Truong_12" | ((TextEdit)sender).Name == "txt_Truong_09" | ((TextEdit)sender).Name == "txt_Truong_10" 
+            else if (((TextEdit)sender).Name == "txt_Truong_12" | ((TextEdit)sender).Name == "txt_Truong_09" | ((TextEdit)sender).Name == "txt_Truong_10" 
                |((TextEdit)sender).Name == "txt_Truong_15" | ((TextEdit)sender).Name == "txt_Truong_16" | ((TextEdit)sender).Name == "txt_Truong_21"
                |((TextEdit)sender).Name == "txt_Truong_22" | ((TextEdit)sender).Name == "txt_Truong_18")
             {
@@ -995,13 +1045,13 @@ namespace CLS_NatSu.MyUserControl
                 {
                     txt_Truong_12.BackColor = Color.Red;
                     txt_Truong_12.ForeColor = Color.White;
-                    txt_Truong_12.Tag = "1";
+                    //txt_Truong_12.Tag = "1";
                 }
                 else
                 {
                     txt_Truong_12.BackColor = Color.White;
                     txt_Truong_12.ForeColor = Color.Black;
-                    txt_Truong_12.Tag = "0";
+                    //txt_Truong_12.Tag = "0";
                 }
                 double truong18 = 0;
                 try
@@ -1017,14 +1067,20 @@ namespace CLS_NatSu.MyUserControl
                 {
                     txt_Truong_18.BackColor = Color.Red;
                     txt_Truong_18.ForeColor = Color.White;
-                    txt_Truong_18.Tag = "1";
+                    //txt_Truong_18.Tag = "1";
                 }
                 else
                 {
                     txt_Truong_18.BackColor = Color.White;
                     txt_Truong_18.ForeColor = Color.Black;
-                    txt_Truong_18.Tag = "0";
+                    //txt_Truong_18.Tag = "0";
                 }
+            }
+
+            if (Global.FlagCheckDeSo & ((TextEdit)sender).BackColor == Color.White & ((TextEdit)sender).Tag + "" == "PaleVioletRed")
+            {
+                ((TextEdit)sender).BackColor = Color.PaleVioletRed;
+                ((TextEdit)sender).ForeColor = Color.White;
             }
         }
 
@@ -1034,11 +1090,32 @@ namespace CLS_NatSu.MyUserControl
         }
         
         private void txt_Truong_09_1_KeyDown(object sender, KeyEventArgs e)
-        {
+        {   if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
+            }
             if (e.KeyCode == Keys.Add)
             {
                 ((TextEdit)sender).Text = ((TextEdit)sender).Text + "000";
                 ((TextEdit)sender).SelectionStart = ((TextEdit)sender).Text.Length;
+            }
+            else if (e.KeyCode == Keys.Divide)
+            {
+                if (((TextEdit)sender).Name == "txt_Truong_11" & (!string.IsNullOrEmpty(txt_Truong_09.Text) | !string.IsNullOrEmpty(txt_Truong_10.Text)))
+                {
+                    txt_Truong_11.Text = Tong_truong11 + "";
+                    txt_Truong_11.SelectAll();
+                }
+                else if (((TextEdit)sender).Name == "txt_Truong_17" & (!string.IsNullOrEmpty(txt_Truong_15.Text) | !string.IsNullOrEmpty(txt_Truong_16.Text)))
+                {
+                    txt_Truong_17.Text = Tong_truong17 + "";
+                    txt_Truong_17.SelectAll();
+                }
+                else if (((TextEdit)sender).Name == "txt_Truong_23" & (!string.IsNullOrEmpty(txt_Truong_21.Text) | !string.IsNullOrEmpty(txt_Truong_22.Text)))
+                {
+                    txt_Truong_23.Text = Tong_truong23 + "";
+                    txt_Truong_23.SelectAll();
+                }
             }
             else
                 txt_Truong_03_KeyDown(sender, e);

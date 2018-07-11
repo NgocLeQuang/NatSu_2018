@@ -24,6 +24,7 @@ namespace CLS_NatSu.MyForm
         private string fbatchRefresh = "";
         private bool fLagRefresh = false;
         public string TypeCheck = "";
+        private string Folder = "";
         private void btn_Start_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbb_Batch_Check.Text))
@@ -55,6 +56,7 @@ namespace CLS_NatSu.MyForm
                     }
                 }
             }
+            Folder = (from w in Global.Db.GetFolder(cbb_Batch_Check.SelectedValue + "") select w.PathServer).FirstOrDefault();
             string temp = GetImage();
             if (temp == "NULL")
             {
@@ -78,7 +80,11 @@ namespace CLS_NatSu.MyForm
         {
             this.lb_Image.Text = "";
             this.txt_Truong_01_User1.Text = "";
+            this.txt_Truong_01_User1.BackColor = Color.White;
+            this.txt_Truong_01_User1.ForeColor = Color.Black;
             this.txt_Truong_01_User2.Text = "";
+            this.txt_Truong_01_User2.BackColor = Color.White;
+            this.txt_Truong_01_User2.ForeColor = Color.Black;
             this.lb_User1.Text = "";
             this.lb_User2.Text = "";
             if (Global.StrCheck == "CHECKDESO")
@@ -92,8 +98,7 @@ namespace CLS_NatSu.MyForm
             string str = (from w in Global.Db.GetSoLoiCheck(string.IsNullOrEmpty(cbb_Batch_Check.Text ?? "") ? "" : (cbb_Batch_Check.SelectedValue)+"", Global.StrUserName, this.TypeCheck) select w.CountImage).FirstOrDefault<string>();
             this.lb_Loi.Text = str + " Lỗi";
         }
-
-
+        
         public void LoadBatchMoi()
         {
             if (MessageBox.Show("You want to do the next batch?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
@@ -102,6 +107,7 @@ namespace CLS_NatSu.MyForm
             }
             else
             {
+                Folder = "";
                 this.VisibleButtonSave();
                 this.ResetData();
                 this.cbb_Batch_Check.Text = "";
@@ -146,7 +152,7 @@ namespace CLS_NatSu.MyForm
             }
             lb_Image.Text = imageTemp_check;
             uc_PictureBox1.imageBox1.Image = null;
-            if (uc_PictureBox1.LoadImage(Global.Webservice + cbb_Batch_Check.SelectedValue + "" + "/" + imageTemp_check, imageTemp_check, Settings.Default.ZoomImage) == "Error")
+            if (uc_PictureBox1.LoadImage(Global.Webservice +Folder+ cbb_Batch_Check.SelectedValue + "" + "/" + imageTemp_check, imageTemp_check, Settings.Default.ZoomImage) == "Error")
             {
                 uc_PictureBox1.imageBox1.Image = Resources.svn_deleted;
                 return "Error";
@@ -220,7 +226,7 @@ namespace CLS_NatSu.MyForm
                     this.lb_User2.Text = data[5].UserName;
                     this.txt_Truong_01_User1.Text = data[0].Truong_01;
 
-                    if (data[0].Truong_01 == "225")
+                    if (data[0].Truong_01 == "225"||data[0].Truong_01 == "221")
                     {
                         this.UC_225_1.uC_225_Item1.txt_Truong_02.Text = data[0].Truong_02;
                         this.UC_225_1.uC_225_Item1.txt_Truong_03.Text = data[0].Truong_03;
@@ -229,6 +235,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item1.txt_Truong_04_3.Text = data[0].Truong_04_3;
                         this.UC_225_1.uC_225_Item1.txt_Truong_05_1.Text = data[0].Truong_05_1;
                         this.UC_225_1.uC_225_Item1.txt_Truong_05_2.Text = data[0].Truong_05_2;
+                        this.UC_225_1.uC_225_Item1.txt_Truong_07.Text = FormatCurency(data[0].Truong_07);
                         this.UC_225_1.uC_225_Item1.txt_Truong_08.Text = data[0].Truong_08;
                         this.UC_225_1.uC_225_Item1.txt_Truong_09.Text = FormatCurency(data[0].Truong_09);
                         this.UC_225_1.uC_225_Item1.txt_Truong_10.Text = FormatCurency(data[0].Truong_10);
@@ -252,6 +259,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item2.txt_Truong_04_3.Text = data[1].Truong_04_3;
                         this.UC_225_1.uC_225_Item2.txt_Truong_05_1.Text = data[1].Truong_05_1;
                         this.UC_225_1.uC_225_Item2.txt_Truong_05_2.Text = data[1].Truong_05_2;
+                        this.UC_225_1.uC_225_Item2.txt_Truong_07.Text = FormatCurency(data[1].Truong_07);
                         this.UC_225_1.uC_225_Item2.txt_Truong_08.Text = data[1].Truong_08;
                         this.UC_225_1.uC_225_Item2.txt_Truong_09.Text = FormatCurency(data[1].Truong_09);
                         this.UC_225_1.uC_225_Item2.txt_Truong_10.Text = FormatCurency(data[1].Truong_10);
@@ -275,6 +283,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item3.txt_Truong_04_3.Text = data[2].Truong_04_3;
                         this.UC_225_1.uC_225_Item3.txt_Truong_05_1.Text = data[2].Truong_05_1;
                         this.UC_225_1.uC_225_Item3.txt_Truong_05_2.Text = data[2].Truong_05_2;
+                        this.UC_225_1.uC_225_Item3.txt_Truong_07.Text = FormatCurency(data[2].Truong_07);
                         this.UC_225_1.uC_225_Item3.txt_Truong_08.Text = data[2].Truong_08;
                         this.UC_225_1.uC_225_Item3.txt_Truong_09.Text = FormatCurency(data[2].Truong_09);
                         this.UC_225_1.uC_225_Item3.txt_Truong_10.Text = FormatCurency(data[2].Truong_10);
@@ -298,6 +307,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item4.txt_Truong_04_3.Text = data[3].Truong_04_3;
                         this.UC_225_1.uC_225_Item4.txt_Truong_05_1.Text = data[3].Truong_05_1;
                         this.UC_225_1.uC_225_Item4.txt_Truong_05_2.Text = data[3].Truong_05_2;
+                        this.UC_225_1.uC_225_Item4.txt_Truong_07.Text = FormatCurency(data[3].Truong_07);
                         this.UC_225_1.uC_225_Item4.txt_Truong_08.Text = data[3].Truong_08;
                         this.UC_225_1.uC_225_Item4.txt_Truong_09.Text = FormatCurency(data[3].Truong_09);
                         this.UC_225_1.uC_225_Item4.txt_Truong_10.Text = FormatCurency(data[3].Truong_10);
@@ -321,6 +331,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item5.txt_Truong_04_3.Text = data[4].Truong_04_3;
                         this.UC_225_1.uC_225_Item5.txt_Truong_05_1.Text = data[4].Truong_05_1;
                         this.UC_225_1.uC_225_Item5.txt_Truong_05_2.Text = data[4].Truong_05_2;
+                        this.UC_225_1.uC_225_Item5.txt_Truong_07.Text = FormatCurency(data[4].Truong_07);
                         this.UC_225_1.uC_225_Item5.txt_Truong_08.Text = data[4].Truong_08;
                         this.UC_225_1.uC_225_Item5.txt_Truong_09.Text = FormatCurency(data[4].Truong_09);
                         this.UC_225_1.uC_225_Item5.txt_Truong_10.Text = FormatCurency(data[4].Truong_10);
@@ -484,7 +495,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_2225_1.txt_Truong_Flag.Text = data[3].Truong_Flag;
                     }
                     this.txt_Truong_01_User2.Text = data[5].Truong_01;
-                    if (data[5].Truong_01 == "225")
+                    if (data[5].Truong_01 == "225" || data[5].Truong_01 == "221")
                     {
                         this.UC_225_2.uC_225_Item1.txt_Truong_02.Text = data[5].Truong_02;
                         this.UC_225_2.uC_225_Item1.txt_Truong_03.Text = data[5].Truong_03;
@@ -493,6 +504,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item1.txt_Truong_04_3.Text = data[5].Truong_04_3;
                         this.UC_225_2.uC_225_Item1.txt_Truong_05_1.Text = data[5].Truong_05_1;
                         this.UC_225_2.uC_225_Item1.txt_Truong_05_2.Text = data[5].Truong_05_2;
+                        this.UC_225_2.uC_225_Item1.txt_Truong_07.Text = FormatCurency(data[5].Truong_07);
                         this.UC_225_2.uC_225_Item1.txt_Truong_08.Text = data[5].Truong_08;
                         this.UC_225_2.uC_225_Item1.txt_Truong_09.Text = FormatCurency(data[5].Truong_09);
                         this.UC_225_2.uC_225_Item1.txt_Truong_10.Text = FormatCurency(data[5].Truong_10);
@@ -516,6 +528,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item2.txt_Truong_04_3.Text = data[6].Truong_04_3;
                         this.UC_225_2.uC_225_Item2.txt_Truong_05_1.Text = data[6].Truong_05_1;
                         this.UC_225_2.uC_225_Item2.txt_Truong_05_2.Text = data[6].Truong_05_2;
+                        this.UC_225_2.uC_225_Item2.txt_Truong_07.Text = FormatCurency(data[6].Truong_07);
                         this.UC_225_2.uC_225_Item2.txt_Truong_08.Text = data[6].Truong_08;
                         this.UC_225_2.uC_225_Item2.txt_Truong_09.Text = FormatCurency(data[6].Truong_09);
                         this.UC_225_2.uC_225_Item2.txt_Truong_10.Text = FormatCurency(data[6].Truong_10);
@@ -539,6 +552,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item3.txt_Truong_04_3.Text = data[7].Truong_04_3;
                         this.UC_225_2.uC_225_Item3.txt_Truong_05_1.Text = data[7].Truong_05_1;
                         this.UC_225_2.uC_225_Item3.txt_Truong_05_2.Text = data[7].Truong_05_2;
+                        this.UC_225_2.uC_225_Item3.txt_Truong_07.Text = FormatCurency(data[7].Truong_07);
                         this.UC_225_2.uC_225_Item3.txt_Truong_08.Text = data[7].Truong_08;
                         this.UC_225_2.uC_225_Item3.txt_Truong_09.Text = FormatCurency(data[7].Truong_09);
                         this.UC_225_2.uC_225_Item3.txt_Truong_10.Text = FormatCurency(data[7].Truong_10);
@@ -562,6 +576,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item4.txt_Truong_04_3.Text = data[8].Truong_04_3;
                         this.UC_225_2.uC_225_Item4.txt_Truong_05_1.Text = data[8].Truong_05_1;
                         this.UC_225_2.uC_225_Item4.txt_Truong_05_2.Text = data[8].Truong_05_2;
+                        this.UC_225_2.uC_225_Item4.txt_Truong_07.Text = FormatCurency(data[8].Truong_07);
                         this.UC_225_2.uC_225_Item4.txt_Truong_08.Text = data[8].Truong_08;
                         this.UC_225_2.uC_225_Item4.txt_Truong_09.Text = FormatCurency(data[8].Truong_09);
                         this.UC_225_2.uC_225_Item4.txt_Truong_10.Text = FormatCurency(data[8].Truong_10);
@@ -585,6 +600,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item5.txt_Truong_04_3.Text = data[9].Truong_04_3;
                         this.UC_225_2.uC_225_Item5.txt_Truong_05_1.Text = data[9].Truong_05_1;
                         this.UC_225_2.uC_225_Item5.txt_Truong_05_2.Text = data[9].Truong_05_2;
+                        this.UC_225_2.uC_225_Item5.txt_Truong_07.Text = FormatCurency(data[9].Truong_07);
                         this.UC_225_2.uC_225_Item5.txt_Truong_08.Text = data[9].Truong_08;
                         this.UC_225_2.uC_225_Item5.txt_Truong_09.Text = FormatCurency(data[9].Truong_09);
                         this.UC_225_2.uC_225_Item5.txt_Truong_10.Text = FormatCurency(data[9].Truong_10);
@@ -769,7 +785,7 @@ namespace CLS_NatSu.MyForm
                     this.lb_User1.Text = data[5].UserName;
                     this.lb_User2.Text = data[0].UserName;
                     this.txt_Truong_01_User1.Text = data[5].Truong_01;
-                    if (data[5].Truong_01 == "225")
+                    if (data[5].Truong_01 == "225" || data[5].Truong_01 == "221")
                     {
                         this.UC_225_1.uC_225_Item1.txt_Truong_02.Text = data[5].Truong_02;
                         this.UC_225_1.uC_225_Item1.txt_Truong_03.Text = data[5].Truong_03;
@@ -778,6 +794,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item1.txt_Truong_04_3.Text = data[5].Truong_04_3;
                         this.UC_225_1.uC_225_Item1.txt_Truong_05_1.Text = data[5].Truong_05_1;
                         this.UC_225_1.uC_225_Item1.txt_Truong_05_2.Text = data[5].Truong_05_2;
+                        this.UC_225_1.uC_225_Item1.txt_Truong_07.Text = FormatCurency(data[5].Truong_07);
                         this.UC_225_1.uC_225_Item1.txt_Truong_08.Text = data[5].Truong_08;
                         this.UC_225_1.uC_225_Item1.txt_Truong_09.Text = FormatCurency(data[5].Truong_09);
                         this.UC_225_1.uC_225_Item1.txt_Truong_10.Text = FormatCurency(data[5].Truong_10);
@@ -801,6 +818,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item2.txt_Truong_04_3.Text = data[6].Truong_04_3;
                         this.UC_225_1.uC_225_Item2.txt_Truong_05_1.Text = data[6].Truong_05_1;
                         this.UC_225_1.uC_225_Item2.txt_Truong_05_2.Text = data[6].Truong_05_2;
+                        this.UC_225_1.uC_225_Item2.txt_Truong_07.Text = FormatCurency(data[6].Truong_07);
                         this.UC_225_1.uC_225_Item2.txt_Truong_08.Text = data[6].Truong_08;
                         this.UC_225_1.uC_225_Item2.txt_Truong_09.Text = FormatCurency(data[6].Truong_09);
                         this.UC_225_1.uC_225_Item2.txt_Truong_10.Text = FormatCurency(data[6].Truong_10);
@@ -824,6 +842,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item3.txt_Truong_04_3.Text = data[7].Truong_04_3;
                         this.UC_225_1.uC_225_Item3.txt_Truong_05_1.Text = data[7].Truong_05_1;
                         this.UC_225_1.uC_225_Item3.txt_Truong_05_2.Text = data[7].Truong_05_2;
+                        this.UC_225_1.uC_225_Item3.txt_Truong_07.Text = FormatCurency(data[7].Truong_07);
                         this.UC_225_1.uC_225_Item3.txt_Truong_08.Text = data[7].Truong_08;
                         this.UC_225_1.uC_225_Item3.txt_Truong_09.Text = FormatCurency(data[7].Truong_09);
                         this.UC_225_1.uC_225_Item3.txt_Truong_10.Text = FormatCurency(data[7].Truong_10);
@@ -847,6 +866,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item4.txt_Truong_04_3.Text = data[8].Truong_04_3;
                         this.UC_225_1.uC_225_Item4.txt_Truong_05_1.Text = data[8].Truong_05_1;
                         this.UC_225_1.uC_225_Item4.txt_Truong_05_2.Text = data[8].Truong_05_2;
+                        this.UC_225_1.uC_225_Item4.txt_Truong_07.Text = FormatCurency(data[8].Truong_07);
                         this.UC_225_1.uC_225_Item4.txt_Truong_08.Text = data[8].Truong_08;
                         this.UC_225_1.uC_225_Item4.txt_Truong_09.Text = FormatCurency(data[8].Truong_09);
                         this.UC_225_1.uC_225_Item4.txt_Truong_10.Text = FormatCurency(data[8].Truong_10);
@@ -870,6 +890,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_1.uC_225_Item5.txt_Truong_04_3.Text = data[9].Truong_04_3;
                         this.UC_225_1.uC_225_Item5.txt_Truong_05_1.Text = data[9].Truong_05_1;
                         this.UC_225_1.uC_225_Item5.txt_Truong_05_2.Text = data[9].Truong_05_2;
+                        this.UC_225_1.uC_225_Item5.txt_Truong_07.Text = FormatCurency(data[9].Truong_07);
                         this.UC_225_1.uC_225_Item5.txt_Truong_08.Text = data[9].Truong_08;
                         this.UC_225_1.uC_225_Item5.txt_Truong_09.Text = FormatCurency(data[9].Truong_09);
                         this.UC_225_1.uC_225_Item5.txt_Truong_10.Text = FormatCurency(data[9].Truong_10);
@@ -1033,7 +1054,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_2225_1.txt_Truong_Flag.Text = data[8].Truong_Flag;
                     }
                     this.txt_Truong_01_User2.Text = data[0].Truong_01;
-                    if (data[0].Truong_01 == "225")
+                    if (data[0].Truong_01 == "225" || data[0].Truong_01 == "221")
                     {
                         this.UC_225_2.uC_225_Item1.txt_Truong_02.Text = data[0].Truong_02;
                         this.UC_225_2.uC_225_Item1.txt_Truong_03.Text = data[0].Truong_03;
@@ -1042,6 +1063,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item1.txt_Truong_04_3.Text = data[0].Truong_04_3;
                         this.UC_225_2.uC_225_Item1.txt_Truong_05_1.Text = data[0].Truong_05_1;
                         this.UC_225_2.uC_225_Item1.txt_Truong_05_2.Text = data[0].Truong_05_2;
+                        this.UC_225_2.uC_225_Item1.txt_Truong_07.Text = FormatCurency(data[0].Truong_07);
                         this.UC_225_2.uC_225_Item1.txt_Truong_08.Text = data[0].Truong_08;
                         this.UC_225_2.uC_225_Item1.txt_Truong_09.Text = FormatCurency(data[0].Truong_09);
                         this.UC_225_2.uC_225_Item1.txt_Truong_10.Text = FormatCurency(data[0].Truong_10);
@@ -1065,6 +1087,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item2.txt_Truong_04_3.Text = data[1].Truong_04_3;
                         this.UC_225_2.uC_225_Item2.txt_Truong_05_1.Text = data[1].Truong_05_1;
                         this.UC_225_2.uC_225_Item2.txt_Truong_05_2.Text = data[1].Truong_05_2;
+                        this.UC_225_2.uC_225_Item2.txt_Truong_07.Text = FormatCurency(data[1].Truong_07);
                         this.UC_225_2.uC_225_Item2.txt_Truong_08.Text = data[1].Truong_08;
                         this.UC_225_2.uC_225_Item2.txt_Truong_09.Text = FormatCurency(data[1].Truong_09);
                         this.UC_225_2.uC_225_Item2.txt_Truong_10.Text = FormatCurency(data[1].Truong_10);
@@ -1088,6 +1111,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item3.txt_Truong_04_3.Text = data[2].Truong_04_3;
                         this.UC_225_2.uC_225_Item3.txt_Truong_05_1.Text = data[2].Truong_05_1;
                         this.UC_225_2.uC_225_Item3.txt_Truong_05_2.Text = data[2].Truong_05_2;
+                        this.UC_225_2.uC_225_Item3.txt_Truong_07.Text = FormatCurency(data[2].Truong_07);
                         this.UC_225_2.uC_225_Item3.txt_Truong_08.Text = data[2].Truong_08;
                         this.UC_225_2.uC_225_Item3.txt_Truong_09.Text = FormatCurency(data[2].Truong_09);
                         this.UC_225_2.uC_225_Item3.txt_Truong_10.Text = FormatCurency(data[2].Truong_10);
@@ -1111,6 +1135,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item4.txt_Truong_04_3.Text = data[3].Truong_04_3;
                         this.UC_225_2.uC_225_Item4.txt_Truong_05_1.Text = data[3].Truong_05_1;
                         this.UC_225_2.uC_225_Item4.txt_Truong_05_2.Text = data[3].Truong_05_2;
+                        this.UC_225_2.uC_225_Item4.txt_Truong_07.Text = FormatCurency(data[3].Truong_07);
                         this.UC_225_2.uC_225_Item4.txt_Truong_08.Text = data[3].Truong_08;
                         this.UC_225_2.uC_225_Item4.txt_Truong_09.Text = FormatCurency(data[3].Truong_09);
                         this.UC_225_2.uC_225_Item4.txt_Truong_10.Text = FormatCurency(data[3].Truong_10);
@@ -1134,6 +1159,7 @@ namespace CLS_NatSu.MyForm
                         this.UC_225_2.uC_225_Item5.txt_Truong_04_3.Text = data[4].Truong_04_3;
                         this.UC_225_2.uC_225_Item5.txt_Truong_05_1.Text = data[4].Truong_05_1;
                         this.UC_225_2.uC_225_Item5.txt_Truong_05_2.Text = data[4].Truong_05_2;
+                        this.UC_225_2.uC_225_Item5.txt_Truong_07.Text = FormatCurency(data[4].Truong_07);
                         this.UC_225_2.uC_225_Item5.txt_Truong_08.Text = data[4].Truong_08;
                         this.UC_225_2.uC_225_Item5.txt_Truong_09.Text = FormatCurency(data[4].Truong_09);
                         this.UC_225_2.uC_225_Item5.txt_Truong_10.Text = FormatCurency(data[4].Truong_10);
@@ -1310,6 +1336,7 @@ namespace CLS_NatSu.MyForm
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item1.txt_Truong_04_3, this.UC_225_2.uC_225_Item1.txt_Truong_04_3);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item1.txt_Truong_05_1, this.UC_225_2.uC_225_Item1.txt_Truong_05_1);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item1.txt_Truong_05_2, this.UC_225_2.uC_225_Item1.txt_Truong_05_2);
+                this.Compare_TextBox(this.UC_225_1.uC_225_Item1.txt_Truong_07, this.UC_225_2.uC_225_Item1.txt_Truong_07);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item1.txt_Truong_08, this.UC_225_2.uC_225_Item1.txt_Truong_08);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item1.txt_Truong_09, this.UC_225_2.uC_225_Item1.txt_Truong_09);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item1.txt_Truong_10, this.UC_225_2.uC_225_Item1.txt_Truong_10);
@@ -1333,6 +1360,7 @@ namespace CLS_NatSu.MyForm
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item2.txt_Truong_04_3, this.UC_225_2.uC_225_Item2.txt_Truong_04_3);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item2.txt_Truong_05_1, this.UC_225_2.uC_225_Item2.txt_Truong_05_1);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item2.txt_Truong_05_2, this.UC_225_2.uC_225_Item2.txt_Truong_05_2);
+                this.Compare_TextBox(this.UC_225_1.uC_225_Item2.txt_Truong_07, this.UC_225_2.uC_225_Item2.txt_Truong_07);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item2.txt_Truong_08, this.UC_225_2.uC_225_Item2.txt_Truong_08);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item2.txt_Truong_09, this.UC_225_2.uC_225_Item2.txt_Truong_09);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item2.txt_Truong_10, this.UC_225_2.uC_225_Item2.txt_Truong_10);
@@ -1356,6 +1384,7 @@ namespace CLS_NatSu.MyForm
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_04_3, this.UC_225_2.uC_225_Item3.txt_Truong_04_3);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_05_1, this.UC_225_2.uC_225_Item3.txt_Truong_05_1);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_05_2, this.UC_225_2.uC_225_Item3.txt_Truong_05_2);
+                this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_07, this.UC_225_2.uC_225_Item3.txt_Truong_07);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_08, this.UC_225_2.uC_225_Item3.txt_Truong_08);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_09, this.UC_225_2.uC_225_Item3.txt_Truong_09);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_10, this.UC_225_2.uC_225_Item3.txt_Truong_10);
@@ -1368,7 +1397,7 @@ namespace CLS_NatSu.MyForm
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_18, this.UC_225_2.uC_225_Item3.txt_Truong_18);
                 this.Compare_LookUpEdit(this.UC_225_1.uC_225_Item3.txt_Truong_19, this.UC_225_2.uC_225_Item3.txt_Truong_19);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_20, this.UC_225_2.uC_225_Item3.txt_Truong_20);
-                Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_21, this.UC_225_2.uC_225_Item3.txt_Truong_21);
+                this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_21, this.UC_225_2.uC_225_Item3.txt_Truong_21);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_22, this.UC_225_2.uC_225_Item3.txt_Truong_22);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_23, this.UC_225_2.uC_225_Item3.txt_Truong_23);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item3.txt_Truong_24, this.UC_225_2.uC_225_Item3.txt_Truong_24);
@@ -1379,6 +1408,7 @@ namespace CLS_NatSu.MyForm
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item4.txt_Truong_04_3, this.UC_225_2.uC_225_Item4.txt_Truong_04_3);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item4.txt_Truong_05_1, this.UC_225_2.uC_225_Item4.txt_Truong_05_1);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item4.txt_Truong_05_2, this.UC_225_2.uC_225_Item4.txt_Truong_05_2);
+                this.Compare_TextBox(this.UC_225_1.uC_225_Item4.txt_Truong_07, this.UC_225_2.uC_225_Item4.txt_Truong_07);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item4.txt_Truong_08, this.UC_225_2.uC_225_Item4.txt_Truong_08);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item4.txt_Truong_09, this.UC_225_2.uC_225_Item4.txt_Truong_09);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item4.txt_Truong_10, this.UC_225_2.uC_225_Item4.txt_Truong_10);
@@ -1402,6 +1432,7 @@ namespace CLS_NatSu.MyForm
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item5.txt_Truong_04_3, this.UC_225_2.uC_225_Item5.txt_Truong_04_3);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item5.txt_Truong_05_1, this.UC_225_2.uC_225_Item5.txt_Truong_05_1);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item5.txt_Truong_05_2, this.UC_225_2.uC_225_Item5.txt_Truong_05_2);
+                this.Compare_TextBox(this.UC_225_1.uC_225_Item5.txt_Truong_07, this.UC_225_2.uC_225_Item5.txt_Truong_07);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item5.txt_Truong_08, this.UC_225_2.uC_225_Item5.txt_Truong_08);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item5.txt_Truong_09, this.UC_225_2.uC_225_Item5.txt_Truong_09);
                 this.Compare_TextBox(this.UC_225_1.uC_225_Item5.txt_Truong_10, this.UC_225_2.uC_225_Item5.txt_Truong_10);
@@ -1561,7 +1592,7 @@ namespace CLS_NatSu.MyForm
                 this.Compare_TextBox(this.UC_2225_1.uC_2225_Item5.txt_Truong_26, this.UC_2225_2.uC_2225_Item5.txt_Truong_26);
                 this.Compare_TextBox(this.UC_2225_1.txt_Truong_Flag, this.UC_2225_2.txt_Truong_Flag);
             }
-            if (this.txt_Truong_01_User1.Text == "225")
+            if (this.txt_Truong_01_User1.Text == "225"||this.txt_Truong_01_User1.Text == "221")
             {
                 this.UC_225_1.uC_225_Item1.txt_Truong_02.Focus();
             }
@@ -1574,10 +1605,11 @@ namespace CLS_NatSu.MyForm
         bool FlagLoad = false;
         private void frm_Checker_Load(object sender, EventArgs e)
         {
+            Folder = "";
             Global.FlagLoad = true;
             FlagLoad = true;
             this.Text = TypeCheck;
-            this.splitCheck.SplitterPosition = 640;
+            this.splitCheck.SplitterPosition = 724;
             this.Tab_User1.ShowTabHeader = DefaultBoolean.False;
             this.Tab_User2.ShowTabHeader = DefaultBoolean.False;
             VisibleButtonSave();
@@ -1589,6 +1621,7 @@ namespace CLS_NatSu.MyForm
                 cbb_Batch_Check.DisplayMember = "BatchName";
                 cbb_Batch_Check.ValueMember = "BatchID";
                 cbb_Batch_Check.SelectedValue = Global.StrBatchID;
+                Folder = (from w in Global.Db.GetFolder(Global.StrBatchID) select w.PathServer).FirstOrDefault();
                 if (string.IsNullOrEmpty(cbb_Batch_Check.Text))
                     cbb_Batch_Check.SelectedIndex = 0;
             }
@@ -1636,15 +1669,17 @@ namespace CLS_NatSu.MyForm
         {
             if (Global.StrCheck == "CHECKDESO")
             {
-                if (string.IsNullOrEmpty(this.txt_Truong_01_User1.Text))
-                {
-                    MessageBox.Show("Bạn đang để trống trường 1. Vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return;
-                }
-                if (this.CheckLoaiPhieu(this.txt_Truong_01_User1.Text) && (MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No))
-                {
-                    return;
-                }
+                //if (string.IsNullOrEmpty(this.txt_Truong_01_User1.Text))
+                //{
+                //    MessageBox.Show("Bạn đang để trống trường 1. Vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                //    return;
+                //}
+                //if (this.CheckLoaiPhieu(this.txt_Truong_01_User1.Text))
+                //{
+                //    if ((MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                //        return;
+                //}
+                
                 bool flag_Phieu1_User1Sai = false;
                 bool flag_Phieu2_User1Sai = false;
                 bool flag_Phieu3_User1Sai = false;
@@ -1655,11 +1690,12 @@ namespace CLS_NatSu.MyForm
                 bool flag_Phieu3_User2Sai = false;
                 bool flag_Phieu4_User2Sai = false;
                 bool flag_Phieu5_User2Sai = false;
-                if (this.txt_Truong_01_User1.Text == "225")
+                if (this.txt_Truong_01_User1.Text == "225"||this.txt_Truong_01_User1.Text == "221")
                 {
-                    if (this.UC_225_1.IsEmpty() && (MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                    if (this.UC_225_1.IsEmpty())
                     {
-                        return;
+                        if ((MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn lưu phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                            return;
                     }
                     //--Check user 1
                     //Check phiếu 1
@@ -1671,6 +1707,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[0].Truong_04_3 != UC_225_1.uC_225_Item1.txt_Truong_04_3.Text 
                         || DataUser1[0].Truong_05_1 != UC_225_1.uC_225_Item1.txt_Truong_05_1.Text 
                         || DataUser1[0].Truong_05_2 != UC_225_1.uC_225_Item1.txt_Truong_05_2.Text 
+                        || DataUser1[0].Truong_07 != UC_225_1.uC_225_Item1.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[0].Truong_08 != UC_225_1.uC_225_Item1.txt_Truong_08.Text 
                         || DataUser1[0].Truong_09 != UC_225_1.uC_225_Item1.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[0].Truong_10 != UC_225_1.uC_225_Item1.txt_Truong_10.Text.Replace(",", "") 
@@ -1703,6 +1740,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[1].Truong_04_3 != UC_225_1.uC_225_Item2.txt_Truong_04_3.Text 
                         || DataUser1[1].Truong_05_1 != UC_225_1.uC_225_Item2.txt_Truong_05_1.Text 
                         || DataUser1[1].Truong_05_2 != UC_225_1.uC_225_Item2.txt_Truong_05_2.Text 
+                        || DataUser1[1].Truong_07 != UC_225_1.uC_225_Item2.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[1].Truong_08 != UC_225_1.uC_225_Item2.txt_Truong_08.Text 
                         || DataUser1[1].Truong_09 != UC_225_1.uC_225_Item2.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[1].Truong_10 != UC_225_1.uC_225_Item2.txt_Truong_10.Text.Replace(",", "") 
@@ -1735,6 +1773,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[2].Truong_04_3 != UC_225_1.uC_225_Item3.txt_Truong_04_3.Text 
                         || DataUser1[2].Truong_05_1 != UC_225_1.uC_225_Item3.txt_Truong_05_1.Text 
                         || DataUser1[2].Truong_05_2 != UC_225_1.uC_225_Item3.txt_Truong_05_2.Text 
+                        || DataUser1[2].Truong_07 != UC_225_1.uC_225_Item3.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[2].Truong_08 != UC_225_1.uC_225_Item3.txt_Truong_08.Text 
                         || DataUser1[2].Truong_09 != UC_225_1.uC_225_Item3.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[2].Truong_10 != UC_225_1.uC_225_Item3.txt_Truong_10.Text.Replace(",", "") 
@@ -1767,6 +1806,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[3].Truong_04_3 != UC_225_1.uC_225_Item4.txt_Truong_04_3.Text 
                         || DataUser1[3].Truong_05_1 != UC_225_1.uC_225_Item4.txt_Truong_05_1.Text 
                         || DataUser1[3].Truong_05_2 != UC_225_1.uC_225_Item4.txt_Truong_05_2.Text 
+                        || DataUser1[3].Truong_07 != UC_225_1.uC_225_Item4.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[3].Truong_08 != UC_225_1.uC_225_Item4.txt_Truong_08.Text 
                         || DataUser1[3].Truong_09 != UC_225_1.uC_225_Item4.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[3].Truong_10 != UC_225_1.uC_225_Item4.txt_Truong_10.Text.Replace(",", "") 
@@ -1800,6 +1840,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[4].Truong_04_3 != UC_225_1.uC_225_Item5.txt_Truong_04_3.Text 
                         || DataUser1[4].Truong_05_1 != UC_225_1.uC_225_Item5.txt_Truong_05_1.Text 
                         || DataUser1[4].Truong_05_2 != UC_225_1.uC_225_Item5.txt_Truong_05_2.Text 
+                        || DataUser1[4].Truong_07 != UC_225_1.uC_225_Item5.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[4].Truong_08 != UC_225_1.uC_225_Item5.txt_Truong_08.Text 
                         || DataUser1[4].Truong_09 != UC_225_1.uC_225_Item5.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[4].Truong_10 != UC_225_1.uC_225_Item5.txt_Truong_10.Text.Replace(",", "") 
@@ -1833,6 +1874,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[0].Truong_04_3 != UC_225_1.uC_225_Item1.txt_Truong_04_3.Text 
                         || DataUser2[0].Truong_05_1 != UC_225_1.uC_225_Item1.txt_Truong_05_1.Text 
                         || DataUser2[0].Truong_05_2 != UC_225_1.uC_225_Item1.txt_Truong_05_2.Text 
+                        || DataUser2[0].Truong_07 != UC_225_1.uC_225_Item1.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[0].Truong_08 != UC_225_1.uC_225_Item1.txt_Truong_08.Text 
                         || DataUser2[0].Truong_09 != UC_225_1.uC_225_Item1.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[0].Truong_10 != UC_225_1.uC_225_Item1.txt_Truong_10.Text.Replace(",", "") 
@@ -1865,6 +1907,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[1].Truong_04_3 != UC_225_1.uC_225_Item2.txt_Truong_04_3.Text 
                         || DataUser2[1].Truong_05_1 != UC_225_1.uC_225_Item2.txt_Truong_05_1.Text 
                         || DataUser2[1].Truong_05_2 != UC_225_1.uC_225_Item2.txt_Truong_05_2.Text 
+                        || DataUser2[1].Truong_07 != UC_225_1.uC_225_Item2.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[1].Truong_08 != UC_225_1.uC_225_Item2.txt_Truong_08.Text 
                         || DataUser2[1].Truong_09 != UC_225_1.uC_225_Item2.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[1].Truong_10 != UC_225_1.uC_225_Item2.txt_Truong_10.Text.Replace(",", "") 
@@ -1897,6 +1940,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[2].Truong_04_3 != UC_225_1.uC_225_Item3.txt_Truong_04_3.Text 
                         || DataUser2[2].Truong_05_1 != UC_225_1.uC_225_Item3.txt_Truong_05_1.Text 
                         || DataUser2[2].Truong_05_2 != UC_225_1.uC_225_Item3.txt_Truong_05_2.Text 
+                        || DataUser2[2].Truong_07 != UC_225_1.uC_225_Item3.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[2].Truong_08 != UC_225_1.uC_225_Item3.txt_Truong_08.Text 
                         || DataUser2[2].Truong_09 != UC_225_1.uC_225_Item3.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[2].Truong_10 != UC_225_1.uC_225_Item3.txt_Truong_10.Text.Replace(",", "") 
@@ -1929,6 +1973,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[3].Truong_04_3 != UC_225_1.uC_225_Item4.txt_Truong_04_3.Text 
                         || DataUser2[3].Truong_05_1 != UC_225_1.uC_225_Item4.txt_Truong_05_1.Text 
                         || DataUser2[3].Truong_05_2 != UC_225_1.uC_225_Item4.txt_Truong_05_2.Text 
+                        || DataUser2[3].Truong_07 != UC_225_1.uC_225_Item4.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[3].Truong_08 != UC_225_1.uC_225_Item4.txt_Truong_08.Text 
                         || DataUser2[3].Truong_09 != UC_225_1.uC_225_Item4.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[3].Truong_10 != UC_225_1.uC_225_Item4.txt_Truong_10.Text.Replace(",", "") 
@@ -1962,6 +2007,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[4].Truong_04_3 != UC_225_1.uC_225_Item5.txt_Truong_04_3.Text 
                         || DataUser2[4].Truong_05_1 != UC_225_1.uC_225_Item5.txt_Truong_05_1.Text 
                         || DataUser2[4].Truong_05_2 != UC_225_1.uC_225_Item5.txt_Truong_05_2.Text 
+                        || DataUser2[4].Truong_07 != UC_225_1.uC_225_Item5.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[4].Truong_08 != UC_225_1.uC_225_Item5.txt_Truong_08.Text 
                         || DataUser2[4].Truong_09 != UC_225_1.uC_225_Item5.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[4].Truong_10 != UC_225_1.uC_225_Item5.txt_Truong_10.Text.Replace(",", "") 
@@ -2000,9 +2046,10 @@ namespace CLS_NatSu.MyForm
                 }
                 else
                 {
-                    if (this.UC_2225_1.IsEmpty() && (MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                    if (this.UC_2225_1.IsEmpty())
                     {
-                        return;
+                        if((MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                            return;
                     }
                     //--Check User 1
                     //Check phiếu 1
@@ -2398,7 +2445,7 @@ namespace CLS_NatSu.MyForm
             fbatchRefresh = "";
             ResetData();
             if (Global.RunUpdateVersion())
-                Application.Exit(); ;
+                Application.Exit();
             string temp = GetImage();
             if (temp == "NULL")
             {
@@ -2424,15 +2471,15 @@ namespace CLS_NatSu.MyForm
         {
             if (Global.StrCheck == "CHECKDESO")
             {
-                if (string.IsNullOrEmpty(this.txt_Truong_01_User2.Text))
-                {
-                    MessageBox.Show("Bạn đang để trống trường 1. Vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return;
-                }
-                if (this.CheckLoaiPhieu(this.txt_Truong_01_User2.Text) && (MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No))
-                {
-                    return;
-                }
+                //if (string.IsNullOrEmpty(this.txt_Truong_01_User2.Text))
+                //{
+                //    MessageBox.Show("Bạn đang để trống trường 1. Vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                //    return;
+                //}
+                //if (this.CheckLoaiPhieu(this.txt_Truong_01_User2.Text) && (MessageBox.Show("Bạn đang chọn loại phiếu khác. Bạn muốn gửi phiếu không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                //{
+                //    return;
+                //}
                 bool flag_Phieu1_User1Sai = false;
                 bool flag_Phieu2_User1Sai = false;
                 bool flag_Phieu3_User1Sai = false;
@@ -2443,11 +2490,12 @@ namespace CLS_NatSu.MyForm
                 bool flag_Phieu3_User2Sai = false;
                 bool flag_Phieu4_User2Sai = false;
                 bool flag_Phieu5_User2Sai = false;
-                if (this.txt_Truong_01_User2.Text == "225")
+                if (this.txt_Truong_01_User2.Text == "225"||this.txt_Truong_01_User2.Text == "221")
                 {
-                    if (this.UC_225_2.IsEmpty() && (MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                    if (this.UC_225_2.IsEmpty())
                     {
-                        return;
+                        if((MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                            return;
                     }
                     //--Check user 1
                     //Check phiếu 1
@@ -2459,6 +2507,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[0].Truong_04_3 != UC_225_2.uC_225_Item1.txt_Truong_04_3.Text 
                         || DataUser1[0].Truong_05_1 != UC_225_2.uC_225_Item1.txt_Truong_05_1.Text 
                         || DataUser1[0].Truong_05_2 != UC_225_2.uC_225_Item1.txt_Truong_05_2.Text 
+                        || DataUser1[0].Truong_07 != UC_225_2.uC_225_Item1.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[0].Truong_08 != UC_225_2.uC_225_Item1.txt_Truong_08.Text 
                         || DataUser1[0].Truong_09 != UC_225_2.uC_225_Item1.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[0].Truong_10 != UC_225_2.uC_225_Item1.txt_Truong_10.Text.Replace(",", "") 
@@ -2491,6 +2540,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[1].Truong_04_3 != UC_225_2.uC_225_Item2.txt_Truong_04_3.Text 
                         || DataUser1[1].Truong_05_1 != UC_225_2.uC_225_Item2.txt_Truong_05_1.Text 
                         || DataUser1[1].Truong_05_2 != UC_225_2.uC_225_Item2.txt_Truong_05_2.Text 
+                        || DataUser1[1].Truong_07 != UC_225_2.uC_225_Item2.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[1].Truong_08 != UC_225_2.uC_225_Item2.txt_Truong_08.Text 
                         || DataUser1[1].Truong_09 != UC_225_2.uC_225_Item2.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[1].Truong_10 != UC_225_2.uC_225_Item2.txt_Truong_10.Text.Replace(",", "") 
@@ -2523,6 +2573,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[2].Truong_04_3 != UC_225_2.uC_225_Item3.txt_Truong_04_3.Text 
                         || DataUser1[2].Truong_05_1 != UC_225_2.uC_225_Item3.txt_Truong_05_1.Text 
                         || DataUser1[2].Truong_05_2 != UC_225_2.uC_225_Item3.txt_Truong_05_2.Text 
+                        || DataUser1[2].Truong_07 != UC_225_2.uC_225_Item3.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[2].Truong_08 != UC_225_2.uC_225_Item3.txt_Truong_08.Text 
                         || DataUser1[2].Truong_09 != UC_225_2.uC_225_Item3.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[2].Truong_10 != UC_225_2.uC_225_Item3.txt_Truong_10.Text.Replace(",", "") 
@@ -2555,6 +2606,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[3].Truong_04_3 != UC_225_2.uC_225_Item4.txt_Truong_04_3.Text 
                         || DataUser1[3].Truong_05_1 != UC_225_2.uC_225_Item4.txt_Truong_05_1.Text 
                         || DataUser1[3].Truong_05_2 != UC_225_2.uC_225_Item4.txt_Truong_05_2.Text 
+                        || DataUser1[3].Truong_07 != UC_225_2.uC_225_Item4.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[3].Truong_08 != UC_225_2.uC_225_Item4.txt_Truong_08.Text 
                         || DataUser1[3].Truong_09 != UC_225_2.uC_225_Item4.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[3].Truong_10 != UC_225_2.uC_225_Item4.txt_Truong_10.Text.Replace(",", "") 
@@ -2588,6 +2640,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser1[4].Truong_04_3 != UC_225_2.uC_225_Item5.txt_Truong_04_3.Text 
                         || DataUser1[4].Truong_05_1 != UC_225_2.uC_225_Item5.txt_Truong_05_1.Text 
                         || DataUser1[4].Truong_05_2 != UC_225_2.uC_225_Item5.txt_Truong_05_2.Text 
+                        || DataUser1[4].Truong_07 != UC_225_2.uC_225_Item5.txt_Truong_07.Text.Replace(",", "")
                         || DataUser1[4].Truong_08 != UC_225_2.uC_225_Item5.txt_Truong_08.Text 
                         || DataUser1[4].Truong_09 != UC_225_2.uC_225_Item5.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser1[4].Truong_10 != UC_225_2.uC_225_Item5.txt_Truong_10.Text.Replace(",", "") 
@@ -2621,6 +2674,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[0].Truong_04_3 != UC_225_2.uC_225_Item1.txt_Truong_04_3.Text 
                         || DataUser2[0].Truong_05_1 != UC_225_2.uC_225_Item1.txt_Truong_05_1.Text 
                         || DataUser2[0].Truong_05_2 != UC_225_2.uC_225_Item1.txt_Truong_05_2.Text 
+                        || DataUser2[0].Truong_07 != UC_225_2.uC_225_Item1.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[0].Truong_08 != UC_225_2.uC_225_Item1.txt_Truong_08.Text 
                         || DataUser2[0].Truong_09 != UC_225_2.uC_225_Item1.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[0].Truong_10 != UC_225_2.uC_225_Item1.txt_Truong_10.Text.Replace(",", "") 
@@ -2653,6 +2707,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[1].Truong_04_3 != UC_225_2.uC_225_Item2.txt_Truong_04_3.Text 
                         || DataUser2[1].Truong_05_1 != UC_225_2.uC_225_Item2.txt_Truong_05_1.Text 
                         || DataUser2[1].Truong_05_2 != UC_225_2.uC_225_Item2.txt_Truong_05_2.Text 
+                        || DataUser2[1].Truong_07 != UC_225_2.uC_225_Item2.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[1].Truong_08 != UC_225_2.uC_225_Item2.txt_Truong_08.Text 
                         || DataUser2[1].Truong_09 != UC_225_2.uC_225_Item2.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[1].Truong_10 != UC_225_2.uC_225_Item2.txt_Truong_10.Text.Replace(",", "") 
@@ -2685,6 +2740,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[2].Truong_04_3 != UC_225_2.uC_225_Item3.txt_Truong_04_3.Text 
                         || DataUser2[2].Truong_05_1 != UC_225_2.uC_225_Item3.txt_Truong_05_1.Text 
                         || DataUser2[2].Truong_05_2 != UC_225_2.uC_225_Item3.txt_Truong_05_2.Text 
+                        || DataUser2[2].Truong_07 != UC_225_2.uC_225_Item3.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[2].Truong_08 != UC_225_2.uC_225_Item3.txt_Truong_08.Text 
                         || DataUser2[2].Truong_09 != UC_225_2.uC_225_Item3.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[2].Truong_10 != UC_225_2.uC_225_Item3.txt_Truong_10.Text.Replace(",", "") 
@@ -2717,6 +2773,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[3].Truong_04_3 != UC_225_2.uC_225_Item4.txt_Truong_04_3.Text 
                         || DataUser2[3].Truong_05_1 != UC_225_2.uC_225_Item4.txt_Truong_05_1.Text 
                         || DataUser2[3].Truong_05_2 != UC_225_2.uC_225_Item4.txt_Truong_05_2.Text 
+                        || DataUser2[3].Truong_07 != UC_225_2.uC_225_Item4.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[3].Truong_08 != UC_225_2.uC_225_Item4.txt_Truong_08.Text 
                         || DataUser2[3].Truong_09 != UC_225_2.uC_225_Item4.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[3].Truong_10 != UC_225_2.uC_225_Item4.txt_Truong_10.Text.Replace(",", "") 
@@ -2750,6 +2807,7 @@ namespace CLS_NatSu.MyForm
                         || DataUser2[4].Truong_04_3 != UC_225_2.uC_225_Item5.txt_Truong_04_3.Text 
                         || DataUser2[4].Truong_05_1 != UC_225_2.uC_225_Item5.txt_Truong_05_1.Text 
                         || DataUser2[4].Truong_05_2 != UC_225_2.uC_225_Item5.txt_Truong_05_2.Text 
+                        || DataUser2[4].Truong_07 != UC_225_2.uC_225_Item5.txt_Truong_07.Text.Replace(",", "")
                         || DataUser2[4].Truong_08 != UC_225_2.uC_225_Item5.txt_Truong_08.Text 
                         || DataUser2[4].Truong_09 != UC_225_2.uC_225_Item5.txt_Truong_09.Text.Replace(",", "") 
                         || DataUser2[4].Truong_10 != UC_225_2.uC_225_Item5.txt_Truong_10.Text.Replace(",", "") 
@@ -2788,9 +2846,10 @@ namespace CLS_NatSu.MyForm
                 }
                 else
                 {
-                    if (this.UC_2225_2.IsEmpty() && (MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                    if (this.UC_2225_2.IsEmpty())
                     {
-                        return;
+                        if((MessageBox.Show("Bạn đang để trống phiếu. Bạn muốn gửi phiếu không ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.No))
+                            return;
                     }
                     //--Check User 1
                     //Check phiếu 1
@@ -3170,13 +3229,13 @@ namespace CLS_NatSu.MyForm
                     }
                     if (this.fLagRefresh)
                     {
-                        this.UC_2225_2.Save2225_Check(this.fbatchRefresh, this.lb_Image.Text, this.txt_Truong_01_User1.Text,
+                        this.UC_2225_2.Save2225_Check(this.fbatchRefresh, this.lb_Image.Text, this.txt_Truong_01_User2.Text,
                                                     this.lb_User1.Text, flag_Phieu1_User1Sai, flag_Phieu2_User1Sai, flag_Phieu3_User1Sai, flag_Phieu4_User1Sai, flag_Phieu5_User1Sai,
                                                     this.lb_User2.Text, flag_Phieu1_User2Sai, flag_Phieu2_User2Sai, flag_Phieu3_User2Sai, flag_Phieu4_User2Sai, flag_Phieu5_User2Sai);
                     }
                     else
                     {
-                        this.UC_2225_2.Save2225_Check(this.cbb_Batch_Check.SelectedValue+"", this.lb_Image.Text, this.txt_Truong_01_User1.Text,
+                        this.UC_2225_2.Save2225_Check(this.cbb_Batch_Check.SelectedValue+"", this.lb_Image.Text, this.txt_Truong_01_User2.Text,
                                                     this.lb_User1.Text, flag_Phieu1_User1Sai, flag_Phieu2_User1Sai, flag_Phieu3_User1Sai, flag_Phieu4_User1Sai, flag_Phieu5_User1Sai,
                                                     this.lb_User2.Text, flag_Phieu1_User2Sai, flag_Phieu2_User2Sai, flag_Phieu3_User2Sai, flag_Phieu4_User2Sai, flag_Phieu5_User2Sai);
                     }
@@ -3277,6 +3336,8 @@ namespace CLS_NatSu.MyForm
                 t2.BackColor = Color.White;
                 t2.ForeColor = Color.Black;
             }
+            t1.Tag = t1.BackColor.Name;
+            t2.Tag = t2.BackColor.Name;
         }
         private void Compare_TextBox(TextEdit t1, TextEdit t2)
         {
@@ -3294,6 +3355,8 @@ namespace CLS_NatSu.MyForm
                 t2.BackColor = Color.White;
                 t2.ForeColor = Color.Black;
             }
+            t1.Tag = t1.BackColor.Name;
+            t2.Tag = t2.BackColor.Name;
         }
         public void CompareRichTextBox(RichTextBox t1, RichTextBox t2)
         {
@@ -3388,7 +3451,9 @@ namespace CLS_NatSu.MyForm
             ResetData();
             lb_Image.Text = temp.IDImage;
             fbatchRefresh = temp.BatchID;
-            uc_PictureBox1.LoadImage(Global.Webservice + fbatchRefresh + "/" + lb_Image.Text, lb_Image.Text, Settings.Default.ZoomImage);
+            string FolderRefresh = (from w in Global.Db.GetFolder(fbatchRefresh) select w.PathServer).FirstOrDefault();
+
+            uc_PictureBox1.LoadImage(Global.Webservice + FolderRefresh+ fbatchRefresh + "/" + lb_Image.Text, lb_Image.Text, Settings.Default.ZoomImage);
             Load_DeSo(fbatchRefresh, lb_Image.Text);
             VisibleButtonSave();
             fLagRefresh = true;
@@ -3411,25 +3476,25 @@ namespace CLS_NatSu.MyForm
         
         private void Tab_User1_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
         {
-            if ((this.Tab_User1.SelectedTabPage.Name == "tp_2225_User1") || (this.Tab_User2.SelectedTabPage.Name == "tp_2225_User2"))
+            if (this.Tab_User1.SelectedTabPage.Name == "tp_2225_User1")
             {
-                this.splitCheck.SplitterPosition = 680;
+                this.splitCheck.SplitterPosition = 665;
             }
             else
             {
-                this.splitCheck.SplitterPosition = 640;
+                this.splitCheck.SplitterPosition = 724;
             }
         }
         
         private void Tab_User2_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
         {
-            if ((this.Tab_User1.SelectedTabPage.Name == "tp_2225_User1") || (this.Tab_User2.SelectedTabPage.Name == "tp_2225_User2"))
+            if (this.Tab_User2.SelectedTabPage.Name == "tp_2225_User2")
             {
-                this.splitCheck.SplitterPosition = 680;
+                this.splitCheck.SplitterPosition = 665;
             }
             else
             {
-                this.splitCheck.SplitterPosition = 640;
+                this.splitCheck.SplitterPosition = 724;
             }
         }
         
@@ -3495,7 +3560,7 @@ namespace CLS_NatSu.MyForm
         
         private void txt_Truong_01_User1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.txt_Truong_01_User1.Text == "225")
+            if (this.txt_Truong_01_User1.Text == "225"|| this.txt_Truong_01_User1.Text == "221")
             {
                 this.Tab_User1.SelectedTabPage = this.tp_225_User1;
             }
@@ -3507,13 +3572,21 @@ namespace CLS_NatSu.MyForm
 
         private void txt_Truong_01_User2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.txt_Truong_01_User2.Text == "225")
+            if (this.txt_Truong_01_User2.Text == "225"|| this.txt_Truong_01_User2.Text == "221")
             {
                 this.Tab_User2.SelectedTabPage = this.tp_225_User2;
             }
             else
             {
                 this.Tab_User2.SelectedTabPage = this.tp_2225_User2;
+            }
+        }
+
+        private void frm_Checker_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control & e.KeyCode == Keys.Tab)
+            {
+                e.Handled = true;
             }
         }
     }

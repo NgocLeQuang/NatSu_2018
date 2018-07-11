@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions5 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ManagerBatch));
             this.btn_Xoa = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.BatchID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -45,7 +47,7 @@
             this.btn_xoabatch = new DevExpress.XtraEditors.SimpleButton();
             this.btn_TaoBatch = new DevExpress.XtraEditors.SimpleButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lb_Tong = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Xoa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -55,9 +57,9 @@
             // btn_Xoa
             // 
             this.btn_Xoa.AutoHeight = false;
-            editorButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions2.Image")));
+            editorButtonImageOptions5.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions5.Image")));
             this.btn_Xoa.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions2, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
+            new DevExpress.XtraEditors.Controls.EditorButton(editorButtonImageOptions5, DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, null)});
             this.btn_Xoa.Name = "btn_Xoa";
             this.btn_Xoa.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btn_Xoa.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btn_Xoa_ButtonClick);
@@ -80,6 +82,7 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.BatchID,
             this.gridColumn2,
+            this.gridColumn9,
             this.gridColumn10,
             this.gridColumn1,
             this.gridColumn5,
@@ -97,6 +100,7 @@
             this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView1_CustomDrawRowIndicator);
+            this.gridView1.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridView1_SelectionChanged);
             this.gridView1.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView1_CellValueChanging);
             // 
             // BatchID
@@ -113,16 +117,37 @@
             this.gridColumn2.OptionsColumn.ReadOnly = true;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
-            this.gridColumn2.Width = 139;
+            this.gridColumn2.Width = 141;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "Folder server";
+            this.gridColumn9.FieldName = "PathServer";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.ReadOnly = true;
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 4;
+            this.gridColumn9.Width = 71;
             // 
             // gridColumn10
             // 
             this.gridColumn10.Caption = "Folder Location";
             this.gridColumn10.FieldName = "Location";
             this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.OptionsColumn.ReadOnly = true;
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
-            this.gridColumn10.Width = 103;
+            this.gridColumn10.VisibleIndex = 5;
+            this.gridColumn10.Width = 85;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Folder";
+            this.gridColumn1.FieldName = "PathPicture";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.ReadOnly = true;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 3;
+            this.gridColumn1.Width = 86;
             // 
             // gridColumn5
             // 
@@ -133,8 +158,8 @@
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.OptionsColumn.ReadOnly = true;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
-            this.gridColumn5.Width = 106;
+            this.gridColumn5.VisibleIndex = 2;
+            this.gridColumn5.Width = 98;
             // 
             // gridColumn3
             // 
@@ -154,7 +179,7 @@
             this.gridColumn4.OptionsColumn.ReadOnly = true;
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 7;
-            this.gridColumn4.Width = 71;
+            this.gridColumn4.Width = 72;
             // 
             // gridColumn6
             // 
@@ -180,8 +205,8 @@
             this.gridColumn7.ColumnEdit = this.btn_Xoa;
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 9;
-            this.gridColumn7.Width = 68;
+            this.gridColumn7.VisibleIndex = 10;
+            this.gridColumn7.Width = 100;
             // 
             // btn_xoabatch
             // 
@@ -209,6 +234,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lb_Tong);
             this.panel1.Controls.Add(this.btn_xoabatch);
             this.panel1.Controls.Add(this.btn_TaoBatch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -217,13 +243,15 @@
             this.panel1.Size = new System.Drawing.Size(947, 35);
             this.panel1.TabIndex = 4;
             // 
-            // gridColumn1
+            // lb_Tong
             // 
-            this.gridColumn1.Caption = "Folder";
-            this.gridColumn1.FieldName = "PathPicture";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 2;
+            this.lb_Tong.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Tong.Appearance.Options.UseFont = true;
+            this.lb_Tong.Location = new System.Drawing.Point(12, 12);
+            this.lb_Tong.Name = "lb_Tong";
+            this.lb_Tong.Size = new System.Drawing.Size(75, 16);
+            this.lb_Tong.TabIndex = 2;
+            this.lb_Tong.Text = "labelControl1";
             // 
             // frm_ManagerBatch
             // 
@@ -242,6 +270,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -264,5 +293,7 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraEditors.LabelControl lb_Tong;
     }
 }

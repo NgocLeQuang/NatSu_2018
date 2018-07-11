@@ -32,6 +32,7 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lb_BatchName = new DevExpress.XtraEditors.LabelControl();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_path = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -42,7 +43,6 @@
             this.Batch = new DevExpress.XtraTab.XtraTabPage();
             this.list_Batch = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.lb_BatchName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -77,6 +77,16 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1105, 95);
             this.panelControl1.TabIndex = 4;
+            // 
+            // lb_BatchName
+            // 
+            this.lb_BatchName.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_BatchName.Appearance.Options.UseFont = true;
+            this.lb_BatchName.Location = new System.Drawing.Point(33, 40);
+            this.lb_BatchName.Name = "lb_BatchName";
+            this.lb_BatchName.Size = new System.Drawing.Size(68, 16);
+            this.lb_BatchName.TabIndex = 9;
+            this.lb_BatchName.Text = "Batch Name";
             // 
             // label1
             // 
@@ -166,16 +176,6 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // lb_BatchName
-            // 
-            this.lb_BatchName.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_BatchName.Appearance.Options.UseFont = true;
-            this.lb_BatchName.Location = new System.Drawing.Point(33, 40);
-            this.lb_BatchName.Name = "lb_BatchName";
-            this.lb_BatchName.Size = new System.Drawing.Size(68, 16);
-            this.lb_BatchName.TabIndex = 9;
-            this.lb_BatchName.Text = "Batch Name";
             // 
             // frm_ExportExcel
             // 

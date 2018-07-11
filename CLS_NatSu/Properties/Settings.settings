@@ -5,10 +5,10 @@
     <Setting Name="DatabaseDataEntryBPOConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=192.168.165.10;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;User ID=sa;Password=BPO@DN#2013&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.165.10;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;User ID=NatSu_2018;Password=123@123a&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=192.168.165.10;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;User ID=sa;Password=BPO@DN#2013</Value>
+      <Value Profile="(Default)">Data Source=192.168.165.10;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;User ID=NatSu_2018;Password=123@123a</Value>
     </Setting>
     <Setting Name="Server" Type="System.String" Scope="User">
       <Value Profile="(Default)">DaNang</Value>
@@ -40,13 +40,24 @@
     <Setting Name="NatSu_2018ConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=sa;Password=BPO@DN#2013&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=NatSu_2018;Password=123@123a&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=sa;Password=BPO@DN#2013</Value>
+      <Value Profile="(Default)">Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=NatSu_2018;Password=123@123a</Value>
     </Setting>
     <Setting Name="FocusFolder_UpBatch" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FolderExcel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="NatSu_2018ConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=sa&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=sa</Value>
     </Setting>
   </Settings>
 </SettingsFile>

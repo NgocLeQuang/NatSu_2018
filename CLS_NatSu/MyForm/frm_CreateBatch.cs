@@ -51,7 +51,8 @@ namespace CLS_NatSu.MyForm
             {
                 _lFileNames = dlg.FileNames;
                 txt_ImagePath.Text = Path.GetDirectoryName(dlg.FileName);
-            }soluonghinh = 0;
+            }
+            soluonghinh = 0;
             soluonghinh = dlg.FileNames.Length;
             lb_SoLuongHinh.Text = dlg.FileNames.Length + " files ";
         }
@@ -66,7 +67,7 @@ namespace CLS_NatSu.MyForm
             lb_SobatchHoanThanh.Text = "";
             txt_DateCreate.Text = DateTime.Now.ToShortDateString() + "-" + DateTime.Now.ToShortTimeString();
             backgroundWorker1.RunWorkerAsync();
-            //UpLoadMulti_5Folder();
+            //UpLoadMulti_3Folder();
         }
 
         private void txt_BatchName_EditValueChanged(object sender, EventArgs e)
@@ -119,7 +120,7 @@ namespace CLS_NatSu.MyForm
             chk_ChiaUser.Checked = true;
             txt_UserCreate.Text = Global.StrUserName;
             txt_DateCreate.Text = DateTime.Now.ToShortDateString() + "-" + DateTime.Now.ToShortTimeString();
-            
+            txt_Path.Text = @"X:\N\13";
             flag_load = false;
             txt_BatchName.Focus();
         }
@@ -138,6 +139,11 @@ namespace CLS_NatSu.MyForm
         string[] separators = { @"\", "/" };
         private void UpLoadSingle()
         {
+            if (txt_Path.Text == @"X:\N\13")
+            {
+                MessageBox.Show("Bạn đang để đường dẫn path mặc định. Vui lòng kiểm tra lại.");
+                return;
+            }
             progressBar1.Step = 1;
             progressBar1.Value = 1;
             progressBar1.Maximum = _lFileNames.Length;
@@ -156,6 +162,7 @@ namespace CLS_NatSu.MyForm
                         BatchName = txt_BatchName.Text,
                         UserCreate = txt_UserCreate.Text,
                         DateCreate = DateTime.Now,
+                        PathServer = "",
                         PathPicture = txt_Path.Text,
                         Location = txt_ImagePath.Text,
                         NumberImage = soluonghinh.ToString(),
@@ -215,7 +222,7 @@ namespace CLS_NatSu.MyForm
             MessageBox.Show("Tạo batch mới thành công!");
             txt_BatchName.Text = "";
             txt_ImagePath.Text = "";
-            txt_Path.Text = "";
+            txt_Path.Text = @"X:\N\13";
             lb_SoLuongHinh.Text = "";
         }
         string sBatchID = "", batch="";
@@ -268,6 +275,7 @@ namespace CLS_NatSu.MyForm
                         BatchName = new DirectoryInfo(itemBatch).Name,
                         UserCreate = txt_UserCreate.Text,
                         DateCreate = DateTime.Now,
+                        PathServer = "",
                         PathPicture = txt_Path.Text,
                         Location = txt_PathFolder.Text,
                         NumberImage = pathImageLocation.Length + "",
@@ -323,7 +331,7 @@ namespace CLS_NatSu.MyForm
                 txt_ImagePath.Text = "";
                 lb_SoLuongHinh.Text = "";
                 txt_PathFolder.Text = "";
-                txt_Path.Text = "";
+                txt_Path.Text = @"X:\N\13";
                 //btn_CreateBatch.Enabled = true;
                 btn_Browser.Enabled = true;
                 txt_PathFolder.Enabled = true;
@@ -339,6 +347,109 @@ namespace CLS_NatSu.MyForm
                 Directory.CreateDirectory(temp);
             }
         }
+        private void UpLoadMulti_3Folder()
+        {
+            List<string> lStrBath1 = new List<string>();
+            List<string> lStrBath2 = new List<string>();
+            lStrBath1.AddRange(Directory.GetDirectories(txt_PathFolder.Text));
+            int total = lStrBath1.Count;
+            string pathserver = @"\" + new DirectoryInfo(txt_PathFolder.Text).Name;
+            string pathexcel = @"X:\N\13";
+            string s = new DirectoryInfo(txt_PathFolder.Text).Name;
+            createFolder(s);
+            int n = 0;
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new[] { new DataColumn("ImageID", typeof(string))});
+            foreach (string item1 in lStrBath1)
+            {
+                string pathexcel1 = pathexcel+ @"\" + new DirectoryInfo(item1).Name;
+                lStrBath2.Clear();
+                lStrBath2.AddRange(Directory.GetDirectories(item1));
+                if (lStrBath2.Count > 0)
+                {
+                    string batchID = (new DirectoryInfo(new DirectoryInfo(item1).Name).Name + txt_DateCreate.Text).Replace("/", "").Replace(@"\", "").Replace(@":", "").Replace(@"-", "");
+                    bool BatchNew = false;
+                    foreach (string item2 in lStrBath2)
+                    {
+                        string pathexcel2 = pathexcel1 + @"\" + new DirectoryInfo(item2).Name;
+                        dt.Clear();
+                        int m = 0;
+                        n += 1;
+                        lb_SobatchHoanThanh.Text = n + @" :";
+                        var filters = new String[] { "jpg", "jpeg", "tif" };
+                        string[] pathImageLocation = GetFilesFrom(item2, filters, true);
+                        if (!BatchNew)
+                        {
+                            BatchNew = true;
+                            var fBatch = new tbl_Batch
+                            {
+                                BatchID = batchID,
+                                BatchName = new DirectoryInfo(item1).Name,
+                                UserCreate = txt_UserCreate.Text,
+                                DateCreate = DateTime.Now,
+                                PathServer = pathserver+ @"\",
+                                PathPicture = pathexcel + @"\" + new DirectoryInfo(item1).Name + @"\" + new DirectoryInfo(item2).Name,
+                                Location = txt_PathFolder.Text,
+                                NumberImage = pathImageLocation.Length + "",
+                                ChiaUser = chk_ChiaUser.Checked ? true : false,
+                                CongKhaiBatch = false,
+                            };
+                            Global.Db.tbl_Batches.InsertOnSubmit(fBatch);
+                            Global.Db.SubmitChanges();
+                        }
+                        progressBar1.Step = 1;
+                        progressBar1.Value = 1;
+                        progressBar1.Maximum = pathImageLocation.Count();
+                        progressBar1.Minimum = 0;
+                        ModifyProgressBarColor.SetState(progressBar1, 1);
+                        for (int j = 0; j < pathImageLocation.Count(); j++)
+                        {
+                            FileInfo fi = new FileInfo(pathImageLocation[j]);
+                            dt.Rows.Add(fi.Name);
+                        }
+                        string ConnectionString = Global.Db.Connection.ConnectionString;
+                        SqlConnection con = new SqlConnection(ConnectionString);
+                        con.Open();
+                        SqlCommand cmd = new SqlCommand("Insert_Image", con);
+                        cmd.CommandTimeout = 10 * 60;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@BatchID", batchID);
+                        cmd.Parameters.AddWithValue("@ListIdImage", dt);
+                        cmd.Parameters.AddWithValue("@ChiaUser", chk_ChiaUser.Checked ? 1 : 0);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        string temp = Global.StrPath + "\\" + pathserver + "\\" + batchID;
+                        if (!Directory.Exists(temp))
+                        {
+                            Directory.CreateDirectory(temp);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Bị trùng tên batch!");
+                            return;
+                        }
+                        for (int j = 0; j < pathImageLocation.Count(); j++)
+                        {
+                            File.Copy(pathImageLocation[j], temp + @"\" + new FileInfo(pathImageLocation[j]).Name);
+                            lb_SoImageDaHoanThanh.Text = (j + 1) + @"\" + pathImageLocation.Count();
+                            m += 1;
+                            progressBar1.PerformStep();
+                        }
+                        lb_SoImageDaHoanThanh.Text = m + @"/" + pathImageLocation.Length;
+                    }
+                }
+            }
+            MessageBox.Show(@"Tạo batch mới thành công!");
+            txt_BatchName.Text = "";
+            txt_ImagePath.Text = "";
+            lb_SoLuongHinh.Text = "";
+            txt_PathFolder.Text = "";
+            txt_Path.Text = @"X:\N\13";
+            btn_Browser.Enabled = true;
+            txt_PathFolder.Enabled = true;
+            txt_Path.Enabled = true;
+        }
+
         private void UpLoadMulti_5Folder()
         {
             List<string> lStrBath1 = new List<string>();
@@ -348,7 +459,8 @@ namespace CLS_NatSu.MyForm
             lStrBath1.AddRange(Directory.GetDirectories(txt_PathFolder.Text));
             int k = 0;
             int total = lStrBath1.Count;
-            string pathexcel = @"X:\" + new DirectoryInfo(txt_PathFolder.Text).Name;
+            string pathserver = @"\"+new DirectoryInfo(txt_PathFolder.Text).Name;
+            string pathexcel = @"X:";
             string s = new DirectoryInfo(txt_PathFolder.Text).Name;
             createFolder(s);
             int n = 0;
@@ -356,7 +468,7 @@ namespace CLS_NatSu.MyForm
             dt.Columns.AddRange(new[] { new DataColumn("ImageID", typeof(string)) });
             foreach (string item1 in lStrBath1)
             {
-                string pathexcel1 = pathexcel + @"\" + new DirectoryInfo(item1).Name;
+                string pathserver1 = pathserver + @"\" + new DirectoryInfo(item1).Name;
                 string litem1 = s + @"\" + new DirectoryInfo(item1).Name;
                 createFolder(litem1);
                 lStrBath2.Clear();
@@ -373,7 +485,7 @@ namespace CLS_NatSu.MyForm
                         {
                             foreach (string item3 in lStrBath3)
                             {
-                                string pathexcel2 = pathexcel1 + @"\" + new DirectoryInfo(item3).Name;
+                                string pathserver2 = pathserver1 + @"\" + new DirectoryInfo(item3).Name;
                                 string litem3 = litem2 + @"\" + new DirectoryInfo(item3).Name;
                                 createFolder(litem3);
                                 lStrBath4.Clear();
@@ -386,7 +498,7 @@ namespace CLS_NatSu.MyForm
                                         if (true/*FolderNameTemp.Substring(0, 7) == "2225000"*/)
                                         {
                                             string batchID  = (new DirectoryInfo(lStrBath4[i]).Name + txt_DateCreate.Text).Replace("/", "").Replace(@"\", "").Replace(@":", "").Replace(@"-", "");
-                                            string pathexcel3 = pathexcel2 + @"\" + new DirectoryInfo(lStrBath4[i]).Name + @"\";
+                                            string pathserver3 = pathserver2 + @"\" + new DirectoryInfo(lStrBath4[i]).Name + @"\";
                                             string litem4 = litem3 + @"\" + batchID;
                                             dt.Clear();
                                             int m = 0;
@@ -401,7 +513,8 @@ namespace CLS_NatSu.MyForm
                                                 BatchName = new DirectoryInfo(lStrBath4[i]).Name,
                                                 UserCreate = txt_UserCreate.Text,
                                                 DateCreate = DateTime.Now,
-                                                PathPicture = pathexcel3,
+                                                PathServer= pathserver1 + @"\" + new DirectoryInfo(item2).Name + @"\" + new DirectoryInfo(item3).Name+@"\",
+                                                PathPicture = pathexcel+pathserver3,
                                                 Location = txt_PathFolder.Text,
                                                 NumberImage = pathImageLocation.Length + "",
                                                 ChiaUser = chk_ChiaUser.Checked ? true : false,
@@ -463,7 +576,7 @@ namespace CLS_NatSu.MyForm
             txt_ImagePath.Text = "";
             lb_SoLuongHinh.Text = "";
             txt_PathFolder.Text = "";
-            txt_Path.Text = "";
+            txt_Path.Text = @"X:\N\13";
             btn_Browser.Enabled = true;
             txt_PathFolder.Enabled = true;
             txt_Path.Enabled = true;
@@ -478,7 +591,7 @@ namespace CLS_NatSu.MyForm
                 //label1.Visible = true;
                 //lb_SobatchHoanThanh.Visible = true;
                 //lb_SoImageDaHoanThanh.Visible = true;
-                UpLoadMulti();
+                UpLoadMulti_3Folder();
             }
             else
             {

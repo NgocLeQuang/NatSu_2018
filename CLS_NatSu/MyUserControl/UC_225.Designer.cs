@@ -146,7 +146,7 @@
             this.uC_225_Item5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.uC_225_Item5.Location = new System.Drawing.Point(2, 500);
             this.uC_225_Item5.Name = "uC_225_Item5";
-            this.uC_225_Item5.Size = new System.Drawing.Size(605, 122);
+            this.uC_225_Item5.Size = new System.Drawing.Size(709, 122);
             this.uC_225_Item5.TabIndex = 4;
             // 
             // uC_225_Item4
@@ -154,7 +154,7 @@
             this.uC_225_Item4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.uC_225_Item4.Location = new System.Drawing.Point(2, 375);
             this.uC_225_Item4.Name = "uC_225_Item4";
-            this.uC_225_Item4.Size = new System.Drawing.Size(605, 122);
+            this.uC_225_Item4.Size = new System.Drawing.Size(709, 122);
             this.uC_225_Item4.TabIndex = 3;
             // 
             // uC_225_Item3
@@ -162,7 +162,7 @@
             this.uC_225_Item3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.uC_225_Item3.Location = new System.Drawing.Point(2, 251);
             this.uC_225_Item3.Name = "uC_225_Item3";
-            this.uC_225_Item3.Size = new System.Drawing.Size(605, 122);
+            this.uC_225_Item3.Size = new System.Drawing.Size(709, 122);
             this.uC_225_Item3.TabIndex = 2;
             // 
             // uC_225_Item2
@@ -170,7 +170,7 @@
             this.uC_225_Item2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.uC_225_Item2.Location = new System.Drawing.Point(2, 127);
             this.uC_225_Item2.Name = "uC_225_Item2";
-            this.uC_225_Item2.Size = new System.Drawing.Size(605, 122);
+            this.uC_225_Item2.Size = new System.Drawing.Size(709, 122);
             this.uC_225_Item2.TabIndex = 1;
             // 
             // uC_225_Item1
@@ -178,7 +178,7 @@
             this.uC_225_Item1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.uC_225_Item1.Location = new System.Drawing.Point(2, 3);
             this.uC_225_Item1.Name = "uC_225_Item1";
-            this.uC_225_Item1.Size = new System.Drawing.Size(605, 122);
+            this.uC_225_Item1.Size = new System.Drawing.Size(709, 122);
             this.uC_225_Item1.TabIndex = 0;
             // 
             // UC_225
@@ -201,7 +201,7 @@
             this.Controls.Add(this.uC_225_Item2);
             this.Controls.Add(this.uC_225_Item1);
             this.Name = "UC_225";
-            this.Size = new System.Drawing.Size(610, 665);
+            this.Size = new System.Drawing.Size(713, 665);
             this.Load += new System.EventHandler(this.UC_225_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_Flag.Properties)).EndInit();
             this.ResumeLayout(false);

@@ -40,11 +40,11 @@ namespace CLS_NatSu.MyForm
             GridHitInfo info = view.CalcHitInfo(pt);
             if (info.RowHandle < 0)
                 return;
-            //ShowImage showwImage = new ShowImage();
-            //showwImage.BatchName = gridView1.GetRowCellValue(info.RowHandle, "BatchName") + "";
-            //showwImage.BatchID = gridView1.GetRowCellValue(info.RowHandle, "BatchID") + "";
-            //showwImage.IdImage = gridView1.GetRowCellValue(info.RowHandle, "IDImage") + "";
-            //showwImage.ShowDialog();
+            ShowImage showwImage = new ShowImage();
+            showwImage.BatchName = gridView1.GetRowCellValue(info.RowHandle, "BatchName") + "";
+            showwImage.BatchID = gridView1.GetRowCellValue(info.RowHandle, "BatchID") + "";
+            showwImage.IdImage = gridView1.GetRowCellValue(info.RowHandle, "IDImage") + "";
+            showwImage.ShowDialog();
             Global.StrCheck = "";
         }
         private void gridView1_DoubleClick(object sender, EventArgs e)

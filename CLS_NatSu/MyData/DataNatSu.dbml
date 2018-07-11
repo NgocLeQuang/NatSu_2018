@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NatSu_2018" Class="DataNatSuDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=sa" SettingsObjectName="CLS_NatSu.Properties.Settings" SettingsPropertyName="NatSu_2018ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;User ID=sa" SettingsObjectName="CLS_NatSu.Properties.Settings" SettingsPropertyName="NatSu_2018ConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_DeSo" Member="tbl_DeSos">
     <Type Name="tbl_DeSo">
       <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -60,19 +60,6 @@
       <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_Batch" Member="tbl_Batches">
-    <Type Name="tbl_Batch">
-      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="BatchName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="UserCreate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PathPicture" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NumberImage" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ChiaUser" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CongKhaiBatch" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_MissCheck_DeSo" Member="tbl_MissCheck_DeSos">
     <Type Name="tbl_MissCheck_DeSo">
       <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -96,6 +83,30 @@
       <Column Name="End_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_Batch" Member="tbl_Batches">
+    <Type Name="tbl_Batch">
+      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BatchName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserCreate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PathServer" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PathPicture" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NumberImage" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ChiaUser" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CongKhaiBatch" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_MissLastCheck" Member="tbl_MissLastChecks">
+    <Type Name="tbl_MissLastCheck">
+      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IDImage" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Submit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Start_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="End_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.UpdateBatchChiaUser" Method="UpdateBatchChiaUser">
     <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(100)" />
     <Parameter Name="status" Type="System.Int32" DbType="Int" />
@@ -109,19 +120,6 @@
   <Function Name="dbo.XoaBatch" Method="XoaBatch">
     <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.GetBatch" Method="GetBatch">
-    <ElementType Name="GetBatchResult">
-      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="BatchName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="UserCreate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PathPicture" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NumberImage" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ChiaUser" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CongKhaiBatch" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </ElementType>
   </Function>
   <Function Name="dbo.CheckBatchChiaUser" Method="CheckBatchChiaUser">
     <Parameter Name="Batch" Parameter="batch" Type="System.String" DbType="NVarChar(255)" />
@@ -521,19 +519,6 @@
       <Column Name="IDImage" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.GetBatchCongKhai" Method="GetBatchCongKhai">
-    <ElementType Name="GetBatchCongKhaiResult">
-      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="BatchName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="UserCreate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PathPicture" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NumberImage" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ChiaUser" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CongKhaiBatch" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.GetImage_ShowImageCheck" Method="GetImage_ShowImageCheck">
     <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
     <Parameter Name="User" Parameter="user" Type="System.String" DbType="NVarChar(255)" />
@@ -674,6 +659,129 @@
     <Parameter Name="idimage" Type="System.String" DbType="NVarChar(255)" />
     <ElementType Name="ChiTietUserResult">
       <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetBatch" Method="GetBatch">
+    <ElementType Name="GetBatchResult">
+      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="BatchName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserCreate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PathServer" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PathPicture" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NumberImage" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ChiaUser" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CongKhaiBatch" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetBatchCongKhai" Method="GetBatchCongKhai">
+    <ElementType Name="GetBatchCongKhaiResult">
+      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="BatchName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserCreate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PathServer" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PathPicture" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NumberImage" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ChiaUser" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CongKhaiBatch" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetFolder" Method="GetFolder">
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="GetFolderResult">
+      <Column Name="PathServer" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.KiemTraImageSubmitCungThoiGian" Method="KiemTraImageSubmitCungThoiGian">
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetBatchLastcheckTruong19" Method="GetBatchLastcheckTruong19">
+    <Parameter Name="username" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="GetBatchLastcheckTruong19Result">
+      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="BatchName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetImageLastCheck" Method="GetImageLastCheck">
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="GetImageLastCheckResult">
+      <Column Name="" Member="Column1" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetDataLastCheck" Method="GetDataLastCheck">
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="IDImage" Parameter="iDImage" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="GetDataLastCheckResult">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IDImage" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Truong_01" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_02" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_03" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_04_1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_04_2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_04_3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_05_1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_05_2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_06" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_07" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_08" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_09" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_10" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_11" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_12" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_13" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_14" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_15" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_16" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_17" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_18" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_19" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_20" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_21" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_22" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_23" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_24" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_25" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_26" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Truong_Flag" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="IDPhieu" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Dem" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Error" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="True" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Phase" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="DateInput" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Insert_LastCheckTruong19" Method="Insert_LastCheckTruong19">
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="IdImage" Parameter="idImage" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="UserNameCheck" Parameter="userNameCheck" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="Truong_19_1" Parameter="truong_19_1" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Truong_19_2" Parameter="truong_19_2" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Truong_19_3" Parameter="truong_19_3" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Truong_19_4" Parameter="truong_19_4" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="Truong_19_5" Parameter="truong_19_5" Type="System.String" DbType="NVarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.KiemTraLastcheck" Method="KiemTraLastcheck">
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="KiemTraLastcheckResult">
+      <Column Name="BatchID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IDImage" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetSoLoiLastCheck" Method="GetSoLoiLastCheck">
+    <Parameter Name="BatchID" Parameter="batchID" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(255)" />
+    <ElementType Name="GetSoLoiLastCheckResult">
+      <Column Name="CountImage" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

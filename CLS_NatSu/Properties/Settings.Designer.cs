@@ -27,7 +27,7 @@ namespace CLS_NatSu.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.165.10;Initial Catalog=DatabaseDataEntryBPO;Persist Security " +
-            "Info=True;User ID=sa;Password=BPO@DN#2013")]
+            "Info=True;User ID=NatSu_2018;Password=123@123a")]
         public string DatabaseDataEntryBPOConnectionString {
             get {
                 return ((string)(this["DatabaseDataEntryBPOConnectionString"]));
@@ -146,7 +146,7 @@ namespace CLS_NatSu.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;" +
-            "User ID=sa;Password=BPO@DN#2013")]
+            "User ID=NatSu_2018;Password=123@123a")]
         public string NatSu_2018ConnectionString {
             get {
                 return ((string)(this["NatSu_2018ConnectionString"]));
@@ -162,6 +162,29 @@ namespace CLS_NatSu.Properties {
             }
             set {
                 this["FocusFolder_UpBatch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FolderExcel {
+            get {
+                return ((string)(this["FolderExcel"]));
+            }
+            set {
+                this["FolderExcel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.165.10;Initial Catalog=NatSu_2018;Persist Security Info=True;" +
+            "User ID=sa")]
+        public string NatSu_2018ConnectionString1 {
+            get {
+                return ((string)(this["NatSu_2018ConnectionString1"]));
             }
         }
     }

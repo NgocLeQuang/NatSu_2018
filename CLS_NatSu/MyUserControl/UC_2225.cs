@@ -13,6 +13,7 @@ namespace CLS_NatSu.MyUserControl
 {
     public partial class UC_2225 : UserControl
     {
+        public event Focus_Text FocusTXT;
         public event AllTextChange Changed;
         public UC_2225()
         {
@@ -51,11 +52,217 @@ namespace CLS_NatSu.MyUserControl
             uC_2225_Item3.Changed += UcNatsu_Changed;
             uC_2225_Item4.Changed += UcNatsu_Changed;
             uC_2225_Item5.Changed += UcNatsu_Changed;
+            if (!Global.FlagLoadDeSo)
+                return;
+            uC_2225_Item1.txt_Truong_02.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_03.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_04_1.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_04_2.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_04_3.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_05_1.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_05_2.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_06.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_07.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_08.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_09.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_10.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_11.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_12.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_13.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_14.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_15.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_16.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_17.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_18.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_19.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_20.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_21.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_22.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_23.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_24.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_25.GotFocus += Txt_GotFocus_Phieu1;
+            uC_2225_Item1.txt_Truong_26.GotFocus += Txt_GotFocus_Phieu1;
+
+            uC_2225_Item2.txt_Truong_02.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_03.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_04_1.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_04_2.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_04_3.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_05_1.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_05_2.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_06.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_07.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_08.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_09.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_10.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_11.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_12.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_13.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_14.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_15.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_16.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_17.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_18.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_19.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_20.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_21.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_22.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_23.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_24.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_25.GotFocus += Txt_GotFocus_Phieu2;
+            uC_2225_Item2.txt_Truong_26.GotFocus += Txt_GotFocus_Phieu2;
+
+            uC_2225_Item3.txt_Truong_02.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_03.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_04_1.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_04_2.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_04_3.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_05_1.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_05_2.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_06.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_07.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_08.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_09.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_10.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_11.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_12.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_13.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_14.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_15.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_16.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_17.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_18.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_19.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_20.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_21.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_22.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_23.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_24.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_25.GotFocus += Txt_GotFocus_Phieu3;
+            uC_2225_Item3.txt_Truong_26.GotFocus += Txt_GotFocus_Phieu3;
+
+            uC_2225_Item4.txt_Truong_02.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_03.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_04_1.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_04_2.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_04_3.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_05_1.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_05_2.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_06.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_07.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_08.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_09.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_10.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_11.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_12.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_13.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_14.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_15.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_16.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_17.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_18.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_19.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_20.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_21.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_22.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_23.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_24.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_25.GotFocus += Txt_GotFocus_Phieu4;
+            uC_2225_Item4.txt_Truong_26.GotFocus += Txt_GotFocus_Phieu4;
+
+            uC_2225_Item5.txt_Truong_02.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_03.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_04_1.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_04_2.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_04_3.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_05_1.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_05_2.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_06.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_07.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_08.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_09.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_10.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_11.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_12.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_13.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_14.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_15.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_16.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_17.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_18.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_19.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_20.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_21.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_22.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_23.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_24.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_25.GotFocus += Txt_GotFocus_Phieu5;
+            uC_2225_Item5.txt_Truong_26.GotFocus += Txt_GotFocus_Phieu5;
+            txt_Truong_Flag.GotFocus += Txt_GotFocus_Flag;
         }
 
         private void UcNatsu_Changed(object sender, EventArgs e)
         {
             Changed?.Invoke(sender, e);
+        }
+        private void Txt_GotFocus_Phieu1(object sender, EventArgs e)
+        {
+            FocusTXT(uC_2225_Item1, sender);
+        }
+
+        private void Txt_GotFocus_Phieu2(object sender, EventArgs e)
+        {
+            FocusTXT(uC_2225_Item2, sender);
+        }
+
+        private void Txt_GotFocus_Phieu3(object sender, EventArgs e)
+        {
+            FocusTXT(uC_2225_Item3, sender);
+        }
+
+        private void Txt_GotFocus_Phieu4(object sender, EventArgs e)
+        {
+            FocusTXT(uC_2225_Item4, sender);
+        }
+
+        private void Txt_GotFocus_Phieu5(object sender, EventArgs e)
+        {
+            FocusTXT(uC_2225_Item5, sender);
+        }
+        private void Txt_GotFocus_Flag(object sender, EventArgs e)
+        {
+            FocusTXT(null, sender);
+        }
+        public void SetFocus(object IDPhieu, object Text)
+        {
+            if (IDPhieu == null)
+            {
+                ((TextEdit)Text).Focus();
+            }
+            else if (IDPhieu != "")
+            {
+                UC_2225_Item temp = (UC_2225_Item)IDPhieu;
+                if (temp.Name == "uC_2225_Item1")
+                {
+                    uC_2225_Item1.SetFocusItem(Text);
+                }
+                else if (temp.Name == "uC_2225_Item2")
+                {
+                    uC_2225_Item2.SetFocusItem(Text);
+                }
+                else if (temp.Name == "uC_2225_Item3")
+                {
+                    uC_2225_Item3.SetFocusItem(Text);
+                }
+                else if (temp.Name == "uC_2225_Item4")
+                {
+                    uC_2225_Item4.SetFocusItem(Text);
+                }
+                else if (temp.Name == "uC_2225_Item5")
+                {
+                    uC_2225_Item5.SetFocusItem(Text);
+                }
+            }
         }
         public void Save2225(string BatchID,string Image,string Truong_01)
         {

@@ -6,8 +6,10 @@ using System.Windows.Forms;
 
 namespace CLS_NatSu.MyUserControl
 {
+    public delegate void MouseUp_Image(object sender, EventArgs e);
     public partial class uc_PictureBox : UserControl
     {
+        public event MouseUp_Image MouseUpImage;
         Image temp_ ;
         public int iZoomMinimum = 10;
         public int iZoomMax = 500;
@@ -69,12 +71,12 @@ namespace CLS_NatSu.MyUserControl
         {
             imageBox1.AllowZoom = true;
         }
-
         private void imageBox1_MouseLeave(object sender, EventArgs e)
         {
             imageBox1.AllowZoom = false;
+            MouseUpImage?.Invoke(sender, e);
         }
-
+        
         public void btn_Xoaytrai_Click(object sender, EventArgs e)
         {
            // MessageBox.Show(trackBar_Ngang.Value.ToString() + "/" + trackBar_Doc.Value.ToString());

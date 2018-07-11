@@ -62,9 +62,52 @@ namespace CLS_NatSu.MyForm
                     Global.Server = "Khac";
                     Global.Webservice = "http://101.99.53.121:3602/NatSu/";
                     Global.Webservice_Update = "http://101.99.53.121:3602/Update/Natsu2018/";
+                    
                     Global.Db = new DataNatSuDataContext(@"Data Source=http://101.99.53.121,3609;Initial Catalog=NatSu_2018;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
                     Global.Db.CommandTimeout = 15 * 60; // 5 Mins
                     Global.DbBpo = new DataBPODataContext(@"Data Source=http://101.99.53.121,3609;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                    try
+                    {
+                        Global.Db.Connection.Open();
+                        //if(Global.Db.Connection.State!=System.Data.ConnectionState.Open)
+                        //{
+                        //    Global.Webservice = "http://118.69.176.36:3602/NatSu/";
+                        //    Global.Webservice_Update = "http://118.69.176.36:3602/Update/Natsu2018/";
+                        //    Global.Db = new DataNatSuDataContext(@"Data Source=118.69.176.36,3609;Initial Catalog=NatSu_2018;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                        //    Global.Db.CommandTimeout = 15 * 60; // 5 Mins
+                        //    Global.DbBpo = new DataBPODataContext(@"Data Source=118.69.176.36,3609;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                        //}
+                        Global.Db.Connection.Close();
+                    }
+                    catch
+                    {
+                        //try
+                        //{
+                        //    Global.Webservice = "http://118.69.176.36:3602/NatSu/";
+                        //    Global.Webservice_Update = "http://118.69.176.36:3602/Update/Natsu2018/";
+                        //    Global.Db = new DataNatSuDataContext(@"Data Source=118.69.176.36,3609;Initial Catalog=NatSu_2018;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                        //    Global.Db.CommandTimeout = 15 * 60; // 5 Mins
+                        //    Global.DbBpo = new DataBPODataContext(@"Data Source=118.69.176.36,3609;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                        //    Global.Db.Connection.Open();
+                        //    if (Global.Db.Connection.State != System.Data.ConnectionState.Open)
+                        //    {
+                        //        Global.Webservice = "http://117.2.142.10:3602/NatSu/";
+                        //        Global.Webservice_Update = "http://117.2.142.10:3602/Update/Natsu2018/";
+                        //        Global.Db = new DataNatSuDataContext(@"Data Source=117.2.142.10,3609;Initial Catalog=NatSu_2018;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                        //        Global.Db.CommandTimeout = 15 * 60; // 5 Mins
+                        //        Global.DbBpo = new DataBPODataContext(@"Data Source=117.2.142.10,3609;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                        //    }
+                        //    Global.Db.Connection.Close();
+                        //}
+                        //catch
+                        //{
+                            Global.Webservice = "http://117.2.142.10:3602/NatSu/";
+                            Global.Webservice_Update = "http://117.2.142.10:3602/Update/Natsu2018/";
+                            Global.Db = new DataNatSuDataContext(@"Data Source=117.2.142.10,3609;Initial Catalog=NatSu_2018;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                            Global.Db.CommandTimeout = 15 * 60; // 5 Mins
+                            Global.DbBpo = new DataBPODataContext(@"Data Source=117.2.142.10,3609;Initial Catalog=DatabaseDataEntryBPO;Persist Security Info=True;Network Library=DBMSSOCN;User ID=NatSu_2018;Password=123@123a");
+                        //}
+                    }
                 }
             }
             catch (Exception i)

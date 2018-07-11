@@ -211,6 +211,12 @@
     <Compile Include="MyForm\frm_ExportExcel.designer.cs">
       <DependentUpon>frm_ExportExcel.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyForm\frm_LastCheckTruong19.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\frm_LastCheckTruong19.Designer.cs">
+      <DependentUpon>frm_LastCheckTruong19.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyForm\frm_Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +252,12 @@
     </Compile>
     <Compile Include="MyForm\Refresh_ImageNotInput.designer.cs">
       <DependentUpon>Refresh_ImageNotInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm\ShowImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyForm\ShowImage.designer.cs">
+      <DependentUpon>ShowImage.cs</DependentUpon>
     </Compile>
     <Compile Include="MyUserControl\UC_225.cs">
       <SubType>UserControl</SubType>
@@ -351,6 +363,9 @@
     <EmbeddedResource Include="MyForm\frm_ExportExcel.resx">
       <DependentUpon>frm_ExportExcel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\frm_LastCheckTruong19.resx">
+      <DependentUpon>frm_LastCheckTruong19.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyForm\frm_Main.resx">
       <DependentUpon>frm_Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -368,6 +383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm\Refresh_ImageNotInput.resx">
       <DependentUpon>Refresh_ImageNotInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm\ShowImage.resx">
+      <DependentUpon>ShowImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyUserControl\UC_225.resx">
       <DependentUpon>UC_225.cs</DependentUpon>

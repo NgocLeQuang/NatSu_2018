@@ -8,6 +8,8 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Base;
 using System.IO;
 using CLS_NatSu.MyClass;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace CLS_NatSu.MyForm
 {
@@ -41,17 +43,19 @@ namespace CLS_NatSu.MyForm
         private void refresh()
         {
             gridControl1.DataSource = (from var in Global.Db.GetBatch() select var).ToList();
+            lb_Tong.Text = "Số hình: 0";
         }
         
         private void btn_Xoa_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             string BatchID = gridView1.GetFocusedRowCellValue("BatchID").ToString();
+            string PathServer = gridView1.GetFocusedRowCellValue("PathServer")+"";
             DialogResult dlr = (MessageBox.Show("Bạn đang thực hiện xóa batch: " + gridView1.GetFocusedRowCellValue("BatchName").ToString() + "\nYes = xóa batch này \nNo = không thực hiện xóa", "Thông báo", MessageBoxButtons.YesNo,MessageBoxIcon.Warning,MessageBoxDefaultButton.Button2));
             if (dlr == DialogResult.Yes)
             {
                 try
                 {
-                    string temp = Global.StrPath + "\\" + BatchID;
+                    string temp = Global.StrPath + "\\"+ PathServer + BatchID;
                     Global.Db.XoaBatch(BatchID);
                     Directory.Delete(temp, true);
                     MessageBox.Show("Đã xóa batch thành công!");
@@ -96,7 +100,8 @@ namespace CLS_NatSu.MyForm
                 foreach (var rowHandle in gridView1.GetSelectedRows())
                 {
                     string BatchID = gridView1.GetRowCellValue(rowHandle, "BatchID").ToString();
-                    string temp = Global.StrPath + "\\" + BatchID;
+                    string PathServer = gridView1.GetRowCellValue(rowHandle, "PathServer")+"";
+                    string temp = Global.StrPath + "\\"+ PathServer + BatchID;
                     Global.Db.XoaBatch(BatchID);
                     Directory.Delete(temp, true);
                 }
@@ -160,6 +165,29 @@ namespace CLS_NatSu.MyForm
             {
                 MessageBox.Show("Lỗi : " + i.Message);
             }
+        }
+        string FormatCurency(string curency)// định dạng 1,234
+        {
+            string str = curency.ToString();
+            string pattern = @"(?<a>\d*)(?<b>\d{3})*";
+            Match m = Regex.Match(str, pattern, RegexOptions.RightToLeft);
+            StringBuilder sb = new StringBuilder();
+            foreach (Capture i in m.Groups["b"].Captures)
+            {
+                sb.Insert(0, "," + i.Value);
+            }
+            sb.Insert(0, m.Groups["a"].Value);
+            return sb.ToString().Trim(',');
+        }
+        private void gridView1_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            int T = 0;
+            foreach (var rowHandle in gridView1.GetSelectedRows())
+            {
+                T += int.Parse(gridView1.GetRowCellValue(rowHandle, "NumberImage").ToString());
+            }
+
+            lb_Tong.Text = "Số hình: " + FormatCurency(T+"");
         }
     }
 }

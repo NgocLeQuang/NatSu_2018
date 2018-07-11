@@ -37,6 +37,7 @@ namespace CLS_NatSu.MyForm
             xtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
             lb_BatchName.Text = "";
             FlagLoad = true;
+            txt_path.Text = Properties.Settings.Default.FolderExcel;
             //dgv.PageVisible = true;
             //Batch.PageVisible = false;
             list_Batch.DataSource = (from w in Global.Db.GetBatchCongKhai() select new MyEntry { BatchID = w.BatchID, BatchName = w.BatchName }).ToList();
@@ -117,6 +118,13 @@ namespace CLS_NatSu.MyForm
                     MessageBox.Show("Không có Batch.");
                     return;
                 }
+
+                //Kiểm tra hình submit cùng lúc
+                foreach (var item in list_Batch.SelectedItems)
+                {
+                    Global.Db.KiemTraImageSubmitCungThoiGian(((MyEntry)item).BatchID + "");
+                }
+
                 string ListBatchNotFinish = "", ListUser = "";
                 foreach (var item in list_Batch.SelectedItems)
                 {
@@ -159,7 +167,6 @@ namespace CLS_NatSu.MyForm
                     if (ListCheckNotComplete.Count > 0 || soloi > 0)
                     {
                         ListBatchNotFinish += ("\r\n" + ((MyEntry)item).BatchName);
-                        MessageBox.Show("Batch: " + ((MyEntry)item).BatchName + "Chưa check xong DeSo!");
                         string sss = "";
                         foreach (var item_temp in ListCheckNotComplete)
                         {
@@ -185,9 +192,40 @@ namespace CLS_NatSu.MyForm
                     if (!string.IsNullOrEmpty(ListUser))
                     {
                         MessageBox.Show("\r\nNhững user lấy hình về nhưng chưa check deso: \r\n" + ListUser);
-                        return;
+                    }
+                    return;
+                }
+                //----------------------
+                ListBatchNotFinish = "";
+                ListUser = "";
+                foreach (var item in list_Batch.SelectedItems)
+                {
+                    var soloi = (from w in Global.Db.KiemTraLastcheck(((MyEntry)item).BatchID + "") select w.IDImage).Count();
+                    var ListCheckNotComplete = (from w in Global.Db.tbl_MissLastChecks where w.BatchID == ((MyEntry)item).BatchID + "" && w.Submit == false select new { w.IDImage, w.UserName }).ToList();
+                    if (ListCheckNotComplete.Count > 0 || soloi > 0)
+                    {
+                        ListBatchNotFinish += ("\r\n" + ((MyEntry)item).BatchName);
+                        string sss = "";
+                        foreach (var item_temp in ListCheckNotComplete)
+                        {
+                            sss += item_temp.UserName + "\r\n";
+                        }
+                        if (ListCheckNotComplete.Count() > 0)
+                        {
+                            ListUser += sss;
+                        }
                     }
                 }
+                if (!string.IsNullOrEmpty(ListBatchNotFinish) || !string.IsNullOrEmpty(ListUser))
+                {
+                    MessageBox.Show("Batch: " + ListBatchNotFinish + "Chưa LastCheck xong trường 19!");
+                    if (!string.IsNullOrEmpty(ListUser))
+                    {
+                        MessageBox.Show("\r\nNhững user lấy hình về nhưng chưa lastcheck: \r\n" + ListUser);
+                    }
+                    return;
+                }
+
                 if (!string.IsNullOrEmpty(ListBatchDaXuat))
                 {
                     if (MessageBox.Show("\r\nBatch đã xuất:" + ListBatchDaXuat + "\r\nBạn muốn xuất lại không ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3) == DialogResult.Yes)
@@ -278,7 +316,7 @@ namespace CLS_NatSu.MyForm
                 _kq = new DataTable();
                 string ConnectionString = Global.Db.Connection.ConnectionString;
                 SqlConnection con = new SqlConnection(ConnectionString);
-                SqlCommand cmd = new SqlCommand("ExportExcel", con);
+                SqlCommand cmd = new SqlCommand("ExportExcel_TEST", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@BatchID", ((MyEntry)item).BatchID);
                 con.Open();
@@ -370,6 +408,7 @@ namespace CLS_NatSu.MyForm
                 string truong25UserNhap = "";
                 string truong26UserNhap = "";
                 string FlagZUserNhap = "";
+                string sPhieuTruong = "";
 
 
                 var totalRow = RowCount / 3;
@@ -385,46 +424,47 @@ namespace CLS_NatSu.MyForm
                 {
                     for (int i = 0; i < RowCount; i += 3)
                     {
+                        sPhieuTruong = "";
                         wrksheet.Cells[h, 1] = _kq.Rows[i][0] + ""; //tên image
                         //Dữ liệu đúng
                         wrksheet.Cells[h, 2] = truong1 = _kq.Rows[i][4] + "";//Truong01
-                        wrksheet.Cells[h, 3] = truong2 = _kq.Rows[i][5] + "";//Truong02
-                        wrksheet.Cells[h, 4] = truong3 = _kq.Rows[i][6] + "";//Truong03
-                        wrksheet.Cells[h, 5] = truong4_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][7] + "", 2, "0");//Truong04_1
-                        wrksheet.Cells[h, 6] = truong4_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][8] + "", 2, "0");//Truong04_2
-                        wrksheet.Cells[h, 7] = truong4_3 = ThemKyTuPhiaTruoc(_kq.Rows[i][9] + "", 2, "0");//Truong04_3
-                        wrksheet.Cells[h, 8] = truong5_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][10] + "", 2, "0");//Truong05_1
-                        wrksheet.Cells[h, 9] = truong5_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][11] + "", 2, "0");//Truong05_2
-                        wrksheet.Cells[h, 10] = truong6 = ThemKyTuPhiaTruoc(_kq.Rows[i][12] + "", 2, "0");//Truong06
-                        wrksheet.Cells[h, 11] = truong7 = _kq.Rows[i][13] + "";//Truong07
-                        wrksheet.Cells[h, 12] = truong8 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][14] + "", "0");//Truong08
-                        wrksheet.Cells[h, 13] = truong9 = _kq.Rows[i][15] + "";//Truong09
-                        wrksheet.Cells[h, 14] = truong10 = _kq.Rows[i][16] + "";//Truong10
-                        wrksheet.Cells[h, 15] = truong11 = _kq.Rows[i][17] + "";//Truong11
-                        wrksheet.Cells[h, 16] = truong12 = _kq.Rows[i][18] + "";//Truong12
-                        wrksheet.Cells[h, 17] = truong13 = _kq.Rows[i][19] + "";//Truong13
-                        wrksheet.Cells[h, 18] = truong14 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][20] + "", "0");//Truong14
-                        wrksheet.Cells[h, 19] = truong15 = _kq.Rows[i][21] + "";//Truong15
-                        wrksheet.Cells[h, 20] = truong16 = _kq.Rows[i][22] + "";//Truong16
-                        wrksheet.Cells[h, 21] = truong17 = _kq.Rows[i][23] + "";//Truong17
-                        wrksheet.Cells[h, 22] = truong18 = _kq.Rows[i][24] + "";//Truong18
-                        wrksheet.Cells[h, 23] = truong19 = _kq.Rows[i][25] + "";//Truong19
-                        wrksheet.Cells[h, 24] = truong20 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][26] + "", "0");//Truong20
-                        wrksheet.Cells[h, 25] = truong21 = _kq.Rows[i][27] + "";//Truong21
-                        wrksheet.Cells[h, 26] = truong22 = _kq.Rows[i][28] + "";//Truong22
-                        wrksheet.Cells[h, 27] = truong23 = _kq.Rows[i][29] + "";//Truong23
-                        wrksheet.Cells[h, 28] = truong24 = _kq.Rows[i][30] + "";//Truong24
+                        sPhieuTruong += wrksheet.Cells[h, 3] = truong2 = _kq.Rows[i][5] + "";//Truong02
+                        sPhieuTruong += wrksheet.Cells[h, 4] = truong3 = _kq.Rows[i][6] + "";//Truong03
+                        sPhieuTruong += wrksheet.Cells[h, 5] = truong4_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][7] + "", 2, "0");//Truong04_1
+                        sPhieuTruong += wrksheet.Cells[h, 6] = truong4_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][8] + "", 2, "0");//Truong04_2
+                        sPhieuTruong += wrksheet.Cells[h, 7] = truong4_3 = ThemKyTuPhiaTruoc(_kq.Rows[i][9] + "", 2, "0");//Truong04_3
+                        sPhieuTruong += wrksheet.Cells[h, 8] = truong5_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][10] + "", 2, "0");//Truong05_1
+                        sPhieuTruong += wrksheet.Cells[h, 9] = truong5_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][11] + "", 2, "0");//Truong05_2
+                        sPhieuTruong += wrksheet.Cells[h, 10] = truong6 = ThemKyTuPhiaTruoc(_kq.Rows[i][12] + "", 2, "0");//Truong06
+                        sPhieuTruong += wrksheet.Cells[h, 11] = truong7 = _kq.Rows[i][13] + "";//Truong07
+                        sPhieuTruong += wrksheet.Cells[h, 12] = truong8 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][14] + "", "0");//Truong08
+                        sPhieuTruong += wrksheet.Cells[h, 13] = truong9 = _kq.Rows[i][15] + "";//Truong09
+                        sPhieuTruong += wrksheet.Cells[h, 14] = truong10 = _kq.Rows[i][16] + "";//Truong10
+                        sPhieuTruong += wrksheet.Cells[h, 15] = truong11 = _kq.Rows[i][17] + "";//Truong11
+                        sPhieuTruong += wrksheet.Cells[h, 16] = truong12 = _kq.Rows[i][18] + "";//Truong12
+                        sPhieuTruong += wrksheet.Cells[h, 17] = truong13 = _kq.Rows[i][19] + "";//Truong13
+                        sPhieuTruong += wrksheet.Cells[h, 18] = truong14 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][20] + "", "0");//Truong14
+                        sPhieuTruong += wrksheet.Cells[h, 19] = truong15 = _kq.Rows[i][21] + "";//Truong15
+                        sPhieuTruong += wrksheet.Cells[h, 20] = truong16 = _kq.Rows[i][22] + "";//Truong16
+                        sPhieuTruong += wrksheet.Cells[h, 21] = truong17 = _kq.Rows[i][23] + "";//Truong17
+                        sPhieuTruong += wrksheet.Cells[h, 22] = truong18 = _kq.Rows[i][24] + "";//Truong18
+                        sPhieuTruong += wrksheet.Cells[h, 23] = truong19 = _kq.Rows[i][25] + "";//Truong19
+                        sPhieuTruong += wrksheet.Cells[h, 24] = truong20 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][26] + "", "0");//Truong20
+                        sPhieuTruong += wrksheet.Cells[h, 25] = truong21 = _kq.Rows[i][27] + "";//Truong21
+                        sPhieuTruong += wrksheet.Cells[h, 26] = truong22 = _kq.Rows[i][28] + "";//Truong22
+                        sPhieuTruong += wrksheet.Cells[h, 27] = truong23 = _kq.Rows[i][29] + "";//Truong23
+                        sPhieuTruong += wrksheet.Cells[h, 28] = truong24 = _kq.Rows[i][30] + "";//Truong24
                         if (string.IsNullOrEmpty(_kq.Rows[i][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i][32] + ""))
                         {
-                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong25
-                            wrksheet.Cells[h, 30] = truong26 = "";//Truong26
+                            sPhieuTruong += wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong25
+                            sPhieuTruong += wrksheet.Cells[h, 30] = truong26 = "";//Truong26
                         }
                         else
                         {
-                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][31] + "", 2, "0");//Truong25
-                            wrksheet.Cells[h, 30] = truong26 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong26
+                            sPhieuTruong += wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][31] + "", 2, "0");//Truong25
+                            sPhieuTruong += wrksheet.Cells[h, 30] = truong26 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong26
                         }
-                        wrksheet.Cells[h, 31] = _kq.Rows[i][33] + ""; //FlagZ
+                        sPhieuTruong += wrksheet.Cells[h, 31] = _kq.Rows[i][33] + ""; //FlagZ
                         wrksheet.Cells[h, 32] = _kq.Rows[i][2] + ""; //IDPhieu
 
                         //Dữ liệu User 1
@@ -661,8 +701,8 @@ namespace CLS_NatSu.MyForm
                         {
                             wrksheet.Cells[h, 77].Interior.Color = Color.Red;
                         }
-                        wrksheet.Cells[h, 78] = truong19UserNhap = _kq.Rows[i + 2][16] + "";//Truong10
-                        if (truong10 != truong19UserNhap)
+                        wrksheet.Cells[h, 78] = truong10UserNhap = _kq.Rows[i + 2][16] + "";//Truong10
+                        if (truong10 != truong10UserNhap)
                         {
                             wrksheet.Cells[h, 78].Interior.Color = Color.Red;
                         }
@@ -771,7 +811,7 @@ namespace CLS_NatSu.MyForm
                             wrksheet.Cells[h, 34].Interior.Color = Color.Red;
                         }
                         wrksheet.Cells[h, 96] = _kq.Rows[i + 2][2] + ""; //IDPhieu
-
+                        wrksheet.Cells[h, 97] = string.IsNullOrEmpty(sPhieuTruong)? "X" : "";
                         lb_Complete.Text = (h - 1) + "/" + RowCount / 3 + " (" + (int)(((double)(h - 1) / (double)(RowCount / 3)) * 100) + "%) ";
                         progressBar1.PerformStep();
                         h++;
@@ -781,46 +821,47 @@ namespace CLS_NatSu.MyForm
                 {
                     for (int i = 0; i < RowCount; i += 3)
                     {
+                        sPhieuTruong = "";
                         wrksheet.Cells[h, 1] = _kq.Rows[i][0] + ""; //tên image
                         //Dữ liệu đúng
                         wrksheet.Cells[h, 2] = truong1 = _kq.Rows[i][4] + "";//Truong01
-                        wrksheet.Cells[h, 3] = truong2 = _kq.Rows[i][5] + "";//Truong02
-                        wrksheet.Cells[h, 4] = truong3 = _kq.Rows[i][6] + "";//Truong03
-                        wrksheet.Cells[h, 5] = truong4_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][7] + "", 2, "0");//Truong04_1
-                        wrksheet.Cells[h, 6] = truong4_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][8] + "", 2, "0");//Truong04_2
-                        wrksheet.Cells[h, 7] = truong4_3 = ThemKyTuPhiaTruoc(_kq.Rows[i][9] + "", 2, "0");//Truong04_3
-                        wrksheet.Cells[h, 8] = truong5_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][10] + "", 2, "0");//Truong05_1
-                        wrksheet.Cells[h, 9] = truong5_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][11] + "", 2, "0");//Truong05_2
-                        wrksheet.Cells[h, 10] = truong6 = ThemKyTuPhiaTruoc(_kq.Rows[i][12] + "", 2, "0");//Truong06
-                        wrksheet.Cells[h, 11] = truong7 = _kq.Rows[i][13] + "";//Truong07
-                        wrksheet.Cells[h, 12] = truong8 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][14] + "", "0");//Truong08
-                        wrksheet.Cells[h, 13] = truong9 = _kq.Rows[i][15] + "";//Truong09
-                        wrksheet.Cells[h, 14] = truong10 = _kq.Rows[i][16] + "";//Truong10
-                        wrksheet.Cells[h, 15] = truong11 = _kq.Rows[i][17] + "";//Truong11
-                        wrksheet.Cells[h, 16] = truong12 = _kq.Rows[i][18] + "";//Truong12
-                        wrksheet.Cells[h, 17] = truong13 = _kq.Rows[i][19] + "";//Truong13
-                        wrksheet.Cells[h, 18] = truong14 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][20] + "", "0");//Truong14
-                        wrksheet.Cells[h, 19] = truong15 = _kq.Rows[i][21] + "";//Truong15
-                        wrksheet.Cells[h, 20] = truong16 = _kq.Rows[i][22] + "";//Truong16
-                        wrksheet.Cells[h, 21] = truong17 = _kq.Rows[i][23] + "";//Truong17
-                        wrksheet.Cells[h, 22] = truong18 = _kq.Rows[i][24] + "";//Truong18
-                        wrksheet.Cells[h, 23] = truong19 = _kq.Rows[i][25] + "";//Truong19
-                        wrksheet.Cells[h, 24] = truong20 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][26] + "", "0");//Truong20
-                        wrksheet.Cells[h, 25] = truong21 = _kq.Rows[i][27] + "";//Truong21
-                        wrksheet.Cells[h, 26] = truong22 = _kq.Rows[i][28] + "";//Truong22
-                        wrksheet.Cells[h, 27] = truong23 = _kq.Rows[i][29] + "";//Truong23
-                        wrksheet.Cells[h, 28] = truong24 = _kq.Rows[i][30] + "";//Truong24
+                        sPhieuTruong += wrksheet.Cells[h, 3] = truong2 = _kq.Rows[i][5] + "";//Truong02
+                        sPhieuTruong += wrksheet.Cells[h, 4] = truong3 = _kq.Rows[i][6] + "";//Truong03
+                        sPhieuTruong += wrksheet.Cells[h, 5] = truong4_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][7] + "", 2, "0");//Truong04_1
+                        sPhieuTruong += wrksheet.Cells[h, 6] = truong4_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][8] + "", 2, "0");//Truong04_2
+                        sPhieuTruong += wrksheet.Cells[h, 7] = truong4_3 = ThemKyTuPhiaTruoc(_kq.Rows[i][9] + "", 2, "0");//Truong04_3
+                        sPhieuTruong += wrksheet.Cells[h, 8] = truong5_1 = ThemKyTuPhiaTruoc(_kq.Rows[i][10] + "", 2, "0");//Truong05_1
+                        sPhieuTruong += wrksheet.Cells[h, 9] = truong5_2 = ThemKyTuPhiaTruoc(_kq.Rows[i][11] + "", 2, "0");//Truong05_2
+                        sPhieuTruong += wrksheet.Cells[h, 10] = truong6 = ThemKyTuPhiaTruoc(_kq.Rows[i][12] + "", 2, "0");//Truong06
+                        sPhieuTruong += wrksheet.Cells[h, 11] = truong7 = _kq.Rows[i][13] + "";//Truong07
+                        sPhieuTruong += wrksheet.Cells[h, 12] = truong8 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][14] + "", "0");//Truong08
+                        sPhieuTruong += wrksheet.Cells[h, 13] = truong9 = _kq.Rows[i][15] + "";//Truong09
+                        sPhieuTruong += wrksheet.Cells[h, 14] = truong10 = _kq.Rows[i][16] + "";//Truong10
+                        sPhieuTruong += wrksheet.Cells[h, 15] = truong11 = _kq.Rows[i][17] + "";//Truong11
+                        sPhieuTruong += wrksheet.Cells[h, 16] = truong12 = _kq.Rows[i][18] + "";//Truong12
+                        sPhieuTruong += wrksheet.Cells[h, 17] = truong13 = _kq.Rows[i][19] + "";//Truong13
+                        sPhieuTruong += wrksheet.Cells[h, 18] = truong14 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][20] + "", "0");//Truong14
+                        sPhieuTruong += wrksheet.Cells[h, 19] = truong15 = _kq.Rows[i][21] + "";//Truong15
+                        sPhieuTruong += wrksheet.Cells[h, 20] = truong16 = _kq.Rows[i][22] + "";//Truong16
+                        sPhieuTruong += wrksheet.Cells[h, 21] = truong17 = _kq.Rows[i][23] + "";//Truong17
+                        sPhieuTruong += wrksheet.Cells[h, 22] = truong18 = _kq.Rows[i][24] + "";//Truong18
+                        sPhieuTruong += wrksheet.Cells[h, 23] = truong19 = _kq.Rows[i][25] + "";//Truong19
+                        sPhieuTruong += wrksheet.Cells[h, 24] = truong20 = ThemKyTuPhiaTruoc_8_14_20(_kq.Rows[i][26] + "", "0");//Truong20
+                        sPhieuTruong += wrksheet.Cells[h, 25] = truong21 = _kq.Rows[i][27] + "";//Truong21
+                        sPhieuTruong += wrksheet.Cells[h, 26] = truong22 = _kq.Rows[i][28] + "";//Truong22
+                        sPhieuTruong += wrksheet.Cells[h, 27] = truong23 = _kq.Rows[i][29] + "";//Truong23
+                        sPhieuTruong += wrksheet.Cells[h, 28] = truong24 = _kq.Rows[i][30] + "";//Truong24
                         if (string.IsNullOrEmpty(_kq.Rows[i][31] + "") && !string.IsNullOrEmpty(_kq.Rows[i][32] + ""))
                         {
-                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong25
-                            wrksheet.Cells[h, 30] = truong26 = "";//Truong26
+                            sPhieuTruong += wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong25
+                            sPhieuTruong += wrksheet.Cells[h, 30] = truong26 = "";//Truong26
                         }
                         else
                         {
-                            wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][31] + "", 2, "0");//Truong25
-                            wrksheet.Cells[h, 30] = truong26 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong26
+                            sPhieuTruong += wrksheet.Cells[h, 29] = truong25 = ThemKyTuPhiaTruoc(_kq.Rows[i][31] + "", 2, "0");//Truong25
+                            sPhieuTruong += wrksheet.Cells[h, 30] = truong26 = ThemKyTuPhiaTruoc(_kq.Rows[i][32] + "", 2, "0");//Truong26
                         }
-                        wrksheet.Cells[h, 31] = _kq.Rows[i][33] + ""; //FlagZ
+                        sPhieuTruong += wrksheet.Cells[h, 31] = _kq.Rows[i][33] + ""; //FlagZ
                         wrksheet.Cells[h, 32] = _kq.Rows[i][2] + ""; //IDPhieu
 
                         //Dữ liệu User 1
@@ -877,14 +918,15 @@ namespace CLS_NatSu.MyForm
                            || truong8 != truong8UserNhap
                            || truong9 != truong9UserNhap
                            || truong10 != truong10UserNhap
-                           || truong12 != truong11UserNhap
-                           || truong13 != truong12UserNhap
-                           || truong14 != truong13UserNhap
-                           || truong15 != truong14UserNhap
-                           || truong16 != truong15UserNhap
-                           || truong17 != truong16UserNhap
-                           || truong18 != truong17UserNhap
-                           || truong19 != truong18UserNhap
+                           || truong11 != truong11UserNhap
+                           || truong12 != truong12UserNhap
+                           || truong13 != truong13UserNhap
+                           || truong14 != truong14UserNhap
+                           || truong15 != truong15UserNhap
+                           || truong16 != truong16UserNhap
+                           || truong17 != truong17UserNhap
+                           || truong18 != truong18UserNhap
+                           || truong19 != truong19UserNhap
                            || truong20 != truong20UserNhap
                            || truong21 != truong21UserNhap
                            || truong22 != truong22UserNhap
@@ -1176,14 +1218,15 @@ namespace CLS_NatSu.MyForm
                            || truong8 != truong8UserNhap
                            || truong9 != truong9UserNhap
                            || truong10 != truong10UserNhap
-                           || truong12 != truong11UserNhap
-                           || truong13 != truong12UserNhap
-                           || truong14 != truong13UserNhap
-                           || truong15 != truong14UserNhap
-                           || truong16 != truong15UserNhap
-                           || truong17 != truong16UserNhap
-                           || truong18 != truong17UserNhap
-                           || truong19 != truong18UserNhap
+                           || truong11 != truong11UserNhap
+                           || truong12 != truong12UserNhap
+                           || truong13 != truong13UserNhap
+                           || truong14 != truong14UserNhap
+                           || truong15 != truong15UserNhap
+                           || truong16 != truong16UserNhap
+                           || truong17 != truong17UserNhap
+                           || truong18 != truong18UserNhap
+                           || truong19 != truong19UserNhap
                            || truong20 != truong20UserNhap
                            || truong21 != truong21UserNhap
                            || truong22 != truong22UserNhap
@@ -1255,8 +1298,8 @@ namespace CLS_NatSu.MyForm
                                 {
                                     wrksheet.Cells[h, 77].Interior.Color = Color.Red;
                                 }
-                                wrksheet.Cells[h, 78] = truong19UserNhap;//Truong10
-                                if (truong10 != truong19UserNhap)
+                                wrksheet.Cells[h, 78] = truong10UserNhap;//Truong10
+                                if (truong10 != truong10UserNhap)
                                 {
                                     wrksheet.Cells[h, 78].Interior.Color = Color.Red;
                                 }
@@ -1363,7 +1406,7 @@ namespace CLS_NatSu.MyForm
                                 wrksheet.Cells[h, 75] = truong7;//Truong07
                                 wrksheet.Cells[h, 76] = truong8;//Truong08
                                 wrksheet.Cells[h, 77] = truong9;//Truong09
-                                wrksheet.Cells[h, 78] = truong19;//Truong10
+                                wrksheet.Cells[h, 78] = truong10;//Truong10
                                 wrksheet.Cells[h, 79] = truong11;//Truong11
                                 wrksheet.Cells[h, 80] = truong12;//Truong12
                                 wrksheet.Cells[h, 81] = truong13;//Truong13
@@ -1399,7 +1442,7 @@ namespace CLS_NatSu.MyForm
                             wrksheet.Cells[h, 75] = truong7;//Truong07
                             wrksheet.Cells[h, 76] = truong8;//Truong08
                             wrksheet.Cells[h, 77] = truong9;//Truong09
-                            wrksheet.Cells[h, 78] = truong19;//Truong10
+                            wrksheet.Cells[h, 78] = truong10;//Truong10
                             wrksheet.Cells[h, 79] = truong11;//Truong11
                             wrksheet.Cells[h, 80] = truong12;//Truong12
                             wrksheet.Cells[h, 81] = truong13;//Truong13
@@ -1419,12 +1462,14 @@ namespace CLS_NatSu.MyForm
                             wrksheet.Cells[h, 95] = FlagZ; //FlagZ
                             wrksheet.Cells[h, 96] = _kq.Rows[i + 2][2] + ""; //IDPhieu
                         }
+
+                        wrksheet.Cells[h, 97] = string.IsNullOrEmpty(sPhieuTruong) ? "X" : "";
                         lb_Complete.Text = (h - 1) + "/" + RowCount / 3 + " (" + (int)(((double)(h - 1) / (double)(RowCount/3))*100) + "%) ";
                         progressBar1.PerformStep();
                         h++;
                     }
                 }
-                Microsoft.Office.Interop.Excel.Range rowHead = wrksheet.get_Range("A2", "CR" + (h - 1));
+                Microsoft.Office.Interop.Excel.Range rowHead = wrksheet.get_Range("A2", "CS" + (h - 1));
                 rowHead.Borders.LineStyle = Microsoft.Office.Interop.Excel.Constants.xlSolid;
 
                 //-----------
@@ -1519,10 +1564,18 @@ namespace CLS_NatSu.MyForm
             }
         }
 
+        private void txt_path_TextChanged(object sender, EventArgs e)
+        {
+        }
+
         private void btn_Browse_Click(object sender, EventArgs e)
         {
             if (fbd.ShowDialog() == DialogResult.OK)
+            {
                 txt_path.Text = fbd.SelectedPath.ToString();
+                Properties.Settings.Default.FolderExcel = txt_path.Text;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

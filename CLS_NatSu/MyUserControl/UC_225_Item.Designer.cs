@@ -75,6 +75,8 @@
             this.txt_Truong_23 = new DevExpress.XtraEditors.TextEdit();
             this.txt_Truong_19 = new DevExpress.XtraEditors.LookUpEdit();
             this.lb_Truong_19 = new System.Windows.Forms.Label();
+            this.txt_Truong_07 = new DevExpress.XtraEditors.TextEdit();
+            this.label25 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_02.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_03.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_04_1.Properties)).BeginInit();
@@ -98,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_22.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_23.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_19.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_07.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_Truong_02
@@ -333,7 +336,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Maroon;
-            this.label10.Location = new System.Drawing.Point(384, 35);
+            this.label10.Location = new System.Drawing.Point(383, 35);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 13);
             this.label10.TabIndex = 0;
@@ -342,7 +345,7 @@
             // txt_Truong_12
             // 
             this.txt_Truong_12.EditValue = "";
-            this.txt_Truong_12.Location = new System.Drawing.Point(407, 30);
+            this.txt_Truong_12.Location = new System.Drawing.Point(406, 30);
             this.txt_Truong_12.Name = "txt_Truong_12";
             this.txt_Truong_12.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Truong_12.Properties.Appearance.Options.UseFont = true;
@@ -359,7 +362,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(490, 35);
+            this.label11.Location = new System.Drawing.Point(489, 35);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(25, 13);
             this.label11.TabIndex = 0;
@@ -368,14 +371,14 @@
             // txt_Truong_05_1
             // 
             this.txt_Truong_05_1.EditValue = "";
-            this.txt_Truong_05_1.Location = new System.Drawing.Point(514, 30);
+            this.txt_Truong_05_1.Location = new System.Drawing.Point(513, 30);
             this.txt_Truong_05_1.Name = "txt_Truong_05_1";
             this.txt_Truong_05_1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Truong_05_1.Properties.Appearance.Options.UseFont = true;
             this.txt_Truong_05_1.Properties.Mask.EditMask = "[0-9*]+";
             this.txt_Truong_05_1.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_05_1.Size = new System.Drawing.Size(28, 22);
-            this.txt_Truong_05_1.TabIndex = 19;
+            this.txt_Truong_05_1.TabIndex = 20;
             this.txt_Truong_05_1.EditValueChanged += new System.EventHandler(this.txt_Truong_05_1_1_EditValueChanged);
             this.txt_Truong_05_1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_02_KeyDown);
             // 
@@ -384,7 +387,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Navy;
-            this.label12.Location = new System.Drawing.Point(545, 35);
+            this.label12.Location = new System.Drawing.Point(544, 35);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(25, 13);
             this.label12.TabIndex = 0;
@@ -393,14 +396,14 @@
             // txt_Truong_05_2
             // 
             this.txt_Truong_05_2.EditValue = "";
-            this.txt_Truong_05_2.Location = new System.Drawing.Point(569, 30);
+            this.txt_Truong_05_2.Location = new System.Drawing.Point(568, 30);
             this.txt_Truong_05_2.Name = "txt_Truong_05_2";
             this.txt_Truong_05_2.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Truong_05_2.Properties.Appearance.Options.UseFont = true;
             this.txt_Truong_05_2.Properties.Mask.EditMask = "[0-9*]+";
             this.txt_Truong_05_2.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_05_2.Size = new System.Drawing.Size(28, 22);
-            this.txt_Truong_05_2.TabIndex = 20;
+            this.txt_Truong_05_2.TabIndex = 21;
             this.txt_Truong_05_2.EditValueChanged += new System.EventHandler(this.txt_Truong_05_2_1_EditValueChanged);
             this.txt_Truong_05_2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_02_KeyDown);
             // 
@@ -497,7 +500,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Maroon;
-            this.label17.Location = new System.Drawing.Point(384, 64);
+            this.label17.Location = new System.Drawing.Point(383, 64);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(21, 13);
             this.label17.TabIndex = 0;
@@ -521,14 +524,14 @@
             // txt_Truong_18
             // 
             this.txt_Truong_18.EditValue = "";
-            this.txt_Truong_18.Location = new System.Drawing.Point(407, 59);
+            this.txt_Truong_18.Location = new System.Drawing.Point(406, 59);
             this.txt_Truong_18.Name = "txt_Truong_18";
             this.txt_Truong_18.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Truong_18.Properties.Appearance.Options.UseFont = true;
             this.txt_Truong_18.Properties.Mask.EditMask = "[0-9*,-]+";
             this.txt_Truong_18.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txt_Truong_18.Size = new System.Drawing.Size(80, 22);
-            this.txt_Truong_18.TabIndex = 21;
+            this.txt_Truong_18.TabIndex = 19;
             this.txt_Truong_18.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
             this.txt_Truong_18.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
             this.txt_Truong_18.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
@@ -538,7 +541,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.Maroon;
-            this.label18.Location = new System.Drawing.Point(491, 64);
+            this.label18.Location = new System.Drawing.Point(490, 64);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(21, 13);
             this.label18.TabIndex = 0;
@@ -547,7 +550,7 @@
             // txt_Truong_24
             // 
             this.txt_Truong_24.EditValue = "";
-            this.txt_Truong_24.Location = new System.Drawing.Point(514, 59);
+            this.txt_Truong_24.Location = new System.Drawing.Point(513, 59);
             this.txt_Truong_24.Name = "txt_Truong_24";
             this.txt_Truong_24.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Truong_24.Properties.Appearance.Options.UseFont = true;
@@ -654,7 +657,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.Maroon;
-            this.label23.Location = new System.Drawing.Point(384, 93);
+            this.label23.Location = new System.Drawing.Point(599, 64);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(21, 13);
             this.label23.TabIndex = 0;
@@ -678,39 +681,68 @@
             // txt_Truong_19
             // 
             this.txt_Truong_19.EditValue = "";
-            this.txt_Truong_19.Location = new System.Drawing.Point(407, 88);
+            this.txt_Truong_19.Location = new System.Drawing.Point(621, 59);
             this.txt_Truong_19.Name = "txt_Truong_19";
             this.txt_Truong_19.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.txt_Truong_19.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Truong_19.Properties.Appearance.Options.UseFont = true;
             this.txt_Truong_19.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txt_Truong_19.Properties.MaxLength = 1;
             this.txt_Truong_19.Properties.NullText = "";
             this.txt_Truong_19.Properties.PopupFormMinSize = new System.Drawing.Size(370, 220);
             this.txt_Truong_19.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.OnlyInPopup;
             this.txt_Truong_19.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.txt_Truong_19.Size = new System.Drawing.Size(33, 22);
-            this.txt_Truong_19.TabIndex = 23;
+            this.txt_Truong_19.Size = new System.Drawing.Size(83, 22);
+            this.txt_Truong_19.TabIndex = 24;
             this.txt_Truong_19.TextChanged += new System.EventHandler(this.txt_Truong_19_TextChanged);
             this.txt_Truong_19.Paint += new System.Windows.Forms.PaintEventHandler(this.txt_Truong_08_Paint);
             this.txt_Truong_19.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_19_KeyDown);
+            this.txt_Truong_19.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_Truong_19_KeyPress);
             // 
             // lb_Truong_19
             // 
             this.lb_Truong_19.AutoSize = true;
             this.lb_Truong_19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Truong_19.ForeColor = System.Drawing.Color.Black;
-            this.lb_Truong_19.Location = new System.Drawing.Point(446, 93);
+            this.lb_Truong_19.Location = new System.Drawing.Point(411, 91);
             this.lb_Truong_19.Name = "lb_Truong_19";
-            this.lb_Truong_19.Size = new System.Drawing.Size(0, 13);
+            this.lb_Truong_19.Size = new System.Drawing.Size(73, 13);
             this.lb_Truong_19.TabIndex = 30;
+            this.lb_Truong_19.Text = "                      ";
+            // 
+            // txt_Truong_07
+            // 
+            this.txt_Truong_07.EditValue = "";
+            this.txt_Truong_07.Location = new System.Drawing.Point(621, 30);
+            this.txt_Truong_07.Name = "txt_Truong_07";
+            this.txt_Truong_07.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Truong_07.Properties.Appearance.Options.UseFont = true;
+            this.txt_Truong_07.Properties.Mask.EditMask = "[0-9*,-]+";
+            this.txt_Truong_07.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txt_Truong_07.Size = new System.Drawing.Size(83, 22);
+            this.txt_Truong_07.TabIndex = 23;
+            this.txt_Truong_07.EditValueChanged += new System.EventHandler(this.txt_Truong_09_1_EditValueChanged);
+            this.txt_Truong_07.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyDown);
+            this.txt_Truong_07.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_Truong_09_1_KeyUp);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Navy;
+            this.label25.Location = new System.Drawing.Point(603, 35);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(14, 13);
+            this.label25.TabIndex = 0;
+            this.label25.Text = "7";
             // 
             // UC_225_Item
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.txt_Truong_07);
+            this.Controls.Add(this.label25);
             this.Controls.Add(this.lb_Truong_19);
             this.Controls.Add(this.txt_Truong_19);
             this.Controls.Add(this.txt_Truong_04_3);
@@ -759,7 +791,7 @@
             this.Controls.Add(this.lb_02);
             this.Controls.Add(this.label12);
             this.Name = "UC_225_Item";
-            this.Size = new System.Drawing.Size(600, 113);
+            this.Size = new System.Drawing.Size(709, 113);
             this.Load += new System.EventHandler(this.UC_225_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_02.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_03.Properties)).EndInit();
@@ -784,6 +816,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_22.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_23.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_19.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_Truong_07.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -837,5 +870,7 @@
         public DevExpress.XtraEditors.TextEdit txt_Truong_23;
         public DevExpress.XtraEditors.LookUpEdit txt_Truong_19;
         public System.Windows.Forms.Label lb_Truong_19;
+        public DevExpress.XtraEditors.TextEdit txt_Truong_07;
+        public System.Windows.Forms.Label label25;
     }
 }
